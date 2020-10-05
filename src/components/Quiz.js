@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class Quiz extends Component {
   render() {
     return (
-      <div>Quiz</div>
-    )
+      <h4>Quiz</h4>
+    );
   }
 }
 

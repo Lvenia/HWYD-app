@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-class Day extends Com {
+class Day extends Component {
   render() {
     return (
-      <div>Day Overview</div>
-    )
+      <h4>Day Overview</h4>
+    );
   }
 }
 

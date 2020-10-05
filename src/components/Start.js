@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class Data extends Component {
+class Start extends Component {
   render() {
     return (
-      <h4>Data Overview</h4>
+      <h4>Start</h4>
     );
   }
 }
 
-export default Data;
+export default Start;

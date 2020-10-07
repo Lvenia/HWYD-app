@@ -1,36 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-const NavBar = () => {
-  return (
-    <ul className="nav nav-tabs">
-      <Link
-        className="nav-link active"
-        to="/start"
-      >
-        <li className="nav-item">Start</li>
-      </Link>
-      <Link
-        className="nav-link active"
-        to="/quiz"
-      >
-        <li className="nav-item">Quiz</li>
-      </Link>
-      <Link
-        className="nav-link active"
-        to="/day"
-      >
-        <li className="nav-item">Day</li>
-      </Link>
-      <Link
-        className="nav-link active"
-        to="/data"
-      >
-        <li className="nav-item">All data</li>
-      </Link>
-    </ul>
-  );
-};
+class NavBar extends React.Component {
+
+  renderButtons() {
+
+    const buttons = [
+      {
+        name: 'Start',
+        path: "/start"
+      },
+      {
+        name: 'Quiz',
+        path: "/quiz"
+      },
+      {
+        name: 'Day',
+        path: "/day"
+      },
+      {
+        name: 'All data',
+        path: "/data"
+      },
+    ];
+
+    return buttons.map((button, index) => {
+      return (
+        <NavLink
+          className="nav-link"
+          to={button.path}
+          key={index}
+        >
+          <li className="nav-item">{button.name}</li>
+        </NavLink>
+      );
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <ul className="nav nav-tabs" >
+          {this.renderButtons()}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default NavBar;
-

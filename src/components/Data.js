@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Data extends Component {
+class Data extends React.Component {
   render() {
     return (
       <h4>Data Overview</h4>

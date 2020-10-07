@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Quiz extends Component {
+class Quiz extends React.Component {
   render() {
     return (
       <h4>Quiz</h4>

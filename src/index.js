@@ -6,13 +6,16 @@ import { createStore } from 'redux';
 
 import { Provider } from 'react-redux';
 
-import { createUser, plusOne, minusOne, names, addName, addUser } from './actions'
-import testReducer from './reducers/testReducer';
+import { createUser, plusOne, minusOne, names, addName, addUser } from './actions';
+
+import rootReducer from './reducers/rootReducer';
 
 const store = createStore(
-  testReducer,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+//manual dispatch of the actions to the reducer in order to change state
 
 store.dispatch(createUser('John', 'Canada', 33));
 store.dispatch(plusOne());
@@ -26,6 +29,8 @@ store.dispatch(addUser(johanPerson.payload));
 store.dispatch(createUser('An', 'USA', 42));
 store.dispatch(names('Arnold', 'Adam', 'Enn'));
 store.dispatch(addName('Jack'));
+
+//
 
 ReactDOM.render(
   <Provider store={store}>

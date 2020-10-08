@@ -18,9 +18,9 @@ const store = createStore(
 //manual dispatch of the actions to the reducer in order to change state
 
 store.dispatch(createUser('John', 'Canada', 33));
-store.dispatch(plusOne());
-store.dispatch(plusOne());
-store.dispatch(minusOne());
+// store.dispatch(plusOne());
+// store.dispatch(plusOne());
+// store.dispatch(minusOne());
 const tomPerson = createUser('Tom', 'Brazil', 22);
 const johanPerson = createUser('Johan', 'France', 33)
 store.dispatch(addUser(tomPerson.payload));

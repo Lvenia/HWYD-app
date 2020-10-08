@@ -1,7 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import { plusOne, minusOne, createUser } from '../actions'
 
 class NavBar extends React.Component {
+
+  componentDidMount() {
+    this.props.plusOne();
+  }
 
   renderButtons() {
 
@@ -42,10 +49,31 @@ class NavBar extends React.Component {
       <div>
         <ul className="nav nav-tabs" >
           {this.renderButtons()}
+
+          <button onClick={() => this.props.plusOne()}>Add</button>
+          <button onClick={() => this.props.minusOne()}>Substract</button>
+          <button onClick={() => this.props.createUser('Alex', 'Canada', 42)}>Change user</button>
+
         </ul>
+        <h4>Current count is {this.props.count}</h4>
+        <h4>Current user is {this.props.user.name} from {this.props.user.country}, age {this.props.user.age}.</h4>
       </div>
     );
   }
 }
 
-export default NavBar;
+const mapDispatchToProps = {
+  plusOne,
+  minusOne,
+  createUser
+};
+
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    count: state.testState.counter,
+    user: state.testState.person
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

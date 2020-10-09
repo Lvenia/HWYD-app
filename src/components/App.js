@@ -11,6 +11,7 @@ import Start from './Start';
 import Quiz from './Quiz';
 import Day from './Day';
 import Data from './Data';
+import Users from './Users'
 
 class App extends React.Component {
 
@@ -25,6 +26,7 @@ class App extends React.Component {
             <Route path="/day" component={Day} />
             <Route path="/data" component={Data} />
           </Switch>
+          <Users />
         </React.Fragment >
       </Router>
     );

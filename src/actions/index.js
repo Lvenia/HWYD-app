@@ -1,3 +1,67 @@
+import {
+  USER_CREATE,
+  USER_EDIT,
+  USER_SHOW,
+  USER_ADD,
+  USER_DELETE
+} from './actionTypes';
+
+
+import {
+  INCREMENT_BY_ONE,
+  DECREMENT_BY_ONE,
+  ADD_USERDATA,
+  ADD_NAME,
+  ADD_ELEMENT_TO_ARRAY,
+  ADD_USER
+} from './actionTypes';
+
+
+export const crateUser = (name, age) => {
+  return {
+    type: USER_CREATE,
+    payload: {
+      name,
+      age
+    }
+  };
+};
+
+export const editUser = (id, newName, newAge) => {
+  return {
+    type: USER_EDIT,
+    payload: {
+      newName,
+      newAge
+    }
+  }
+};
+
+export const showUser = (id) => {
+  return {
+    type: USER_SHOW,
+    payload: id
+  };
+};
+
+export const addNewUser = (user) => {
+  return {
+    type: USER_ADD,
+    payload: user
+  };
+};
+
+export const deleteUser = (id) => {
+  return {
+    type: USER_DELETE,
+    payload: id
+  };
+};
+
+
+
+
+
 
 /*
 Actions are the plain js objects containing type key
@@ -24,14 +88,8 @@ perameters will be recieves by function after the function call, in which we per
 
 */
 
-import {
-  INCREMENT_BY_ONE,
-  DECREMENT_BY_ONE,
-  ADD_USERDATA,
-  ADD_NAME,
-  ADD_ELEMENT_TO_ARRAY,
-  ADD_USER
-} from './actionTypes';
+
+
 
 //Action creators with no parameters, no payload
 export const plusOne = () => {
@@ -72,15 +130,17 @@ export const addName = (newElement) => {
   return {
     type: ADD_ELEMENT_TO_ARRAY,
     payload: newElement
-  }
-}
+  };
+};
 
 export const addUser = (user) => {
   return {
     type: ADD_USER,
     payload: user
-  }
-}
+  };
+};
+
+
 
 
 

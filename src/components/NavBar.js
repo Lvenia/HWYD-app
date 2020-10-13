@@ -16,7 +16,7 @@ class NavBar extends React.Component {
     const buttons = [
       {
         name: 'Start',
-        path: "/start"
+        path: "/"
       },
       {
         name: 'Quiz',
@@ -29,6 +29,10 @@ class NavBar extends React.Component {
       {
         name: 'All data',
         path: "/data"
+      },
+      {
+        name: 'Users',
+        path: "/users"
       },
     ];
 
@@ -56,8 +60,8 @@ class NavBar extends React.Component {
           <button onClick={() => this.props.createUser('Alex', 'Canada', 42)}>Change user</button>
 
         </ul>
-        <h4>Current count is {this.props.count}</h4>
-        <h4>Current user is {this.props.user.name} from {this.props.user.country}, age {this.props.user.age}.</h4>
+        {/* <h4>Current count is {this.props.count}</h4>
+        <h4>Current user is {this.props.user.name} from {this.props.user.country}, age {this.props.user.age}.</h4> */}
       </div>
     );
   }

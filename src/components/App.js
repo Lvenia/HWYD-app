@@ -11,7 +11,9 @@ import Start from './Start';
 import Quiz from './Quiz';
 import Day from './Day';
 import Data from './Data';
-import Users from './Users'
+import Users from './Users';
+import UserDetails from './UserDetails';
+import EditUserDetails from './EditUserDetails';
 
 class App extends React.Component {
 
@@ -21,12 +23,15 @@ class App extends React.Component {
         <React.Fragment>
           <NavBar />
           <Switch>
-            <Route path="/start" component={Start} />
+            <Route exact path="/" component={Start} />
             <Route path="/quiz" component={Quiz} />
             <Route path="/day" component={Day} />
             <Route path="/data" component={Data} />
+            <Route path="/users" component={Users} />
+            <Route path="/user/:id" component={UserDetails} />
+            <Route path="/edit/:id" component={EditUserDetails} />
           </Switch>
-          <Users />
+
         </React.Fragment >
       </Router>
     );

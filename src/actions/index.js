@@ -2,7 +2,7 @@ import {
   USER_CREATE,
   USER_EDIT,
   USER_SHOW,
-  USER_ADD,
+  USER_LIST_ADD,
   USER_DELETE
 } from './actionTypes';
 
@@ -27,15 +27,15 @@ export const crateUser = (name, age) => {
   };
 };
 
-export const editUser = (id, newName, newAge) => {
-  return {
-    type: USER_EDIT,
-    payload: {
-      newName,
-      newAge
-    }
-  }
-};
+// export const editUser = (id, newName, newAge) => {
+//   return {
+//     type: USER_EDIT,
+//     payload: {
+//       newName,
+//       newAge
+//     }
+//   }
+// };
 
 export const showUser = (id) => {
   return {
@@ -46,7 +46,7 @@ export const showUser = (id) => {
 
 export const addNewUser = (user) => {
   return {
-    type: USER_ADD,
+    type: USER_LIST_ADD,
     payload: user
   };
 };
@@ -58,6 +58,16 @@ export const deleteUser = (id) => {
   };
 };
 
+export const editUser = (id, name, age) => {
+  return {
+    type: USER_EDIT,
+    payload: {
+      id,
+      name,
+      age
+    }
+  };
+};
 
 
 

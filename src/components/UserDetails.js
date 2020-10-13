@@ -26,7 +26,6 @@ class UserDetails extends React.Component {
         <button
           className="btn btn-warning m-3"
           onClick={() => {
-            // this.props.history.push(`/edit/${this.props.match.params.id}`)
             this.props.history.push(`/edit/${this.props.user.id}`)
           }}
         >
@@ -34,10 +33,6 @@ class UserDetails extends React.Component {
           </button>
       </div>
     );
-
-
-    // console.log(id)
-
   }
 }
 

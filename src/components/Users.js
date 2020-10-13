@@ -45,19 +45,6 @@ class Users extends React.Component {
     })
   };
 
-  // renderUserDetales() {
-  //   if (this.props.user.id === 0) {
-  //     return <div>User array is empty. Please click button to add user to array</div>
-  //   }
-  //   return (
-  //     <div>
-  //       <h4>Curren user is {this.props.user.name}, age {this.props.user.age}.</h4>
-  //       <h4>Number of users: {this.props.users.length}.</h4>
-  //     </div>
-  //   )
-  // }
-
-
   renderUserList() {
 
     return this.props.users.map(user => {
@@ -84,9 +71,7 @@ class Users extends React.Component {
       <div>
         <h5>Hi, I am User component. Press button to add user to the list.</h5>
         {this.renderAddUserButtons()}
-        {/* {this.renderUserDetales()}
-        <button onClick={() => this.props.showUser(2)}>show user id 2</button> */}
-        <h5>To show user detales choose one from the list</h5>
+        <h5>To show user details choose one from the list</h5>
         <br />
         <ListGroup>
           {this.renderUserList()}

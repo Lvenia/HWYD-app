@@ -5,24 +5,28 @@ import { Link } from 'react-router-dom';
 import { editUser } from '../actions';
 
 
-
-
 class EditUserDetails extends React.Component {
 
   state = {
-    name: '',
+    name: null,
     age: null
   };
 
   handleSubmit() {
-    this.props.editUser(this.props.user.id, this.state.name, this.state.age);
+    if (this.state.name && this.state.age) {
+      this.props.editUser(this.props.user.id, this.state.name, this.state.age);
+    } else if (!this.state.name && !this.state.age) {
+      this.props.history.push('/users');
+    } else if (!this.state.name) {
+      this.props.editUser(this.props.user.id, this.props.user.name, this.state.age);
+    } else if (!this.state.age) {
+      this.props.editUser(this.props.user.id, this.state.name, this.props.user.age);
+    }
     this.props.history.push('/users');
   }
 
   render() {
     if (!this.props.user) return <div>Loading...</div>
-
-    console.log(this.props.user)
 
     return (
       <div>
@@ -55,7 +59,6 @@ class EditUserDetails extends React.Component {
             <Button
               className="m-3"
               onClick={() => this.handleSubmit()}
-            //on click call action creator  editUser(id, name, age) and pass an action to the reducer, update the state
             >
               Submit
               </Button>

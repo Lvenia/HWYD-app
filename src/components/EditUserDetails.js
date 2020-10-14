@@ -8,20 +8,26 @@ import { editUser } from '../actions';
 class EditUserDetails extends React.Component {
 
   state = {
-    name: null,
-    age: null
+    name: this.props.user.name,
+    age: this.props.user.age
   };
 
+  // componentDidMount() {
+  //   if (this.props.user) return {
+  //     name: this.props.user.name,
+  //     age: this.props.user.age
+  //   }
+  // }
+
   handleSubmit() {
-    if (this.state.name && this.state.age) {
-      this.props.editUser(this.props.user.id, this.state.name, this.state.age);
-    } else if (!this.state.name && !this.state.age) {
-      this.props.history.push('/users');
-    } else if (!this.state.name) {
-      this.props.editUser(this.props.user.id, this.props.user.name, this.state.age);
-    } else if (!this.state.age) {
-      this.props.editUser(this.props.user.id, this.state.name, this.props.user.age);
-    }
+
+    const { name, age } = this.state;
+    const localPayload = {
+      name,
+      age
+    };
+
+    this.props.editUser(this.props.user.id, localPayload);
     this.props.history.push('/users');
   }
 
@@ -37,7 +43,7 @@ class EditUserDetails extends React.Component {
             <input
               type="text"
               className="form-control"
-              placeholder={this.props.user.name}
+              value={this.state.name}
               onChange={e => this.setState({ name: e.target.value })}
             />
             <br />
@@ -45,7 +51,7 @@ class EditUserDetails extends React.Component {
             <input
               type="number"
               className="form-control"
-              placeholder={this.props.user.age}
+              value={this.state.age}
               onChange={e => this.setState({ age: e.target.value })}
 
             />

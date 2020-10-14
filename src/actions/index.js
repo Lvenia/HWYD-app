@@ -58,13 +58,12 @@ export const deleteUser = (id) => {
   };
 };
 
-export const editUser = (id, name, age) => {
+export const editUser = (id, localPayload) => {
   return {
     type: USER_EDIT,
     payload: {
       id,
-      name,
-      age
+      ...localPayload
     }
   };
 };

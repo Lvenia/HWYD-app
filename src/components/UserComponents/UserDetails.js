@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteUser, editUser } from '../actions';
+import { deleteUser, editUser } from '../../actions';
 
 class UserDetails extends React.Component {
-
   render() {
     if (!this.props.user) return null;
 
     return (
-
       <div className="m-2">
         <h4>User name: {this.props.user.name}.</h4>
         <h5>Age: {this.props.user.age}.</h5>
@@ -41,12 +39,12 @@ const mapStateToProps = (state, ownProps) => {
     user: state.userState.users.find(u => {
       return u.id === Number(ownProps.match.params.id)
     })
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   deleteUser,
   editUser
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);

@@ -14,7 +14,7 @@ const initialState = {
     age: null
   },
   users: []
-}
+};
 
 export default function userReducer(state = initialState, action) {
 
@@ -42,26 +42,18 @@ export default function userReducer(state = initialState, action) {
         ...state,
         currentUser: state.users.find(element => {
           if (element.id === action.payload) {
-            return element
+            return element;
           };
         })
       };
 
     case USER_DELETE:
-      console.log(state.users.filter(u => Number(action.payload !== u.id)))
-      // const newUserArray = state.users.filter(u => (u.id !== (action.payload)))
       return {
         ...state,
         users: state.users.filter(u => Number(action.payload) !== u.id)
-      }
+      };
 
     case USER_EDIT:
-      //recieves a new data
-      // const editedUser = {
-      //   id: action.payload.id,
-      //   name: action.payload.name,
-      //   age: action.payload.age
-      // }
       return {
         ...state,
         users: state.users.map(user => {
@@ -70,15 +62,12 @@ export default function userReducer(state = initialState, action) {
               id: action.payload.id,
               name: action.payload.name,
               age: action.payload.age
-            }
+            };
           } else {
-            return user
+            return user;
           }
         })
-      }
-    //znajty vidpovidnyj object => on click vidkryty novyj tab, w jakomy budut inputy z poperednioju vartistiu
-    //on submit vidpovidnyj object v arr bude nadpysuvatysia, bez zminy id
+      };
   }
-
   return state;
 }

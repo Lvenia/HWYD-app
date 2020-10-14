@@ -11,9 +11,9 @@ import Start from './Start';
 import Quiz from './Quiz';
 import Day from './Day';
 import Data from './Data';
-import Users from './Users';
-import UserDetails from './UserDetails';
-import EditUserDetails from './EditUserDetails';
+import Users from './UserComponents/Users';
+import UserDetails from './UserComponents/UserDetails';
+import EditUserDetails from './UserComponents/EditUserDetails';
 
 class App extends React.Component {
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { editUser } from '../actions';
+import { editUser } from '../../actions';
 
 
 class EditUserDetails extends React.Component {
@@ -12,21 +12,12 @@ class EditUserDetails extends React.Component {
     age: this.props.user.age
   };
 
-  // componentDidMount() {
-  //   if (this.props.user) return {
-  //     name: this.props.user.name,
-  //     age: this.props.user.age
-  //   }
-  // }
-
   handleSubmit() {
-
     const { name, age } = this.state;
     const localPayload = {
       name,
       age
     };
-
     this.props.editUser(this.props.user.id, localPayload);
     this.props.history.push('/users');
   }
@@ -53,7 +44,6 @@ class EditUserDetails extends React.Component {
               className="form-control"
               value={this.state.age}
               onChange={e => this.setState({ age: e.target.value })}
-
             />
             <br />
             <Link
@@ -70,20 +60,19 @@ class EditUserDetails extends React.Component {
               </Button>
           </div>
         </form>
-
       </div>
     )
-  }
+  };
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
     user: state.userState.users.find(u => u.id === Number(ownProps.match.params.id))
-  }
+  };
 };
 
 const mapDispatchToprops = {
   editUser
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToprops)(EditUserDetails)
+export default connect(mapStateToProps, mapDispatchToprops)(EditUserDetails);

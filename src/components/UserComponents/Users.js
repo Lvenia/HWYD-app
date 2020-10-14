@@ -3,15 +3,35 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
 
-import { crateUser, addNewUser, showUser } from '../actions'
+import { crateUser, addNewUser, showUser } from '../../actions'
 
 class Users extends React.Component {
 
+  state = {
+    name: '',
+    age: ''
+  }
+
   handleUserAd(name, age) {
-    this.props.crateUser(name, age);
+    const localPayload = {
+      name,
+      age
+    };
+    this.props.crateUser(localPayload);
     this.props.addNewUser();
+  }
+
+  handleSubmit() {
+    const { name, age } = this.state;
+    const localPayload = {
+      name,
+      age
+    };
+    this.props.crateUser(localPayload);
+    this.props.addNewUser();
+    this.setState({ name: '', age: '' });
   }
 
   renderAddUserButtons() {
@@ -20,12 +40,10 @@ class Users extends React.Component {
         name: 'Ann',
         age: 30
       },
-
       {
         name: 'Caren',
         age: 28
       },
-
       {
         name: 'Mark',
         age: 22
@@ -46,7 +64,6 @@ class Users extends React.Component {
   };
 
   renderUserList() {
-
     return this.props.users.map(user => {
       return (
         <div key={user.id}>
@@ -61,18 +78,43 @@ class Users extends React.Component {
           </ListGroup.Item>
         </div >
       )
-    })
-
+    });
   }
 
   render() {
-
     return (
-      <div>
-        <h5>Hi, I am User component. Press button to add user to the list.</h5>
+      <div className="container-fluid">
+        <h4>Hi, I am User component.</h4>
+        <h5>Press button to add user to the list or complete the form below.</h5>
         {this.renderAddUserButtons()}
-        <h5>To show user details choose one from the list</h5>
+        <form>
+          <div className="form-group m-2">
+            <label>Name</label>
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.name}
+              onChange={e => this.setState({ name: e.target.value })}
+            />
+            <br />
+            <label>Age</label>
+            <input
+              type="number"
+              className="form-control"
+              value={this.state.age}
+              onChange={e => this.setState({ age: e.target.value })}
+            />
+            <br />
+            <Button
+              className="float-right m-3"
+              onClick={() => this.handleSubmit()}
+            >
+              Submit
+              </Button>
+          </div>
+        </form>
         <br />
+        <h5>To show user details choose one from the list.</h5>
         <ListGroup>
           {this.renderUserList()}
         </ListGroup>
@@ -91,7 +133,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     user: state.userState.currentUser,
     users: state.userState.users
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

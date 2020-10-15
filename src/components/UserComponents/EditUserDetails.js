@@ -12,7 +12,7 @@ class EditUserDetails extends React.Component {
     age: this.props.user.age
   };
 
-  handleSubmit() {
+  handleSubmit = () => {
     const { name, age } = this.state;
     const localPayload = {
       name,
@@ -54,7 +54,7 @@ class EditUserDetails extends React.Component {
               </Link>
             <Button
               className="m-3"
-              onClick={() => this.handleSubmit()}
+              onClick={this.handleSubmit}
             >
               Submit
               </Button>
@@ -71,8 +71,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToprops = {
-  editUser
-};
-
-export default connect(mapStateToProps, mapDispatchToprops)(EditUserDetails);
+export default connect(mapStateToProps, { editUser })(EditUserDetails);

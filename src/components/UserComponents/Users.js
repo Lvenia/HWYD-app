@@ -5,63 +5,24 @@ import { Link } from 'react-router-dom';
 
 import { ListGroup, Button } from 'react-bootstrap';
 
-import { crateUser, addNewUser, showUser } from '../../actions'
+import { createUser } from '../../actions';
 
 class Users extends React.Component {
-
+  // TODO: REMOVE UNUSED HANDLERS, STATIC BUTTONS ETC
   state = {
     name: '',
     age: ''
   }
 
-  handleUserAd(name, age) {
-    const localPayload = {
-      name,
-      age
-    };
-    this.props.crateUser(localPayload);
-    this.props.addNewUser();
-  }
-
-  handleSubmit() {
+  handleSubmit = () => {
     const { name, age } = this.state;
     const localPayload = {
       name,
       age
     };
-    this.props.crateUser(localPayload);
-    this.props.addNewUser();
+    this.props.createUser(localPayload);
     this.setState({ name: '', age: '' });
   }
-
-  renderAddUserButtons() {
-    const users = [
-      {
-        name: 'Ann',
-        age: 30
-      },
-      {
-        name: 'Caren',
-        age: 28
-      },
-      {
-        name: 'Mark',
-        age: 22
-      }
-    ];
-
-    return users.map(user => {
-      return (
-        <button
-          key={users.indexOf(user)}
-          className="m-2"
-          onClick={() => this.handleUserAd(user.name, user.age)}
-        >
-          Add {user.name}
-        </button>
-      );
-    })
-  };
 
   renderUserList() {
     return this.props.users.map(user => {
@@ -81,13 +42,21 @@ class Users extends React.Component {
     });
   }
 
+  showHint() {
+    if (this.props.users.length > 0) {
+      return (
+        <h5 className="m-2">To show user details choose one from the list.</h5>
+      )
+    }
+  }
+
   render() {
     return (
       <div className="container-fluid">
         <h4>Hi, I am User component.</h4>
-        <h5>Press button to add user to the list or complete the form below.</h5>
-        {this.renderAddUserButtons()}
-        <form>
+        <h5>Complete the form below to add new user.</h5>
+        {/* {this.renderAddUserButtons()} */}
+        <form style={{ display: "block", overflow: "hidden" }}>
           <div className="form-group m-2">
             <label>Name</label>
             <input
@@ -105,16 +74,16 @@ class Users extends React.Component {
               onChange={e => this.setState({ age: e.target.value })}
             />
             <br />
+            {/* To simplify */}
             <Button
-              className="float-right m-3"
-              onClick={() => this.handleSubmit()}
+              className="float-right m-2"
+              onClick={this.handleSubmit}
             >
               Submit
               </Button>
           </div>
         </form>
-        <br />
-        <h5>To show user details choose one from the list.</h5>
+        {this.showHint()}
         <ListGroup>
           {this.renderUserList()}
         </ListGroup>
@@ -124,16 +93,14 @@ class Users extends React.Component {
 }
 
 const mapDispatchToProps = {
-  crateUser,
-  addNewUser,
-  showUser
+  createUser
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ userState }) => {
   return {
-    user: state.userState.currentUser,
-    users: state.userState.users
+    user: userState.currentUser,
+    users: userState.users
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, { createUser })(Users);

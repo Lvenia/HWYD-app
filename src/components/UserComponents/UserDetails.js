@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import { deleteUser, editUser } from '../../actions';
 
 class UserDetails extends React.Component {
+
+  handleClick = () => {
+    this.props.deleteUser(this.props.match.params.id);
+    this.props.history.push('/users');
+  }
+
   render() {
     if (!this.props.user) return null;
-
     return (
       <div className="m-2">
         <h4>User name: {this.props.user.name}.</h4>
@@ -14,18 +19,13 @@ class UserDetails extends React.Component {
         <br />
         <button
           className="btn btn-danger"
-          onClick={() => {
-            this.props.deleteUser(this.props.match.params.id);
-            this.props.history.push('/users');
-          }}
+          onClick={this.handleClick}
         >
           Delete
          </button>
         <button
           className="btn btn-warning m-3"
-          onClick={() => {
-            this.props.history.push(`/edit/${this.props.user.id}`)
-          }}
+          onClick={() => this.props.history.push(`/edit/${this.props.user.id}`)}
         >
           Edit
           </button>

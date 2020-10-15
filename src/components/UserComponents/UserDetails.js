@@ -2,36 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteUser, editUser } from '../../actions';
 
-class UserDetails extends React.Component {
+function UserDetails({ deleteUser, history, user, match }) {
 
-  handleClick = () => {
-    this.props.deleteUser(this.props.match.params.id);
-    this.props.history.push('/users');
+  const handleClick = () => {
+    deleteUser(match.params.id);
+    history.push('/users');
   }
 
-  render() {
-    if (!this.props.user) return null;
-    return (
-      <div className="m-2">
-        <h4>User name: {this.props.user.name}.</h4>
-        <h5>Age: {this.props.user.age}.</h5>
-        <h5>Id: {this.props.user.id}.</h5>
-        <br />
-        <button
-          className="btn btn-danger"
-          onClick={this.handleClick}
-        >
-          Delete
+  if (!user) return null;
+  return (
+    <div className="m-2">
+      <h4>User name: {user.name}.</h4>
+      <h5>Age: {user.age}.</h5>
+      <h5>Id: {user.id}.</h5>
+      <br />
+      <button
+        className="btn btn-danger"
+        onClick={handleClick}
+      >
+        Delete
          </button>
-        <button
-          className="btn btn-warning m-3"
-          onClick={() => this.props.history.push(`/edit/${this.props.user.id}`)}
-        >
-          Edit
+      <button
+        className="btn btn-warning m-3"
+        onClick={() => history.push(`/edit/${user.id}`)}
+      >
+        Edit
           </button>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 const mapStateToProps = (state, ownProps) => {

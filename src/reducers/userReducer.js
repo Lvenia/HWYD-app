@@ -35,6 +35,7 @@ export default function userReducer(state = initialState, action) {
         users: state.users.map(user => {
           if (user.id === action.payload.id) {
             return {
+              ...user,
               id: action.payload.id,
               name: action.payload.name,
               age: action.payload.age
@@ -44,6 +45,8 @@ export default function userReducer(state = initialState, action) {
           }
         })
       };
+
+    default:
+      return state;
   }
-  return state;
 }

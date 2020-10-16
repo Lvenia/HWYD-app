@@ -5,6 +5,7 @@ import {
 } from './actionTypes';
 
 export const createUser = (localPayload) => {
+
   return {
     type: USER_CREATE,
     payload: {

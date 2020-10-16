@@ -11,12 +11,13 @@ const initialState = {
 export default function userReducer(state = initialState, action) {
 
   switch (action.type) {
-
     case USER_CREATE:
+
       const newUser = {
         id: Math.ceil((Math.random() * 10000)),
         name: action.payload.name,
-        age: action.payload.age
+        age: action.payload.age,
+        avatar: action.payload.avatar
       }
       return {
         ...state,

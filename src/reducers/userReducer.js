@@ -17,7 +17,7 @@ export default function userReducer(state = initialState, action) {
         id: Math.ceil((Math.random() * 10000)),
         name: action.payload.name,
         age: action.payload.age,
-        avatar: action.payload.avatar
+        quote: action.payload.quote
       }
       return {
         ...state,

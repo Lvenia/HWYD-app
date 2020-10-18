@@ -15,6 +15,7 @@ function UserDetails({ deleteUser, history, user, match }) {
       <h4>User name: {user.name}.</h4>
       <h5>Age: {user.age}.</h5>
       <h5>Id: {user.id}.</h5>
+
       <br />
       <button
         className="btn btn-danger"

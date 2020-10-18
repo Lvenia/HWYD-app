@@ -4,15 +4,56 @@ import {
   USER_DELETE
 } from './actionTypes';
 
-export const createUser = (localPayload) => {
+import axios from '../apis/quotegarden';
 
-  return {
+// export const createUser = (localPayload) => {
+
+//   axios.get()
+//     .then(response => {
+//       console.log(response.data);
+//       console.log(response.data.quote.quoteText);
+
+//       return {
+//         type: USER_CREATE,
+//         payload: {
+//           ...localPayload,
+//           quote: response.data.quote.quoteText
+//         }
+//       };
+
+//       // return response.data.quote.quoteText;
+
+//     })
+//     .catch(error => console.log(error))
+// };
+
+// export const createUser = async (localPayload) => {
+
+//   const response = await axios.get('/quotes/random');
+
+//   console.log(response);
+//   console.log(response.data.quote.quoteText);
+
+//   return {
+//     type: USER_CREATE,
+//     payload: {
+//       ...localPayload,
+//       quote: response.data.quote.quoteText
+//     }
+//   };
+// };
+
+export const createUser = localPayload => async dispatch => {
+  const response = await axios.get('/quotes/random');
+  dispatch({
     type: USER_CREATE,
     payload: {
-      ...localPayload
+      ...localPayload,
+      quote: response.data.quote.quoteText
     }
-  };
+  })
 };
+
 
 export const deleteUser = (id) => {
   return {

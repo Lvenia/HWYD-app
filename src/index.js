@@ -10,6 +10,8 @@ import { Provider } from 'react-redux';
 
 import rootReducer from './reducers/rootReducer';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const composeEnhancers = typeof window === 'object' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;

@@ -1,69 +1,103 @@
 import React from 'react';
 
 import QuizRow from './QuizRow'
+import RadioButton from './RadioButton'
 
-const Quiz = () => {
+class Quiz extends React.Component {
 
-  const questions = [
-    {
-      question: 'Have you sleept well?',
-      name: 'sleptWell',
-    },
-    {
-      question: 'How long have you slept?',
-      name: 'sleepDuration',
-    },
-    {
-      question: 'Have you wake up in the night?',
-      name: 'sleepInterupted',
-    },
-    {
-      question: 'Snoozing in the morning?',
-      name: 'snoozing',
-    },
-    {
-      question: 'Or naps during the day?',
-      name: 'dayNap',
-    },
-    {
-      question: 'Have you eaten regularelly?',
-      name: 'mealRegularity',
-    },
-    {
-      question: 'Skipped meal?',
-      name: 'skippedMeal',
-    },
-    {
-      question: 'Junk food?',
-      name: 'junkFood',
-    },
-    {
-      question: 'How many glasses of water have you had?',
-      name: 'waterGlasses',
-    },
-  ];
+  state = {
 
-  function renderQuizRow() {
+  }
 
+  handleClick = (questionType, value) => {
+    console.log('Click!' + questionType + value)
+    this.setState({ [questionType]: value })
+  }
+
+
+
+  renderQuizRow = () => {
+
+    const questions = [
+      {
+        question: 'Have you sleept well?',
+        name: 'sleptWell',
+      },
+      {
+        question: 'How long have you slept?',
+        name: 'sleepDuration',
+      },
+      {
+        question: 'Have you wake up in the night?',
+        name: 'sleepInterupted',
+      },
+      {
+        question: 'Snoozing in the morning?',
+        name: 'snoozing',
+      },
+      {
+        question: 'Or naps during the day?',
+        name: 'dayNap',
+      },
+      {
+        question: 'Have you eaten regularelly?',
+        name: 'mealRegularity',
+      },
+      {
+        question: 'Skipped meal?',
+        name: 'skippedMeal',
+      },
+      {
+        question: 'Junk food?',
+        name: 'junkFood',
+      },
+      {
+        question: 'How many glasses of water have you had?',
+        name: 'waterGlasses',
+      },
+    ];
 
     return questions.map(question => {
+
       return (
         <QuizRow
           key={question.name}
           question={question.question}
           name={question.name}
-        />
+        >
+          <RadioButton
+            options={
+              [
+                {
+                  answer: 'YES',
+                  value: true
+                },
+                {
+                  answer: 'NO',
+                  value: false
+                }
+              ]
+            }
+
+            questionType={question.name}
+            onClick={this.handleClick}
+          />
+        </QuizRow>
       )
     })
   }
+  render() {
 
-  return (
-    <div>
-      <h4>Hi, I am Quiz</h4>
-      {renderQuizRow()}
-    </div>
+    console.log(this.state)
+    return (
+      <div>
+        <h4>Hi, I am Quiz</h4>
+        {this.renderQuizRow()}
+      </div>
 
-  )
+    );
+  }
+
 }
 
 export default Quiz;

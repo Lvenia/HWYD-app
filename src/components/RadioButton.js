@@ -10,7 +10,6 @@ const RadioButton = (props) => {
         key={option.answer}
         type='radio'
         onClick={() => props.onClick(props.questionType, option.value)}
-
       >
         {option.answer}
       </button>

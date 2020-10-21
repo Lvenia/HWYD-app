@@ -48,7 +48,7 @@ class Start extends React.Component {
               size={50}
               icon="fa-star-o"
             />
-            
+
             <p>{star.description}</p>
           </div>
         </Col>
@@ -58,9 +58,6 @@ class Start extends React.Component {
 
   }
   render() {
-
-    console.log(this.state)
-
     return (
       <Container>
         <Row className="m-3 justify-content-md-center" >

@@ -8,7 +8,7 @@ import {
 
 import NavBar from './NavBar';
 import Start from './Start';
-import Quiz from './Quiz';
+import Quiz from './Quiz/Quiz';
 import Day from './Day';
 import Data from './Data';
 import Users from './UserComponents/Users';

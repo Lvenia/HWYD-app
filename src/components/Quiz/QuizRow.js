@@ -6,12 +6,12 @@ class QuizRow extends React.Component {
 
   render() {
     return (
-      <div className="m-3 justify-content-md-center">
+      <div className="p-3 justify-content-md-center">
         <Row className="justify-content-md-center">
-          <Col sm={6}>
+          <Col xs={9}>
             <h4>{this.props.question}</h4>
           </Col>
-          <Col sm={2}>
+          <Col xs={3}>
             {this.props.children}
           </Col>
         </Row>

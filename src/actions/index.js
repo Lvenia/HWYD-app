@@ -1,47 +1,11 @@
 import {
   USER_CREATE,
   USER_EDIT,
-  USER_DELETE
+  USER_DELETE,
+  QUIZ_SUBMIT
 } from './actionTypes';
 
 import axios from '../apis/quotegarden';
-
-// export const createUser = (localPayload) => {
-
-//   axios.get()
-//     .then(response => {
-//       console.log(response.data);
-//       console.log(response.data.quote.quoteText);
-
-//       return {
-//         type: USER_CREATE,
-//         payload: {
-//           ...localPayload,
-//           quote: response.data.quote.quoteText
-//         }
-//       };
-
-//       // return response.data.quote.quoteText;
-
-//     })
-//     .catch(error => console.log(error))
-// };
-
-// export const createUser = async (localPayload) => {
-
-//   const response = await axios.get('/quotes/random');
-
-//   console.log(response);
-//   console.log(response.data.quote.quoteText);
-
-//   return {
-//     type: USER_CREATE,
-//     payload: {
-//       ...localPayload,
-//       quote: response.data.quote.quoteText
-//     }
-//   };
-// };
 
 export const createUser = localPayload => async dispatch => {
   const response = await axios.get('/quotes/random');
@@ -53,7 +17,6 @@ export const createUser = localPayload => async dispatch => {
     }
   })
 };
-
 
 export const deleteUser = (id) => {
   return {
@@ -71,6 +34,16 @@ export const editUser = (id, localPayload) => {
     }
   };
 };
+
+//QUIZ
+
+export const submitAnswers = (localState) => {
+  return {
+    type: QUIZ_SUBMIT,
+    payload: localState
+  }
+};
+
 
 
 

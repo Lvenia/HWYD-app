@@ -1,11 +1,14 @@
 import React from 'react';
 import SleepCategory from './SleepCategory';
+import NutritionCategory from './NutritionCategory';
+import Container from '../common/Container/Container'
 
 const Quiz = () => {
   return (
-    <div>
+    <Container>
       <SleepCategory />
-    </div>
+      <NutritionCategory />
+    </Container>
   );
 }
 

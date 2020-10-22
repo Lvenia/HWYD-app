@@ -5,7 +5,7 @@ const initialState = {
 
 }
 
-export default function hwydReducer(state = initialState, action) {
+export default function quizReducer (state = initialState, action) {
 
   switch (action.type) {
 

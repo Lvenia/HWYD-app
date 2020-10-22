@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -12,13 +12,10 @@ import { submitAnswers } from '../../actions';
 
 class NutritionCategory extends React.Component {
 
-  state = {
-
-  }
+  state = {}
 
   handleClick = (questionType, value) => {
     this.setState({ [questionType]: value })
-
   }
 
   renderNutritionCatQuestions() {
@@ -47,8 +44,6 @@ class NutritionCategory extends React.Component {
   }
 
   render() {
-
-    console.log(this.state)
     return (
       <div>
         {this.renderNutritionCatQuestions()}

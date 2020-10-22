@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Container from '../common/Container/Container';
-
 import questions from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
@@ -38,11 +36,11 @@ class SleepCategory extends React.Component {
             options={
               [
                 {
-                  answer: 'YES',
+                  label: 'YES',
                   value: true
                 },
                 {
-                  answer: 'NO',
+                  label: 'NO',
                   value: false
                 }
               ]
@@ -57,7 +55,7 @@ class SleepCategory extends React.Component {
 
   render() {
     return (
-      <Container>
+      <div>
         {this.renderSleepCatQuestions()}
         <div className="p-3 justify-content-md-center">
           <Row>
@@ -73,7 +71,7 @@ class SleepCategory extends React.Component {
           </Row>
         </div>
 
-      </Container>
+      </div>
     );
   }
 }

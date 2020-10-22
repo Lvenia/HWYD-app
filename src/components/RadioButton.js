@@ -6,11 +6,11 @@ const RadioButton = (props) => {
     return (
       <button
         className="justify-content-md-center mr-1"
-        key={option.answer}
+        key={option.label}
         type='radio'
         onClick={() => props.onClick(props.questionType, option.value)}
       >
-        {option.answer}
+        {option.label}
       </button>
     )
   })

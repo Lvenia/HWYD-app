@@ -1,10 +1,10 @@
 import userReducer from './userReducer';
-import hwydReducer from './hwydReducer'
+import quizReducer from './quizReducer'
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   userState: userReducer,
-  hwydSate: hwydReducer
+  quizSate: quizReducer
 });
 
 export default rootReducer;

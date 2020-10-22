@@ -24,7 +24,7 @@ class SleepCategory extends React.Component {
     this.setState({ [questionType]: value })
   }
 
-  renderQuizRow() {
+  renderSleepCatQuestions() {
 
     const sleepCatQuestions = questions.filter((q) => q.questionCategory === CATEGORY_SLEEP);
 
@@ -58,7 +58,7 @@ class SleepCategory extends React.Component {
   render() {
     return (
       <Container>
-        {this.renderQuizRow()}
+        {this.renderSleepCatQuestions()}
         <div className="p-3 justify-content-md-center">
           <Row>
             <Col sm={12}>

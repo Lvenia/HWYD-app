@@ -22,7 +22,6 @@ const DropdownComponent = (props) => {
             <Dropdown.Item
               key={option}
               title={option}
-              // onClick={() => setDescription(option)}
               onClick={() => {
                 props.onImpactSelect(props.activity, option)
                 setDescription(option)

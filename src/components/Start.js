@@ -4,12 +4,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Icon from './Icon';
+import SubmitButton from './SubmitButton';
 
 class Start extends React.Component {
 
   state = {
-    rate: 0,
-    description: ''
+    dayRate: 0,
+    dayDescription: ''
   }
 
   renderStars() {
@@ -40,8 +41,7 @@ class Start extends React.Component {
         <Col key={star.rate}>
           <div style={{ textAlign: "center" }}
             onClick={() => {
-              this.setState({ rate: star.rate, description: star.description })
-              this.props.history.push('/quiz')
+              this.setState({ dayRate: star.rate, dayDescription: star.description })
             }}
           >
             <Icon
@@ -54,8 +54,6 @@ class Start extends React.Component {
         </Col>
       )
     })
-
-
   }
   render() {
     return (
@@ -66,6 +64,12 @@ class Start extends React.Component {
         <Row className="justify-content-md-center" >
           {this.renderStars()}
         </Row>
+        <Col xs={12}>
+          <SubmitButton
+            label={'Start Quiz'}
+            localState={this.state}
+          />
+        </Col>
       </Container >
     );
   }

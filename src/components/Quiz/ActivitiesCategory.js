@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -7,7 +6,7 @@ import QuizCard from './QuizCard';
 import questions from './questions';
 import { CATEGORY_ACTIVITY } from '../../constants'
 import DropdownComponent from '../DropdownComponent';
-import { submitAnswers } from '../../actions';
+import SubmitButton from '../SubmitButton';
 
 class ActivitiesCategory extends React.Component {
 
@@ -54,7 +53,6 @@ class ActivitiesCategory extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         <div className="p-3 justify-content-md-left">
@@ -64,19 +62,14 @@ class ActivitiesCategory extends React.Component {
           {this.renderActivityCards()}
         </Row>
         <Col sm={12}>
-          <button
-            onClick={() => this.props.submitAnswers(this.state)}
-          >
-            Submit
-              </button>
+          <SubmitButton
+            label={'Submit'}
+            localState={this.state}
+          />
         </Col>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = {
-  submitAnswers
-}
-
-export default connect(null, mapDispatchToProps)(ActivitiesCategory);
+export default ActivitiesCategory;

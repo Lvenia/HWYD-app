@@ -3,15 +3,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Icon from './Icon';
+import StarComponent from './StarComponent';
+
 import SubmitButton from './SubmitButton';
 
 class Start extends React.Component {
 
-  state = {
-    dayRate: 0,
-    dayDescription: ''
-  }
+  state = { dayRate: 0 }
 
   renderStars() {
 
@@ -38,20 +36,13 @@ class Start extends React.Component {
 
     return stars.map(star => {
       return (
-        <Col key={star.rate}>
-          <div style={{ textAlign: "center" }}
-            onClick={() => {
-              this.setState({ dayRate: star.rate, dayDescription: star.description })
-            }}
-          >
-            <Icon
-              size={50}
-              icon="fa-star-o"
-            />
+        <StarComponent
+          key={star.rate}
+          description={star.description}
+          rate={star.rate}
 
-            <p>{star.description}</p>
-          </div>
-        </Col>
+          handleClick={rate => this.setState({ dayRate: rate })}
+        />
       )
     })
   }

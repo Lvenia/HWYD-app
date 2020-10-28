@@ -1,16 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import questions from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
+import SubmitButton from '../SubmitButton';
 
 import { CATEGORY_SLEEP } from '../../constants';
-
-import { submitAnswers } from '../../actions'
-
 
 class SleepCategory extends React.Component {
 
@@ -47,6 +44,7 @@ class SleepCategory extends React.Component {
             }
             questionType={q.name}
             onClick={this.handleClick}
+            answer={this.state[q.name]}
           />
         </QuizRow>
       );
@@ -60,24 +58,16 @@ class SleepCategory extends React.Component {
         <div className="p-3 justify-content-md-center">
           <Row>
             <Col sm={12}>
-              <button
-                onClick={() => {
-                  this.props.submitAnswers(this.state)
-                }}
-              >
-                Submit
-              </button>
+              <SubmitButton
+                label={'Next Section'}
+                localState={this.state}
+              />
             </Col>
           </Row>
         </div>
-
       </div>
     );
   }
 }
 
-const mapDispatchToProps = {
-  submitAnswers
-};
-
-export default connect(null, mapDispatchToProps)(SleepCategory);
+export default SleepCategory;

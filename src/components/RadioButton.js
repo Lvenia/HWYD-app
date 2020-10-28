@@ -1,17 +1,20 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 const RadioButton = (props) => {
-
   return props.options.map(option => {
     return (
-      <button
+      <Button
         className="justify-content-md-center mr-1"
         key={option.label}
         type='radio'
-        onClick={() => props.onClick(props.questionType, option.value)}
+        onClick={() => {
+          props.onClick(props.questionType, option.value)
+        }}
+        variant={props.answer === option.value ? 'light active' : 'light'}
       >
         {option.label}
-      </button>
+      </Button>
     )
   })
 }

@@ -3,17 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Icon from './Icon';
+import StarComponent from './StarComponent';
+
+import SubmitButton from './SubmitButton';
 
 class Start extends React.Component {
 
   state = {
-    rate: 0,
-    description: ''
+    dayRate: 0,
+    hoveredStarRate: 0
   }
 
-  renderStars() {
+  handleHoveredStar = (rate) => this.setState({ hoveredStarRate: rate })
 
+  renderStars() {
     const stars = [{
       rate: 1,
       description: 'tough'
@@ -37,27 +40,23 @@ class Start extends React.Component {
 
     return stars.map(star => {
       return (
-        <Col key={star.rate}>
-          <div style={{ textAlign: "center" }}
-            onClick={() => {
-              this.setState({ rate: star.rate, description: star.description })
-              this.props.history.push('/quiz')
-            }}
-          >
-            <Icon
-              size={50}
-              icon="fa-star-o"
-            />
-
-            <p>{star.description}</p>
-          </div>
-        </Col>
-      )
+        <StarComponent
+          key={star.rate}
+          description={star.description}
+          starRate={star.rate}
+          hoveredStarRate={this.state.hoveredStarRate || this.state.dayRate}
+          handleStarHover={(rate) => this.setState({ hoveredStarRate: rate })}
+          handleClick={(rate) => this.setState({ dayRate: rate })}
+        />
+      );
     })
-
-
   }
+
   render() {
+    const payload = {
+      dayRate: this.state.dayRate,
+    };
+
     return (
       <Container>
         <Row className="m-3 justify-content-md-center" >
@@ -66,9 +65,17 @@ class Start extends React.Component {
         <Row className="justify-content-md-center" >
           {this.renderStars()}
         </Row>
+        <Col xs={12}>
+          <SubmitButton
+            label={'Start Quiz'}
+            localState={payload}
+            locationChange={() => this.props.history.push('/quiz')}
+          />
+        </Col>
       </Container >
     );
   }
 }
 
 export default Start;
+

@@ -30,7 +30,6 @@ class ActivitiesCategory extends React.Component {
     })
   }
 
-
   renderActivityCards() {
 
     const activities = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
@@ -39,12 +38,13 @@ class ActivitiesCategory extends React.Component {
       return (
         <QuizCard
           key={a.name}
-          activity={a.question}
+          activityTitle={a.question}
+          activity={a.name}
           onInputChange={this.handleInputChange}
         >
           <DropdownComponent
             options={['uplifting', 'neutral', 'discouraging']}
-            activity={a.question}
+            activity={a.name}
             onImpactSelect={this.handleSelectChange}
           />
         </QuizCard>

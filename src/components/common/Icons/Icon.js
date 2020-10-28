@@ -2,10 +2,7 @@ import React from 'react';
 
 const Icon = ({
   size,
-  icon,
-  handleMouseEnter,
-  handleMouseLeave,
-  highlight
+  icon
 }) => {
 
   return (
@@ -13,11 +10,7 @@ const Icon = ({
       style={{
         fontSize: size
       }}>
-      <i
-        className={highlight ? `fa ${icon}` : `fa ${icon}-o`}
-        onMouseEnter={() => handleMouseEnter()}
-        onMouseLeave={() => handleMouseLeave()}
-      />
+      <i className={`fa ${icon}`} />
     </span>
   );
 };

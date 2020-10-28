@@ -16,14 +16,6 @@ class Start extends React.Component {
 
   handleHoveredStar = (rate) => this.setState({ hoveredStarRate: rate })
 
-  handleHighlight = (starRate) => {
-    if (starRate <= this.state.hoveredStarRate || starRate <= this.state.dayRate) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   renderStars() {
     const stars = [{
       rate: 1,
@@ -52,8 +44,8 @@ class Start extends React.Component {
           key={star.rate}
           description={star.description}
           starRate={star.rate}
-          getHoveredStarRate={(rate) => this.handleHoveredStar(rate)}
-          highlight={(starRate) => this.handleHighlight(starRate)}
+          hoveredStarRate={this.state.hoveredStarRate || this.state.dayRate}
+          handleStarHover={(rate) => this.setState({ hoveredStarRate: rate })}
           handleClick={(rate) => this.setState({ dayRate: rate })}
         />
       );
@@ -61,6 +53,10 @@ class Start extends React.Component {
   }
 
   render() {
+    const payload = {
+      dayRate: this.state.dayRate,
+    };
+
     return (
       <Container>
         <Row className="m-3 justify-content-md-center" >
@@ -72,9 +68,8 @@ class Start extends React.Component {
         <Col xs={12}>
           <SubmitButton
             label={'Start Quiz'}
-            localState={this.state}
-            path={'/quiz'}
-            locationChange={(path) => this.props.history.push(path)}
+            localState={payload}
+            locationChange={() => this.props.history.push('/quiz')}
           />
         </Col>
       </Container >
@@ -83,3 +78,4 @@ class Start extends React.Component {
 }
 
 export default Start;
+

@@ -11,6 +11,7 @@ const RadioButton = (props) => {
         onClick={() => {
           props.onClick(props.questionType, option.value)
         }}
+        variant={props.answer === option.value ? 'light active' : 'light'}
       >
         {option.label}
       </Button>

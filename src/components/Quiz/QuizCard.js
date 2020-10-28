@@ -12,7 +12,7 @@ const QuizCard = (props) => {
 
         <Col xs={12}>
           <Row className="justify-content-md-center">
-            <Card.Title>{props.activity}</Card.Title>
+            <Card.Title>{props.activityTitle}</Card.Title>
           </Row>
 
           <Row className="justify-content-md-center">

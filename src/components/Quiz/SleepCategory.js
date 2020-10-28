@@ -44,6 +44,7 @@ class SleepCategory extends React.Component {
             }
             questionType={q.name}
             onClick={this.handleClick}
+            answer={this.state[q.name]}
           />
         </QuizRow>
       );

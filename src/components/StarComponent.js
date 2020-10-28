@@ -5,30 +5,32 @@ import Col from 'react-bootstrap/Col';
 
 const StarComponent = ({
   description,
-  highlight,
   starRate,
-  getHoveredStarRate,
-  handleClick
+  hoveredStarRate,
+
+  handleClick,
+  handleStarHover
 }) => {
+
+  const shouldBeHighlighted = starRate <= hoveredStarRate;
+
+  const onClick = () => handleClick(starRate);
+  const onMouseEnter = () => handleStarHover(starRate);
+  const onMouseLeave = () => { handleStarHover(0) }
 
   return (
     <Col>
       <Wrapper
-        highlight={highlight(starRate)}
-        onClick={() => handleClick(starRate)}
+        isHighlighed={shouldBeHighlighted}
+        onClick={onClick}
       >
-        <div>
+        <div
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           <Icon
             size="50px"
-            highlight={highlight(starRate)}
-            icon="fa-star"
-
-            handleMouseEnter={() => {getHoveredStarRate(starRate)}}
-            handleMouseLeave={() => {
-              getHoveredStarRate(0)
-              console.log('mouse leave')
-            }
-            }
+            icon={shouldBeHighlighted ? 'fa-star' : 'fa-star-o'}
           />
           <p>{description}</p>
         </div>

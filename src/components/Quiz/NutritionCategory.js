@@ -19,8 +19,6 @@ class NutritionCategory extends React.Component {
     this.setState({ [questionType]: value })
   }
 
-
-
   renderNutritionCatQuestions() {
     const nutritionCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_NUTRITION)
 
@@ -40,6 +38,7 @@ class NutritionCategory extends React.Component {
             }
             questionType={q.name}
             onClick={this.handleClick}
+            answer={this.state[q.name]}
           />
         </QuizRow>
       )

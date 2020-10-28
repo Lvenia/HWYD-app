@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   text-align: center;
 
   span {
-    color: ${props => props.highlight ? '#ffff4d' : 'none'}
+    color: ${props => props.isHighlighed ? '#ffff4d' : 'none'}
   }
 `
 export default Wrapper;

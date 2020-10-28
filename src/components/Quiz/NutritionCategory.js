@@ -11,9 +11,7 @@ import SubmitButton from '../SubmitButton';
 
 class NutritionCategory extends React.Component {
 
-  state = {
-
-  }
+  state = {}
 
   handleClick = (questionType, value) => {
     this.setState({ [questionType]: value })
@@ -46,8 +44,6 @@ class NutritionCategory extends React.Component {
   }
 
   render() {
-
-    console.log(this.state)
     return (
       <div>
         {this.renderNutritionCatQuestions()}

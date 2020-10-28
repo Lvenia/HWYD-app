@@ -10,7 +10,9 @@ const SubmitButton = ({ submitAnswers, label, localState, locationChange }) => {
       variant="primary"
       onClick={() => {
         submitAnswers(localState);
-        locationChange();
+        if (locationChange) {
+          locationChange()
+        };
       }}
     >
       {label}

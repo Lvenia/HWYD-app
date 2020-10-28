@@ -9,10 +9,22 @@ import SubmitButton from './SubmitButton';
 
 class Start extends React.Component {
 
-  state = { dayRate: 0 }
+  state = {
+    dayRate: 0,
+    hoveredStarRate: 0
+  }
+
+  handleHoveredStar = (rate) => this.setState({ hoveredStarRate: rate })
+
+  handleHighlight = (starRate) => {
+    if (starRate <= this.state.hoveredStarRate || starRate <= this.state.dayRate) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   renderStars() {
-
     const stars = [{
       rate: 1,
       description: 'tough'
@@ -39,13 +51,15 @@ class Start extends React.Component {
         <StarComponent
           key={star.rate}
           description={star.description}
-          rate={star.rate}
-
-          handleClick={rate => this.setState({ dayRate: rate })}
+          starRate={star.rate}
+          getHoveredStarRate={(rate) => this.handleHoveredStar(rate)}
+          highlight={(starRate) => this.handleHighlight(starRate)}
+          handleClick={(rate) => this.setState({ dayRate: rate })}
         />
-      )
+      );
     })
   }
+
   render() {
     return (
       <Container>
@@ -59,6 +73,8 @@ class Start extends React.Component {
           <SubmitButton
             label={'Start Quiz'}
             localState={this.state}
+            path={'/quiz'}
+            locationChange={(path) => this.props.history.push(path)}
           />
         </Col>
       </Container >

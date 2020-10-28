@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Icon from './common/Icons/Icon';
 import Wrapper from './common/Wrapper';
 import Col from 'react-bootstrap/Col';
 
-const StarComponent = ({ description, rate, handleClick }) => {
-
-  const [hover, setHover] = useState(false);
+const StarComponent = ({
+  description,
+  highlight,
+  starRate,
+  getHoveredStarRate,
+  handleClick
+}) => {
 
   return (
-    <Col
-      key={rate}
-      onClick={() => handleClick(rate)}
-    >
-      <Wrapper hover={hover}>
+    <Col>
+      <Wrapper
+        highlight={highlight(starRate)}
+        onClick={() => handleClick(starRate)}
+      >
         <div>
           <Icon
-            icon={hover ? "fa-star" : "fa-star-o"}
             size="50px"
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
+            highlight={highlight(starRate)}
+            icon="fa-star"
+
+            handleMouseEnter={() => {getHoveredStarRate(starRate)}}
+            handleMouseLeave={() => {
+              getHoveredStarRate(0)
+              console.log('mouse leave')
+            }
+            }
           />
           <p>{description}</p>
         </div>

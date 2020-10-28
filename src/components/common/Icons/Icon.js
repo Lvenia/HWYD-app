@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Icon = ({ size, icon, onMouseEnter, onMouseLeave }) => {
+const Icon = ({
+  size,
+  icon,
+  handleMouseEnter,
+  handleMouseLeave,
+  highlight
+}) => {
 
   return (
     <span
@@ -8,9 +14,9 @@ const Icon = ({ size, icon, onMouseEnter, onMouseLeave }) => {
         fontSize: size
       }}>
       <i
-        className={`fa ${icon}`}
-        onMouseEnter={() => onMouseEnter()}
-        onMouseLeave={() => onMouseLeave()}
+        className={highlight ? `fa ${icon}` : `fa ${icon}-o`}
+        onMouseEnter={() => handleMouseEnter()}
+        onMouseLeave={() => handleMouseLeave()}
       />
     </span>
   );

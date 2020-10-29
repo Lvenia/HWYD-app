@@ -15,6 +15,7 @@ class SleepCategory extends React.Component {
 
   }
 
+
   handleClick = (questionType, value) => {
     this.setState({ [questionType]: value })
   }
@@ -61,6 +62,7 @@ class SleepCategory extends React.Component {
               <SubmitButton
                 label={'Next Section'}
                 localState={this.state}
+                moveToNextSection={() => this.props.changeCatNo(this.props.categoryNumber + 1)}
               />
             </Col>
           </Row>

@@ -65,6 +65,7 @@ class ActivitiesCategory extends React.Component {
           <SubmitButton
             label={'Submit'}
             localState={this.state}
+            moveToNextSection={() => this.props.changeCatNo(this.props.categoryNumber + 1)}
           />
         </Col>
       </div>

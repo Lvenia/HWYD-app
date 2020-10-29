@@ -53,6 +53,7 @@ class NutritionCategory extends React.Component {
               <SubmitButton
                 label={'Next Section'}
                 localState={this.state}
+                moveToNextSection={() => this.props.changeCatNo(this.props.categoryNumber + 1)}
               />
             </Col>
           </Row>

@@ -31,7 +31,6 @@ class App extends React.Component {
             <Route path="/user/:id" component={UserDetails} />
             <Route path="/edit/:id" component={EditUserDetails} />
           </Switch>
-
         </React.Fragment >
       </Router>
     );

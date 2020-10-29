@@ -5,16 +5,14 @@ import Col from 'react-bootstrap/Col';
 import questions from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
+import InputField from '../InputField';
 import SubmitButton from '../SubmitButton';
 
-import { CATEGORY_SLEEP } from '../../constants';
+import { CATEGORY_SLEEP, INPUT_RADIOBUTTON, INPUT_HOUR } from '../../constants';
 
 class SleepCategory extends React.Component {
 
-  state = {
-
-  }
-
+  state = {}
 
   handleClick = (questionType, value) => {
     this.setState({ [questionType]: value })
@@ -25,30 +23,48 @@ class SleepCategory extends React.Component {
     const sleepCatQuestions = questions.filter((q) => q.questionCategory === CATEGORY_SLEEP);
 
     return sleepCatQuestions.map((q) => {
-      return (
-        <QuizRow
-          key={q.name}
-          question={q.question}
-        >
-          <RadioButton
-            options={
-              [
-                {
-                  label: 'YES',
-                  value: true
-                },
-                {
-                  label: 'NO',
-                  value: false
-                }
-              ]
-            }
-            questionType={q.name}
-            onClick={this.handleClick}
-            answer={this.state[q.name]}
-          />
-        </QuizRow>
-      );
+      
+      if (q.answerType === INPUT_RADIOBUTTON) {
+        return (
+          <QuizRow
+            key={q.name}
+            question={q.question}
+          >
+            <RadioButton
+              options={
+                [
+                  {
+                    label: 'YES',
+                    value: true
+                  },
+                  {
+                    label: 'NO',
+                    value: false
+                  }
+                ]
+              }
+              questionType={q.name}
+              onClick={this.handleClick}
+              answer={this.state[q.name]}
+            />
+          </QuizRow>
+        );
+
+      } else if (q.answerType === INPUT_HOUR) {
+        return (
+          <QuizRow
+            key={q.name}
+            question={q.question}
+          >
+            <InputField
+              style={{ width: '105px' }}
+              type="time"
+              onInputChange={(value) => this.setState({ [q.name]: value })}
+            />
+          </QuizRow>
+        )
+      }
+
     });
   }
 

@@ -3,11 +3,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import questions from './questions';
-import { CATEGORY_NUTRITION } from '../../constants';
+import { CATEGORY_NUTRITION, INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 
 import SubmitButton from '../SubmitButton';
+import InputField from '../InputField';
 
 class NutritionCategory extends React.Component {
 
@@ -17,33 +18,55 @@ class NutritionCategory extends React.Component {
     this.setState({ [questionType]: value })
   }
 
+  // handleInputChange = (questionType, value) => this.setState({ [questionType]: value })
+
   renderNutritionCatQuestions() {
     const nutritionCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_NUTRITION)
 
     return nutritionCatQuestions.map(q => {
-      return (
-        <QuizRow key={q.name} question={q.question}>
-          <RadioButton
-            options={
-              [{
-                label: 'YES',
-                value: true
-              },
-              {
-                label: 'NO',
-                value: false
-              }]
-            }
-            questionType={q.name}
-            onClick={this.handleClick}
-            answer={this.state[q.name]}
-          />
-        </QuizRow>
-      )
+      if (q.answerType === INPUT_RADIOBUTTON) {
+        return (
+          <QuizRow key={q.name} question={q.question}>
+
+            <RadioButton
+              options={
+                [{
+                  label: 'YES',
+                  value: true
+                },
+                {
+                  label: 'NO',
+                  value: false
+                }]
+              }
+              questionType={q.name}
+              onClick={this.handleClick}
+              answer={this.state[q.name]}
+            />
+          </QuizRow>
+        );
+
+      } else if (q.answerType === INPUT_NUMBER) {
+        return (
+          <QuizRow key={q.name} question={q.question}>
+            <InputField
+              style={{ width: '105px' }}
+              type="number"
+              min={0}
+              max={24}
+              step={0.5}
+              onInputChange={(value) => this.setState({ [q.name]: value })}
+            />
+
+          </QuizRow>
+        );
+      }
+
     })
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         {this.renderNutritionCatQuestions()}

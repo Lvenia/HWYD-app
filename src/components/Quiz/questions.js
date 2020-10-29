@@ -6,7 +6,7 @@ import {
   INPUT_NUMBER,
   INPUT_RADIOBUTTON,
   INPUT_COMBINED_SELECT_NUMBER,
-  INPUT_TIME_PERIOD
+  INPUT_HOUR
 
 } from '../../constants';
 
@@ -19,10 +19,16 @@ const questions = [
     answerType: INPUT_RADIOBUTTON
   },
   {
-    question: 'How long have you been sleeping?',
-    name: 'sleepDuration',
+    question: 'What time did you go to bed?',
+    name: 'goToBed',
     questionCategory: CATEGORY_SLEEP,
-    answerType: INPUT_TIME_PERIOD
+    answerType: INPUT_HOUR
+  },
+  {
+    question: 'What time did you wake up?',
+    name: 'wakeUp',
+    questionCategory: CATEGORY_SLEEP,
+    answerType: INPUT_HOUR
   },
   {
     question: 'Have you wake up in the night?',

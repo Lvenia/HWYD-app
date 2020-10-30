@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from './common/Icons/Icon';
-import Wrapper from './common/Wrapper';
+import Icon from '../common/Icons/Icon';
+import Wrapper from '../common/Wrapper';
 import Col from 'react-bootstrap/Col';
 
 const StarComponent = ({

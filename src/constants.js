@@ -7,4 +7,8 @@ export const INPUT_RADIOBUTTON = 'INPUT_RADIOBUTTON';
 export const INPUT_COMBINED_SELECT_NUMBER = 'INPUT_COMBINED_SELECT_NUMBER';
 export const INPUT_HOUR = 'HOUR'
 
-
+export const STARS_CATEGORY_NUMBER = "1";
+export const SLEEP_CATEGORY_NUMBER = "2";
+export const NUTRITION_CATEGORY_NUMBER = "3";
+export const ACTIVITY_CATEGORY_NUMBER = "4";
+export const QUIZ_COMPLETED = "5";

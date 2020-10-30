@@ -23,7 +23,7 @@ class SleepCategory extends React.Component {
     const sleepCatQuestions = questions.filter((q) => q.questionCategory === CATEGORY_SLEEP);
 
     return sleepCatQuestions.map((q) => {
-      
+
       if (q.answerType === INPUT_RADIOBUTTON) {
         return (
           <QuizRow
@@ -63,6 +63,8 @@ class SleepCategory extends React.Component {
             />
           </QuizRow>
         )
+      } else {
+        return null;
       }
 
     });
@@ -78,7 +80,7 @@ class SleepCategory extends React.Component {
               <SubmitButton
                 label={'Next Section'}
                 localState={this.state}
-                moveToNextSection={() => this.props.changeCatNo(this.props.categoryNumber + 1)}
+                handleClick={this.props.moveToNextSection}
               />
             </Col>
           </Row>

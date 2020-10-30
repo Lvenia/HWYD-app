@@ -3,34 +3,51 @@ import SleepCategory from './SleepCategory';
 import NutritionCategory from './NutritionCategory';
 import ActivitiesCategory from './ActivitiesCategory';
 import Container from '../common/Container/Container';
+import StarsCategory from './StarsCategory';
+
+import {
+  STARS_CATEGORY_NUMBER,
+  SLEEP_CATEGORY_NUMBER,
+  NUTRITION_CATEGORY_NUMBER,
+  ACTIVITY_CATEGORY_NUMBER,
+  QUIZ_COMPLETED,
+} from '../../constants';
 
 
 const Quiz = () => {
 
-  const [categoryNumber, setCategoryNumber] = useState(1);
+  const [categoryNumber, setCategoryNumber] = useState(STARS_CATEGORY_NUMBER);
 
   function renderContent() {
-    if (categoryNumber === 1) {
+    if (categoryNumber === STARS_CATEGORY_NUMBER) {
+      return (
+        <StarsCategory
+          moveToNextSection={() => setCategoryNumber(SLEEP_CATEGORY_NUMBER)}
+        />
+      );
+    }
+    else if (categoryNumber === SLEEP_CATEGORY_NUMBER) {
       return (
         <SleepCategory
-          categoryNumber={1}
-          changeCatNo={setCategoryNumber}
+          moveToNextSection={() => setCategoryNumber(NUTRITION_CATEGORY_NUMBER)}
         />
       );
-    } else if (categoryNumber === 2) {
+
+    } else if (categoryNumber === NUTRITION_CATEGORY_NUMBER) {
       return (
         <NutritionCategory
-          categoryNumber={2}
-          changeCatNo={setCategoryNumber} />
-      );
-    } else if (categoryNumber === 3) {
-      return (
-        <ActivitiesCategory
-          categoryNumber={3}
-          changeCatNo={setCategoryNumber}
+          moveToNextSection={() => setCategoryNumber(ACTIVITY_CATEGORY_NUMBER)}
         />
       );
-    } else if (categoryNumber > 3) {
+
+    } else if (categoryNumber === ACTIVITY_CATEGORY_NUMBER) {
+      return (
+        <ActivitiesCategory
+          moveToNextSection={() => setCategoryNumber(QUIZ_COMPLETED)}
+        />
+      );
+    } else if (categoryNumber === QUIZ_COMPLETED) {
+
       return (
         <Container>
           <h3>Thank you! Your answers have been submited.</h3>

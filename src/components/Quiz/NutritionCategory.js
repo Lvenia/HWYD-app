@@ -18,8 +18,6 @@ class NutritionCategory extends React.Component {
     this.setState({ [questionType]: value })
   }
 
-  // handleInputChange = (questionType, value) => this.setState({ [questionType]: value })
-
   renderNutritionCatQuestions() {
     const nutritionCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_NUTRITION)
 
@@ -60,6 +58,8 @@ class NutritionCategory extends React.Component {
 
           </QuizRow>
         );
+      } else {
+        return null;
       }
 
     })
@@ -76,7 +76,7 @@ class NutritionCategory extends React.Component {
               <SubmitButton
                 label={'Next Section'}
                 localState={this.state}
-                moveToNextSection={() => this.props.changeCatNo(this.props.categoryNumber + 1)}
+                handleClick={this.props.moveToNextSection}
               />
             </Col>
           </Row>

@@ -4,20 +4,13 @@ import { connect } from 'react-redux';
 
 import { submitAnswers } from '../actions';
 
-const SubmitButton = ({ submitAnswers, label, localState, locationChange, moveToNextSection }) => {
+const SubmitButton = ({ submitAnswers, label, localState, locationChange, handleClick }) => {
   return (
     <Button
       variant="primary"
       onClick={() => {
         submitAnswers(localState);
-        if (moveToNextSection) {
-          moveToNextSection()
-        }
-
-        if (locationChange) {
-          locationChange()
-        };
-
+        handleClick();
       }}
     >
       {label}

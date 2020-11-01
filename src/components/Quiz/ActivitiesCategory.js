@@ -10,9 +10,27 @@ import DropdownComponent from '../DropdownComponent';
 import AppButton from '../AppButton';
 import { submitAnswers } from '../../actions';
 
+const activities = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
+const activitiesCatKeys = activities.map(a => { return a.name })
+
 class ActivitiesCategory extends React.Component {
 
   state = {}
+
+  componentDidMount() {
+    const toLocalState = {}
+
+    activitiesCatKeys.map(k => {
+      if (k in this.props.appState) {
+        toLocalState[k] = this.props.appState[k]
+      }
+      return toLocalState
+    })
+
+    if (Object.keys(toLocalState).length > 0) {
+      this.setState(toLocalState)
+    }
+  }
 
   handleInputChange = (activity, inputValue) => {
     this.setState({
@@ -34,20 +52,21 @@ class ActivitiesCategory extends React.Component {
 
   renderActivityCards() {
 
-    const activities = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
-
     return activities.map(a => {
+
       return (
         <QuizCard
           key={a.name}
           activityTitle={a.question}
           activity={a.name}
+          value={this.state[a.name] ? this.state[a.name].activityTime : "HOURS"}
           onInputChange={this.handleInputChange}
         >
           <DropdownComponent
             options={['uplifting', 'neutral', 'discouraging']}
             activity={a.name}
             onImpactSelect={this.handleSelectChange}
+            selectedOption={this.state[a.name] ? this.state[a.name].energyImpact : null}
           />
         </QuizCard>
       );
@@ -85,4 +104,10 @@ class ActivitiesCategory extends React.Component {
   }
 }
 
-export default connect(null, { submitAnswers })(ActivitiesCategory);
+const mapStateToProps = (state) => {
+  return {
+    appState: state.quizState
+  };
+};
+
+export default connect(mapStateToProps, { submitAnswers })(ActivitiesCategory);

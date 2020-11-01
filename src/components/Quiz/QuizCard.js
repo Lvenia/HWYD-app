@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 const QuizCard = (props) => {
+
   return (
     <Card style={{ width: '14rem', margin: '1%' }}>
       <Card.Body>
@@ -24,7 +25,7 @@ const QuizCard = (props) => {
                 step="0.5"
                 size="md"
                 type="number"
-                placeholder="HOURS"
+                placeholder={props.value}
                 onChange={(event) => { props.onInputChange(props.activity, event.target.value) }}
               />
               {props.children}

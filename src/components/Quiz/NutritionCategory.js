@@ -13,17 +13,36 @@ import InputField from '../InputField';
 
 import { submitAnswers } from '../../actions';
 
+const nutritionCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_NUTRITION);
+const nutritionCatKeys = nutritionCatQuestions.map(k => {
+  return k.name
+});
+
 class NutritionCategory extends React.Component {
 
   state = {}
+
+  componentDidMount() {
+
+    const toLocalState = {};
+
+    nutritionCatKeys.map(k => {
+      if (k in this.props.appState) {
+        toLocalState[k] = this.props.appState[k]
+      }
+      return toLocalState;
+    });
+
+    if (Object.keys(toLocalState).length > 0) {
+      this.setState(toLocalState)
+    }
+  }
 
   handleClick = (questionType, value) => {
     this.setState({ [questionType]: value })
   }
 
   renderNutritionCatQuestions() {
-    const nutritionCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_NUTRITION)
-
     return nutritionCatQuestions.map(q => {
       if (q.answerType === INPUT_RADIOBUTTON) {
         return (
@@ -56,6 +75,7 @@ class NutritionCategory extends React.Component {
               min={0}
               max={24}
               step={0.5}
+              value={this.state[q.name]}
               onInputChange={(value) => this.setState({ [q.name]: value })}
             />
 
@@ -99,4 +119,10 @@ class NutritionCategory extends React.Component {
 
 }
 
-export default connect(null, { submitAnswers })(NutritionCategory);
+const mapStateToProps = (state) => {
+  return {
+    appState: state.quizState
+  }
+}
+
+export default connect(mapStateToProps, { submitAnswers })(NutritionCategory);

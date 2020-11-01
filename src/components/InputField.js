@@ -2,7 +2,7 @@ import React from 'react';
 
 import Form from 'react-bootstrap/Form';
 
-const InputField = ({ style, type, onInputChange, min, max, step }) => {
+const InputField = ({ style, type, onInputChange, min, max, step, value }) => {
 
   return (
     <Form.Control
@@ -11,6 +11,7 @@ const InputField = ({ style, type, onInputChange, min, max, step }) => {
       min={min}
       max={max}
       step={step}
+      defaultValue={value}
       onChange={(event) => { onInputChange(event.target.value) }}
     />
   );

@@ -15,9 +15,6 @@ import { CATEGORY_SLEEP, INPUT_RADIOBUTTON, INPUT_HOUR } from '../../constants';
 const sleepCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_SLEEP);
 const sleepCatQuestionsKeys = sleepCatQuestions.map(q => { return q.name });
 
-
-console.log(sleepCatQuestionsKeys);
-
 class SleepCategory extends React.Component {
 
   state = {}
@@ -27,9 +24,11 @@ class SleepCategory extends React.Component {
     const toLocalState = {}
 
     sleepCatQuestionsKeys.map(k => {
+
       if (k in this.props.appState) {
         toLocalState[k] = this.props.appState[k]
       }
+      return toLocalState;
     })
 
     if (Object.keys(toLocalState).length > 0) {
@@ -80,6 +79,7 @@ class SleepCategory extends React.Component {
             <InputField
               style={{ width: '105px' }}
               type="time"
+              value={this.state[q.name]}
               onInputChange={(value) => this.setState({ [q.name]: value })}
             />
           </QuizRow>
@@ -124,6 +124,7 @@ class SleepCategory extends React.Component {
 const mapStateToProps = (state) => {
   return {
     appState: state.quizState
-  }
-}
+  };
+};
+
 export default connect(mapStateToProps, { submitAnswers })(SleepCategory);

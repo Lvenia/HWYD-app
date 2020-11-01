@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -6,7 +7,8 @@ import QuizCard from './QuizCard';
 import questions from './questions';
 import { CATEGORY_ACTIVITY } from '../../constants'
 import DropdownComponent from '../DropdownComponent';
-import SubmitButton from '../SubmitButton';
+import AppButton from '../AppButton';
+import { submitAnswers } from '../../actions';
 
 class ActivitiesCategory extends React.Component {
 
@@ -62,10 +64,20 @@ class ActivitiesCategory extends React.Component {
           {this.renderActivityCards()}
         </Row>
         <Col sm={12}>
-          <SubmitButton
+          <AppButton
+            variant={"light"}
+            label={'Previous Section'}
+            handleClick={() => {
+              this.props.moveToPrevioustSection()
+            }}
+          />
+          <AppButton
+            variant={"primary"}
             label={'Submit'}
-            localState={this.state}
-            handleClick={this.props.moveToNextSection}
+            handleClick={() => {
+              this.props.submitAnswers(this.state)
+              this.props.moveToNextSection()
+            }}
           />
         </Col>
       </div>
@@ -73,4 +85,4 @@ class ActivitiesCategory extends React.Component {
   }
 }
 
-export default ActivitiesCategory;
+export default connect(null, { submitAnswers })(ActivitiesCategory);

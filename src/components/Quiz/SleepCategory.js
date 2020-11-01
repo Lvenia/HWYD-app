@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -6,21 +7,41 @@ import questions from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 import InputField from '../InputField';
-import SubmitButton from '../SubmitButton';
+import AppButton from '../AppButton';
+import { submitAnswers } from '../../actions';
 
 import { CATEGORY_SLEEP, INPUT_RADIOBUTTON, INPUT_HOUR } from '../../constants';
+
+const sleepCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_SLEEP);
+const sleepCatQuestionsKeys = sleepCatQuestions.map(q => { return q.name });
+
+
+console.log(sleepCatQuestionsKeys);
 
 class SleepCategory extends React.Component {
 
   state = {}
+
+  componentDidMount() {
+
+    const toLocalState = {}
+
+    sleepCatQuestionsKeys.map(k => {
+      if (k in this.props.appState) {
+        toLocalState[k] = this.props.appState[k]
+      }
+    })
+
+    if (Object.keys(toLocalState).length > 0) {
+      this.setState(toLocalState)
+    }
+  }
 
   handleClick = (questionType, value) => {
     this.setState({ [questionType]: value })
   }
 
   renderSleepCatQuestions() {
-
-    const sleepCatQuestions = questions.filter((q) => q.questionCategory === CATEGORY_SLEEP);
 
     return sleepCatQuestions.map((q) => {
 
@@ -75,12 +96,22 @@ class SleepCategory extends React.Component {
       <div>
         {this.renderSleepCatQuestions()}
         <div className="p-3 justify-content-md-center">
-          <Row>
+          <Row >
             <Col sm={12}>
-              <SubmitButton
+              <AppButton
+                variant={"light"}
+                label={'Previous Section'}
+                handleClick={() => {
+                  this.props.moveToPrevioustSection()
+                }}
+              />
+              <AppButton
+                variant={"primary"}
                 label={'Next Section'}
-                localState={this.state}
-                handleClick={this.props.moveToNextSection}
+                handleClick={() => {
+                  this.props.submitAnswers(this.state)
+                  this.props.moveToNextSection()
+                }}
               />
             </Col>
           </Row>
@@ -90,4 +121,9 @@ class SleepCategory extends React.Component {
   }
 }
 
-export default SleepCategory;
+const mapStateToProps = (state) => {
+  return {
+    appState: state.quizState
+  }
+}
+export default connect(mapStateToProps, { submitAnswers })(SleepCategory);

@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   userState: userReducer,
-  quizSate: quizReducer
+  quizState: quizReducer
 });
 
 export default rootReducer;

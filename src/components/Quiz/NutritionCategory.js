@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -7,8 +8,10 @@ import { CATEGORY_NUTRITION, INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../const
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 
-import SubmitButton from '../SubmitButton';
+import AppButton from '../AppButton';
 import InputField from '../InputField';
+
+import { submitAnswers } from '../../actions';
 
 class NutritionCategory extends React.Component {
 
@@ -66,17 +69,26 @@ class NutritionCategory extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         {this.renderNutritionCatQuestions()}
         <div className="p-3 justify-content-md-center">
           <Row>
             <Col sm={12}>
-              <SubmitButton
+              <AppButton
+                variant={"light"}
+                label={'Previous Section'}
+                handleClick={() => {
+                  this.props.moveToPrevioustSection()
+                }}
+              />
+              <AppButton
+                variant={"primary"}
                 label={'Next Section'}
-                localState={this.state}
-                handleClick={this.props.moveToNextSection}
+                handleClick={() => {
+                  this.props.submitAnswers(this.state);
+                  this.props.moveToNextSection();
+                }}
               />
             </Col>
           </Row>
@@ -87,4 +99,4 @@ class NutritionCategory extends React.Component {
 
 }
 
-export default NutritionCategory;
+export default connect(null, { submitAnswers })(NutritionCategory);

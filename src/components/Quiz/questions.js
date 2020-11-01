@@ -20,13 +20,13 @@ const questions = [
   },
   {
     question: 'What time did you go to bed?',
-    name: 'goToBed',
+    name: 'wentToBed',
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_HOUR
   },
   {
     question: 'What time did you wake up?',
-    name: 'wakeUp',
+    name: 'wokeUp',
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_HOUR
   },

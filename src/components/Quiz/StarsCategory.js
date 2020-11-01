@@ -6,7 +6,9 @@ import Col from 'react-bootstrap/Col';
 
 import StarComponent from './StarComponent';
 
-import SubmitButton from '../SubmitButton';
+import AppButton from '../AppButton';
+
+import { submitAnswers } from '../../actions'
 
 class StarsComponent extends React.Component {
 
@@ -66,13 +68,19 @@ class StarsComponent extends React.Component {
         <Row className="justify-content-md-center" >
           {this.renderStars()}
         </Row>
-        <Col xs={12}>
-          <SubmitButton
-            label={'Next Section'}
-            localState={payload}
-            handleClick={this.props.moveToNextSection}
-          />
-        </Col>
+        <Row>
+          <Col xs={6}>
+            <AppButton
+              variant={"primary"}
+              label={'Next Section'}
+              handleClick={() => {
+                this.props.submitAnswers(payload)
+                this.props.moveToNextSection()
+              }
+              }
+            />
+          </Col>
+        </Row>
       </Container >
     );
   }
@@ -80,9 +88,13 @@ class StarsComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    choosenDayRate: state.quizSate.dayRate
+    choosenDayRate: state.quizState.dayRate
   }
+};
+
+const mapDispatchToProps = {
+  submitAnswers
 }
 
-export default connect(mapStateToProps)(StarsComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(StarsComponent);
 

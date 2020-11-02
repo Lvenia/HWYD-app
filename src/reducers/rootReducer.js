@@ -1,9 +1,9 @@
-import userReducer from './userReducer';
+import authReducer from './authReducer';
 import quizReducer from './quizReducer'
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-  userState: userReducer,
+  auth: authReducer,
   quizState: quizReducer
 });
 

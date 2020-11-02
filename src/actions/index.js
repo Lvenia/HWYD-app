@@ -1,39 +1,42 @@
 import {
-  USER_CREATE,
-  USER_EDIT,
-  USER_DELETE,
-  QUIZ_SUBMIT
+  QUIZ_SUBMIT,
+  CHECK_AUTH
 } from './actionTypes';
 
-import axios from '../apis/quotegarden';
+import axios from '../apis/api';
 
-export const createUser = localPayload => async dispatch => {
-  const response = await axios.get('/quotes/random');
+export const checkAthentification = () => async dispatch => {
+  const response = await axios.get('/auth/login/success');
+
+  console.log(response)
+
   dispatch({
-    type: USER_CREATE,
+    type: CHECK_AUTH,
     payload: {
-      ...localPayload,
-      quote: response.data.quote.quoteText
+      isAuthenticated: response.data.success,
+      user: response.data.user
     }
   })
-};
+}
 
-export const deleteUser = (id) => {
-  return {
-    type: USER_DELETE,
-    payload: id
-  };
-};
 
-export const editUser = (id, localPayload) => {
-  return {
-    type: USER_EDIT,
-    payload: {
-      id,
-      ...localPayload
-    }
-  };
-};
+export const logOut = () => async dispatch => {
+  const response = await axios.get('/auth/logout');
+
+  if (response.status === 200) {
+    dispatch({
+      type: CHECK_AUTH,
+      payload: {
+        isAuthenticated: false,
+        user: null
+      }
+    })
+  }
+  else {
+    console.log('logout error')
+  }
+  console.log(response)
+}
 
 //QUIZ
 

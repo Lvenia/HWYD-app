@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { submitQuiz, getTodaysAnswers } from '../../actions'
+
 import SleepCategory from './SleepCategory';
 import NutritionCategory from './NutritionCategory';
 import ActivitiesCategory from './ActivitiesCategory';
@@ -17,7 +21,11 @@ import {
 } from '../../constants';
 
 
-const Quiz = () => {
+const Quiz = ({ getTodaysAnswers, submitQuiz }) => {
+
+  useEffect(() => {
+    getTodaysAnswers()
+  }, [])
 
   const [categoryNumber, setCategoryNumber] = useState(STARS_CATEGORY_NUMBER);
 
@@ -66,6 +74,11 @@ const Quiz = () => {
                 label={'Go Back'}
                 handleClick={() => setCategoryNumber(ACTIVITY_CATEGORY_NUMBER)}
               />
+              <AppButton
+                variant={"Succes"}
+                label={'Conform and send'}
+                handleClick={() => submitQuiz()}
+              />
             </Col>
           </Row>
         </Container>
@@ -80,4 +93,10 @@ const Quiz = () => {
   );
 }
 
-export default Quiz;
+const mapStateToProps = (state) => {
+  return {
+    appSate: state.quizState
+  };
+};
+
+export default connect(mapStateToProps, { submitQuiz, getTodaysAnswers })(Quiz);

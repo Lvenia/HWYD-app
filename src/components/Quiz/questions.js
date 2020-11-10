@@ -13,6 +13,9 @@ import {
 
 const questions = [
   {
+    name: 'dayRate'
+  },
+  {
     question: 'Have you slept well?',
     name: 'sleptWell',
     questionCategory: CATEGORY_SLEEP,

@@ -12,6 +12,12 @@ import { submitAnswers } from '../../actions'
 
 class StarsComponent extends React.Component {
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.choosenDayRate !== this.props.choosenDayRate) {
+      this.setState({ dayRate: this.props.choosenDayRate })
+    }
+  }
+
   state = {
     dayRate: this.props.choosenDayRate || 0,
     hoveredStarRate: 0
@@ -92,9 +98,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = {
-  submitAnswers
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StarsComponent);
-
+export default connect(mapStateToProps, { submitAnswers })(StarsComponent);

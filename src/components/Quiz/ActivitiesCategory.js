@@ -11,7 +11,7 @@ import AppButton from '../AppButton';
 import { submitAnswers } from '../../actions';
 
 const activities = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
-const activitiesCatKeys = activities.map(a => { return a.name })
+const activitiesCatKeys = activities.map(a => { return a.name });
 
 class ActivitiesCategory extends React.Component {
 

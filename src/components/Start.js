@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import SubmitButton from './AppButton'
+import SubmitButton from './AppButton';
 
 class Start extends React.Component {
 
@@ -26,4 +26,3 @@ class Start extends React.Component {
 }
 
 export default Start;
-

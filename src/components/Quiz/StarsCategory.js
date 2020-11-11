@@ -94,7 +94,7 @@ class StarsComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    choosenDayRate: state.quizState.dayRate
+    choosenDayRate: state.quizState.data.dayRate
   }
 };
 

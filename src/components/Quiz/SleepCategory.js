@@ -123,7 +123,7 @@ class SleepCategory extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    appState: state.quizState
+    appState: state.quizState.data
   };
 };
 

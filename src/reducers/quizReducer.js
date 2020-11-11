@@ -1,10 +1,15 @@
-import questions from '../components/Quiz/questions'
+import questions from '../components/Quiz/questions';
 
 import {
-  QUIZ_SUBMIT
-} from '../actions/actionTypes'
+  QUIZ_SUBMIT,
+  QUIZ_SUBMIT_SUCCESS,
+  QUIZ_SUBMIT_TRIGGER
+} from '../actions/actionTypes';
 
-const initialState = {};
+const initialState = {
+  data: {},
+  isLoading: false,
+};
 
 export default function quizReducer(state = initialState, action) {
 
@@ -16,7 +21,7 @@ export default function quizReducer(state = initialState, action) {
         return q.name
       });
       const payloadKeys = Object.keys(action.payload);
-     
+
       let quizSubmitData = {};
 
       payloadKeys.forEach(payloadKey => {
@@ -27,7 +32,19 @@ export default function quizReducer(state = initialState, action) {
 
       return {
         ...state,
-        ...quizSubmitData
+        data: { ...state.data, ...quizSubmitData }
+      };
+
+    case QUIZ_SUBMIT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+
+    case QUIZ_SUBMIT_TRIGGER:
+      return {
+        ...state,
+        isLoading: true
       };
 
     default:

@@ -1,3 +1,5 @@
 export const CHECK_AUTH = 'CHECK_AUTH';
 
 export const QUIZ_SUBMIT = 'QUIZ_SUBMIT';
+export const QUIZ_SUBMIT_SUCCESS = 'QUIZ_SUBMIT_SUCCESS';
+export const QUIZ_SUBMIT_TRIGGER = 'QUIZ_SUBMIT_TRIGGER';

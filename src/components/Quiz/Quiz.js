@@ -77,7 +77,7 @@ const Quiz = ({ getTodaysAnswers, submitQuiz }) => {
               <AppButton
                 variant={"Succes"}
                 label={'Conform and send'}
-                handleClick={() => submitQuiz()}
+                handleClick={submitQuiz}
               />
             </Col>
           </Row>
@@ -95,7 +95,7 @@ const Quiz = ({ getTodaysAnswers, submitQuiz }) => {
 
 const mapStateToProps = (state) => {
   return {
-    appSate: state.quizState
+    appSate: state.quizState.data
   };
 };
 

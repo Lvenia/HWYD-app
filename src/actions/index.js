@@ -1,6 +1,8 @@
 import {
   QUIZ_SUBMIT,
-  CHECK_AUTH
+  CHECK_AUTH,
+  QUIZ_SUBMIT_SUCCESS,
+  QUIZ_SUBMIT_TRIGGER
 } from './actionTypes';
 
 import axios from '../apis/api';
@@ -58,10 +60,19 @@ export const submitAnswers = (localState) => {
 export const submitQuiz = () => async (dispatch, getState) => {
 
   try {
-    const dataToSend = getState();
-    const response = await axios.post('/answers', dataToSend.quizState);
 
-    if (!response.status === 201) {
+    dispatch({
+      type: QUIZ_SUBMIT_TRIGGER
+    });
+
+    const dataToSend = getState();
+    const response = await axios.post('/answers', dataToSend.quizState.data);
+
+    if (response.status === 201) {
+      dispatch({
+        type: QUIZ_SUBMIT_SUCCESS
+      });
+    } else {
       throw new Error(`Answers have not been posted, response status is ${response.status}`);
     }
   } catch (err) {

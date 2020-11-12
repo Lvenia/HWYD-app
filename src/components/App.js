@@ -10,7 +10,7 @@ import {
 import NavBar from './NavBar';
 import Start from './Start';
 import Quiz from './Quiz/Quiz';
-import Day from './Day';
+import Day from './ByDay/Day';
 import Data from './Data';
 
 import { checkAthentification } from '../actions'

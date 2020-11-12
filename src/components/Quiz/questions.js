@@ -52,7 +52,7 @@ const questions = [
     answerType: INPUT_RADIOBUTTON
   },
   {
-    question: 'Have you eaten regularelly?',
+    question: 'Have you eaten regularly?',
     name: 'mealRegularity',
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_RADIOBUTTON

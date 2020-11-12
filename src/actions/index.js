@@ -112,7 +112,6 @@ export const getAnswersByDay = (day) => async dispatch => {
 
 
     if (response.status === 200) {
-      console.log(response.data)
       dispatch({
         type: GET_ANSWERS_BY_DAY,
         payload: response.data || {}

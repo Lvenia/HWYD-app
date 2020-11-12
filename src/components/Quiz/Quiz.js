@@ -21,11 +21,11 @@ import {
 } from '../../constants';
 
 
-const Quiz = ({ getTodaysAnswers, submitQuiz }) => {
+const Quiz = ({ getAnswers, submitQuiz }) => {
 
   useEffect(() => {
-    getTodaysAnswers()
-  }, [])
+    getAnswers();
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const [categoryNumber, setCategoryNumber] = useState(STARS_CATEGORY_NUMBER);
 
@@ -99,4 +99,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { submitQuiz, getTodaysAnswers })(Quiz);
+export default connect(mapStateToProps, { submitQuiz, getAnswers: getTodaysAnswers })(Quiz);

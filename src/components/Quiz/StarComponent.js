@@ -7,16 +7,23 @@ const StarComponent = ({
   description,
   starRate,
   hoveredStarRate,
+  readOnly = false,
 
   handleClick,
   handleStarHover
 }) => {
 
+  let onMouseEnter;
+  let onMouseLeave;
+  let onClick;
+
   const shouldBeHighlighted = starRate <= hoveredStarRate;
 
-  const onClick = () => handleClick(starRate);
-  const onMouseEnter = () => handleStarHover(starRate);
-  const onMouseLeave = () => { handleStarHover(0) }
+  if (!readOnly) {
+    onClick = () => handleClick(starRate);
+    onMouseEnter = () => handleStarHover(starRate);
+    onMouseLeave = () => { handleStarHover(0) }
+  }
 
   return (
     <Col>

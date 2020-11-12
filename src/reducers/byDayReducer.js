@@ -17,13 +17,13 @@ export default function byDayReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false
-      }
+      };
 
     case GET_ANSWERS_BY_DAY_TRIGGER:
       return {
         ...state,
         isLoading: true
-      }
+      };
 
     case GET_ANSWERS_BY_DAY:
 
@@ -35,17 +35,12 @@ export default function byDayReducer(state = initialState, action) {
         if (alowedKeys.includes(payloadKey)) {
           answersByDay[payloadKey] = action.payload[payloadKey];
         }
-      })
-
-      console.log(alowedKeys);
-      console.log(payloadKeys);
-      console.log(answersByDay);
-
+      });
 
       return {
         ...state,
         data: { ...state.data, ...answersByDay }
-      }
+      };
 
     default:
       return state;

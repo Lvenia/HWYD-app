@@ -1,5 +1,6 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { getAnswersByDay } from '../../actions';
 
 import Container from '../common/Container/Container';
 import DayPickerComponent from './DayPickerComponent'
@@ -18,7 +19,10 @@ class Day extends React.Component {
   //transfer data from the server to the redux state => when the component is mounted
   componentDidMount() {
     const today = this.renderTodaysDate();
-    this.setState({ selectedDay: today })
+    this.setState({
+      selectedDay: today
+    })
+    this.props.getAnswersByDay(today);
   }
 
   formatDate = (dateUTC) => {
@@ -40,7 +44,6 @@ class Day extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <Container>
         <Row>
@@ -66,14 +69,14 @@ class Day extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     answers: state.quizState.data
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    answersByDay: state.byDayState.data
+  }
+}
 
-// export default connect(mapStateToProps, { getTodaysAnswers })(Day);
-export default Day;
+export default connect(mapStateToProps, { getAnswersByDay })(Day);
+// export default Day;
 
 
 

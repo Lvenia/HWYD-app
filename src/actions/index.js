@@ -2,7 +2,10 @@ import {
   QUIZ_SUBMIT,
   CHECK_AUTH,
   QUIZ_SUBMIT_SUCCESS,
-  QUIZ_SUBMIT_TRIGGER
+  QUIZ_SUBMIT_TRIGGER,
+  GET_ANSWERS_BY_DAY,
+  GET_ANSWERS_BY_DAY_SUCCESS,
+  GET_ANSWERS_BY_DAY_TRIGGER
 } from './actionTypes';
 
 import axios from '../apis/api';
@@ -93,6 +96,37 @@ export const getTodaysAnswers = () => async dispatch => {
     }
   } catch (err) {
     alert(`Error of the getTodaysAnswer request, ${err.message}`);
+  }
+};
+
+export const getAnswersByDay = (day) => async dispatch => {
+  try {
+
+    dispatch({
+      type: GET_ANSWERS_BY_DAY_TRIGGER
+    });
+
+    //make a request and dispatch an action
+    const response = await axios.get(`/answers/${day}`);
+    //answersByDay.data may be an empty object or a response object
+
+
+    if (response.status === 200) {
+      console.log(response.data)
+      dispatch({
+        type: GET_ANSWERS_BY_DAY,
+        payload: response.data || {}
+      });
+
+      dispatch({
+        type: GET_ANSWERS_BY_DAY_SUCCESS
+      });
+    } else {
+      throw new Error('GetAnswersByDay request feiled')
+    }
+
+  } catch (err) {
+    alert(`Something wron with the getAnswersByDate, ${err.message}`)
   }
 };
 

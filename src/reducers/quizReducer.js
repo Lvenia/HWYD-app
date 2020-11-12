@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   data: {},
-  isLoading: false,
+  isLoading: false
 };
 
 export default function quizReducer(state = initialState, action) {
@@ -20,6 +20,7 @@ export default function quizReducer(state = initialState, action) {
       const alowedKeys = questions.map(q => {
         return q.name
       });
+      
       const payloadKeys = Object.keys(action.payload);
 
       let quizSubmitData = {};

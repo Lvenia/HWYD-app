@@ -1,0 +1,45 @@
+dayRate: 5,
+      sleptWell: true,
+      wentToBed: '22:30',
+      wokeUp: '07:00',
+      sleepInterupted: false,
+      snoozing: true,
+      dayNap: false,
+      mealRegularity: true,
+      skippedMeal: false,
+      junkFood: false,
+      waterGlasses: 8,
+      work: {
+        _id: '5fae48f33de8c3bff60bb0de',
+        activityTime: 6,
+        energyImpact: 'uplifting'
+      },
+      sport: {
+        _id: '5fae48f33de8c3bff60bb0df',
+        activityTime: 1,
+        energyImpact: 'uplifting'
+      },
+      dailyTasks: {
+        _id: '5fae48f33de8c3bff60bb0e0',
+        activityTime: 1,
+        energyImpact: 'uplifting'
+      },
+      friends: {
+        _id: '5fae48f33de8c3bff60bb0e1',
+        activityTime: 1,
+        energyImpact: 'uplifting'
+      },
+      family: {
+        _id: '5fae48f33de8c3bff60bb0e2',
+        activityTime: 1,
+        energyImpact: 'uplifting'
+      },
+      reading: {
+        _id: '5fae48f33de8c3bff60bb0e3',
+        activityTime: 1,
+        energyImpact: 'uplifting'
+      }
+    },
+    isLoading: false
+  }
+}

@@ -12,3 +12,25 @@ export const SLEEP_CATEGORY_NUMBER = "2";
 export const NUTRITION_CATEGORY_NUMBER = "3";
 export const ACTIVITY_CATEGORY_NUMBER = "4";
 export const QUIZ_COMPLETED = "5";
+
+
+export const stars = [{
+  rate: 1,
+  description: 'tough'
+},
+{
+  rate: 2,
+  description: 'challenging'
+},
+{
+  rate: 3,
+  description: 'acceptable'
+},
+{
+  rate: 4,
+  description: 'pleasant'
+},
+{
+  rate: 5,
+  description: 'amazing'
+}];

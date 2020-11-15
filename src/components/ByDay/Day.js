@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getAnswersByDay } from '../../actions';
+import { stars } from '../../constants';
 
 import StarComponent from '../Quiz/StarComponent';
-
+import QuizSummary from './QuizSummary';
 
 import Container from '../common/Container/Container';
 import DayPickerComponent from './DayPickerComponent'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+
 
 
 
@@ -42,53 +45,15 @@ class Day extends React.Component {
     })
   }
 
-  renderDayDescription = (rate) => {
+  renderDayDescription = rate => {
 
-    const description = () => {
-      switch (rate) {
-        case 1:
-          return 'a tough';
-        case 2:
-          return 'a challenging';
-        case 3:
-          return 'an acceptable';
-        case 4:
-          return 'a pleasant';
-        case 5:
-          return 'an amazing';
-        default:
-          return 'beautiful'
-      }
-    };
-
-    return (
-      <h1>
-        It has been {description()} day!
-      </h1>
-    );
+    const star = stars.find(star => star.rate === rate);
+    if (star) {
+      return <h1>It was {star.description[0] !== 'a' ? 'a' : 'an'} {star.description} day!</h1>
+    }
   };
 
   renderStars() {
-    const stars = [{
-      rate: 1,
-      description: 'tough'
-    },
-    {
-      rate: 2,
-      description: 'challenging'
-    },
-    {
-      rate: 3,
-      description: 'acceptable'
-    },
-    {
-      rate: 4,
-      description: 'pleasant'
-    },
-    {
-      rate: 5,
-      description: 'amazing'
-    }];
 
     return stars.map(star => {
       return (
@@ -104,34 +69,40 @@ class Day extends React.Component {
 
 
   render() {
-    if (this.props.answersByDay) {
+
+    if (Object.keys(this.props.answersByDay).length > 0) {
+
       return (
         <Container>
+
           <Row className="m-3 justify-content-md-center">
             {this.renderDayDescription(this.props.answersByDay.dayRate)}
           </Row>
+
           <Row className="m-3 justify-content-md-center">
+
             <Col xs={5}>
               <DayPickerComponent
                 handleDayClick={this.handleDayClick}
                 selectedDay={this.state.selectedDateUnformated || new Date()}
               />
             </Col>
+
             <Col xs={7}>
-              <h4>Placeholder for stars</h4>
               <Row className="justify-content-md-center" >
                 {this.renderStars()}
               </Row>
-              <h4>Placeholder for sleep summary</h4>
-              <h4>Placeholder for nutrition summary</h4>
-              <h4>Placeholder for hydration summary</h4>
-              <h4>Placeholder for activities summary</h4>
+
+              <QuizSummary
+                state={this.props.answersByDay}
+              />
+
             </Col>
           </Row>
         </Container>
       );
     } else {
-      return `spiner`
+      return <h1>Loading...</h1>
     }
 
   }
@@ -139,7 +110,8 @@ class Day extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    answersByDay: state.byDayState.data
+    answersByDay: state.byDayState.data,
+    isLoading: state.byDayState.isLoading
   }
 }
 

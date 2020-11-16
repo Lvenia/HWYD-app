@@ -4,12 +4,13 @@ import { getAnswersByDay } from '../../actions';
 import { stars } from '../../constants';
 
 import StarComponent from '../Quiz/StarComponent';
-import QuizSummary from './QuizSummary';
+import QuizSummaryCards from './QuizSummaryCards';
 
 import Container from '../common/Container/Container';
 import DayPickerComponent from './DayPickerComponent'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import questions from '../Quiz/questions';
 
 
 
@@ -78,6 +79,9 @@ class Day extends React.Component {
           <Row className="m-3 justify-content-md-center">
             {this.renderDayDescription(this.props.answersByDay.dayRate)}
           </Row>
+          <Row className="justify-content-md-center" >
+            {this.renderStars()}
+          </Row>
 
           <Row className="m-3 justify-content-md-center">
 
@@ -89,14 +93,10 @@ class Day extends React.Component {
             </Col>
 
             <Col xs={7}>
-              <Row className="justify-content-md-center" >
-                {this.renderStars()}
-              </Row>
 
-              <QuizSummary
+              <QuizSummaryCards
                 state={this.props.answersByDay}
               />
-
             </Col>
           </Row>
         </Container>

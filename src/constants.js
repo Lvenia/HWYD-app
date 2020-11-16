@@ -34,3 +34,4 @@ export const stars = [{
   rate: 5,
   description: 'amazing'
 }];
+

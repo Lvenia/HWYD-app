@@ -6,7 +6,10 @@ import {
   INPUT_NUMBER,
   INPUT_RADIOBUTTON,
   INPUT_COMBINED_SELECT_NUMBER,
-  INPUT_HOUR
+  INPUT_HOUR,
+  SUMMARY_SLEEP,
+  SUMMARY_NUTRITION,
+  SUMMARY_HYDRATION
 
 } from '../../constants';
 
@@ -20,15 +23,9 @@ const questions = [
     name: 'sleptWell',
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
-    renderSummaryHeader: function (sleptWell) {
-      if (sleptWell) {
-        return `You have ${sleptWell ? '' : 'not'} slept well`
-      } else {
-        return 'Sleep details'
-      };
-    },
+    summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (sleptWell) {
-      return `${sleptWell ? 'well-rested' : 'not well-rested'}, `
+      return `${sleptWell ? 'well-rested' : 'not well-rested'}`
     }
   },
 
@@ -37,11 +34,12 @@ const questions = [
     name: 'wentToBed',
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_HOUR,
+    summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (wentToBed, wokeUp) {
       function calculateSleepInterval(wentToBed, wokeUp) {
         return 8
       };
-      return `${calculateSleepInterval()}H, `
+      return `${calculateSleepInterval()}H`
     }
   },
   {
@@ -55,8 +53,9 @@ const questions = [
     name: 'sleepInterupted',
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
+    summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (sleepInterupted) {
-      return `${sleepInterupted ? 'interupted' : 'uninterupted'}, `
+      return `${sleepInterupted ? 'interupted' : 'uninterupted'}`
     }
   },
   {
@@ -64,8 +63,9 @@ const questions = [
     name: 'snoozing',
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
+    summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (snoozing) {
-      return `${snoozing ? 'snoozing' : 'no snoozing'}, `
+      return `${snoozing ? 'snoozing' : 'no snoozing'}`
     }
   },
   {
@@ -73,8 +73,9 @@ const questions = [
     name: 'dayNap',
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
+    summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (dayNap) {
-      return `${dayNap ? 'day nap' : 'no day nap'}`
+      return `${dayNap ? 'day nap' : 'no day naps'}`
     }
   },
   {
@@ -82,11 +83,9 @@ const questions = [
     name: 'mealRegularity',
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_RADIOBUTTON,
-    renderSummaryHeader: function (mealRegularity, skippedMeal, junkFood) {
-      return `You have ${mealRegularity && !skippedMeal && !junkFood ? '' : 'not'} nourished yourself well`
-    },
+    summaryCardCategory: SUMMARY_NUTRITION,
     renderSummaryDetails: function (mealRegularity) {
-      return `${mealRegularity ? 'regular' : 'irregular'} meals, `
+      return `${mealRegularity ? 'regular' : 'irregular'} meals`
     }
   },
 
@@ -95,8 +94,9 @@ const questions = [
     name: 'skippedMeal',
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_RADIOBUTTON,
+    summaryCardCategory: SUMMARY_NUTRITION,
     renderSummaryDetails: function (skippedMeal) {
-      return `${skippedMeal ? '' : 'no'} skipped meals, `
+      return `${skippedMeal ? '' : 'no'} skipped meals`
     }
   },
   {
@@ -104,8 +104,9 @@ const questions = [
     name: 'junkFood',
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_RADIOBUTTON,
+    summaryCardCategory: SUMMARY_NUTRITION,
     renderSummaryDetails: function (junkFood) {
-      return `${junkFood ? '' : 'no'} junk food`
+      return `${junkFood ? 'some' : 'no'} junk food`
     }
   },
   {
@@ -113,11 +114,14 @@ const questions = [
     name: 'waterGlasses',
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_NUMBER,
-    renderSummaryHeader: function () {
-      return `Hydrated well`
-    },
+    summaryCardCategory: SUMMARY_HYDRATION,
     renderSummaryDetails: function (waterGlasses) {
-      return `${waterGlasses} glasses of water`
+      if (waterGlasses) {
+        return `${waterGlasses} glasses of water`
+      } else {
+        return null
+      }
+
     }
   },
   {

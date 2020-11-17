@@ -1,21 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAnswersByDay } from '../../actions';
-import { stars } from '../../constants';
 
-import StarComponent from '../Quiz/StarComponent';
-import QuizSummaryCards from './QuizSummaryCards';
-
-import Container from '../common/Container/Container';
-import DayPickerComponent from './DayPickerComponent'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+import { getAnswersByDay } from '../../actions';
+
+import StarComponent from '../Quiz/StarComponent';
+import Container from '../common/Container/Container';
+import DayPickerComponent from './DayPickerComponent';
+import QuizSummaryCard from './QuizSummaryCard';
+
 import questions from '../Quiz/questions';
-
-
-
-
-
+import { stars, SUMMARY_SLEEP, SUMMARY_NUTRITION, SUMMARY_HYDRATION } from '../../constants';
 
 class Day extends React.Component {
 
@@ -47,7 +44,6 @@ class Day extends React.Component {
   }
 
   renderDayDescription = rate => {
-
     const star = stars.find(star => star.rate === rate);
     if (star) {
       return <h1>It was {star.description[0] !== 'a' ? 'a' : 'an'} {star.description} day!</h1>
@@ -55,7 +51,6 @@ class Day extends React.Component {
   };
 
   renderStars() {
-
     return stars.map(star => {
       return (
         <StarComponent
@@ -68,11 +63,94 @@ class Day extends React.Component {
     })
   };
 
+  renderSleepCard = () => {
+
+    const { sleptWell } = this.props.answersByDay;
+
+    const header = () => {
+      if (sleptWell) {
+        return `You have ${sleptWell ? '' : 'not'} slept well`
+      } else {
+        return 'Sleep details'
+      };
+    };
+
+    let description = [];
+    const qSleep = questions.filter(q => q.summaryCardCategory === SUMMARY_SLEEP);
+    qSleep.map(q => {
+      description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+    });
+
+    return (
+      <QuizSummaryCard
+        headerText={header()}
+        descriptionText={description.join(', ')}
+      />
+    );
+  };
+
+  renderNutritionCard = () => {
+
+    const { mealRegularity, skippedMeal, junkFood } = this.props.answersByDay;
+
+    const header = () => {
+      if (mealRegularity === undefined || skippedMeal === undefined || junkFood === undefined) {
+        return 'Nutrition details'
+      }
+      else {
+        return `${(mealRegularity && !skippedMeal && !junkFood) ? 'You have nourished yourself well' : 'You can nourishe yourself better'}`
+      }
+    };
+
+    let description = [];
+    const qNutrition = questions.filter(q => q.summaryCardCategory === SUMMARY_NUTRITION);
+    qNutrition.map(q => {
+      description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+    });
+
+    return (
+      <QuizSummaryCard
+        headerText={header()}
+        descriptionText={description.join(', ')}
+      />
+    );
+  };
+
+  renderHydrationCard = () => {
+
+    const { waterGlasses } = this.props.answersByDay
+    const header = () => {
+      if (waterGlasses) {
+        if (waterGlasses >= 6) {
+          return 'Well hydrated'
+        } else if (waterGlasses < 5) {
+          return 'Poorly hydrated'
+        } else {
+          return 'Hydrated'
+        }
+      } else {
+        return 'Hydration'
+      }
+    };
+
+    let description = [];
+    const qHydration = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION)
+
+    qHydration.map(q => {
+      description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+    });
+
+    return (
+      <QuizSummaryCard
+        headerText={header()}
+        descriptionText={description.join(', ')}
+      />
+    );
+  };
 
   render() {
 
     if (Object.keys(this.props.answersByDay).length > 0) {
-
       return (
         <Container>
 
@@ -93,10 +171,9 @@ class Day extends React.Component {
             </Col>
 
             <Col xs={7}>
-
-              <QuizSummaryCards
-                state={this.props.answersByDay}
-              />
+              {this.renderSleepCard()}
+              {this.renderNutritionCard()}
+              {this.renderHydrationCard()}
             </Col>
           </Row>
         </Container>
@@ -104,7 +181,6 @@ class Day extends React.Component {
     } else {
       return <h1>Loading...</h1>
     }
-
   }
 }
 

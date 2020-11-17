@@ -35,12 +35,7 @@ const questions = [
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_HOUR,
     summaryCardCategory: SUMMARY_SLEEP,
-    renderSummaryDetails: function (wentToBed, wokeUp) {
-      function calculateSleepInterval(wentToBed, wokeUp) {
-        return 8
-      };
-      return `${calculateSleepInterval()}H`
-    }
+    
   },
   {
     question: 'What time did you wake up?',

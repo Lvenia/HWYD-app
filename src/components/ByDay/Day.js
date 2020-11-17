@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { getAnswersByDay } from '../../actions';
+import { subtractTimeStrings } from '../../utils'
 
 import StarComponent from '../Quiz/StarComponent';
 import Container from '../common/Container/Container';
@@ -65,7 +66,9 @@ class Day extends React.Component {
 
   renderSleepCard = () => {
 
-    const { sleptWell } = this.props.answersByDay;
+    const { sleptWell, wentToBed, wokeUp } = this.props.answersByDay;
+
+    const timeDifferece = subtractTimeStrings(wentToBed, wokeUp); // 0H 20m, 8H 10m
 
     const header = () => {
       if (sleptWell) {
@@ -78,7 +81,11 @@ class Day extends React.Component {
     let description = [];
     const qSleep = questions.filter(q => q.summaryCardCategory === SUMMARY_SLEEP);
     qSleep.map(q => {
-      description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+      if (q.renderSummaryDetails) {
+        description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+      } if (q.name === 'wentToBed') {
+        description.unshift(timeDifferece);
+      }
     });
 
     return (
@@ -135,6 +142,7 @@ class Day extends React.Component {
 
     let description = [];
     const qHydration = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION)
+
 
     qHydration.map(q => {
       description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))

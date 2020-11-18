@@ -1,15 +1,30 @@
 export const subtractTimeStrings = (startTimeString, finishTimeString) => {
   const [startHour, startMinutes] = startTimeString.split(':').map(Number);
   const [endHour, endMinutes] = finishTimeString.split(':').map(Number);
+  let diffHours, diffMinutes;
 
-  //TODO: 22:30 - 6:45 => 8H 15m
+  if (startHour > endHour) {
 
-  //22 > 6 => 24:00-22:30 => 1:30
-  // 1:30 + 6:45 => 30+45 - 60 = 15m (1 h to add) => 1+6+(1h to add)
+    const minutesToMidnight = 60 - startMinutes;
+    const hoursToMidnight = 24 - 1 - startHour;
+    const minutes = endMinutes + minutesToMidnight;
 
+    if (minutes >= 60) {
+      diffMinutes = minutes - 60;
+      diffHours = endHour + hoursToMidnight + 1
+    } else {
+      diffMinutes = minutes;
+      diffHours = endHour + hoursToMidnight
+    }
+  } else if (endHour > startHour) {
 
-  const diffHours = endHour - startHour;
-  const diffMinutes = endMinutes - startMinutes;
-
+    if (endMinutes >= startMinutes) {
+      diffMinutes = endMinutes - startMinutes;
+      diffHours = endHour - startHour;
+    } else {
+      diffMinutes = 60 - startMinutes + endMinutes;
+      diffHours = endHour - startHour - 1;
+    }
+  }
   return `${diffHours}H ${diffMinutes}m`;
 }

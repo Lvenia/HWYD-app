@@ -70,6 +70,7 @@ class Day extends React.Component {
 
     const timeDifferece = subtractTimeStrings(wentToBed, wokeUp); // 0H 20m, 8H 10m
 
+  
     const header = () => {
       if (sleptWell) {
         return `You have ${sleptWell ? '' : 'not'} slept well`
@@ -159,6 +160,8 @@ class Day extends React.Component {
   render() {
 
     if (Object.keys(this.props.answersByDay).length > 0) {
+
+
       return (
         <Container>
 

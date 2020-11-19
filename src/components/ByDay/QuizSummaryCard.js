@@ -1,18 +1,18 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 
-const QuizSummaryCard = ({ headerText, descriptionText }) => {
+const QuizSummaryCard = ({ header, description }) => {
   return (
-    <Table bordered>
+    <Table bordered >
       <thead>
         <tr>
-          <th>{headerText}</th>
+          <th>{header}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
-            {descriptionText}
+            {description}
           </td>
         </tr>
       </tbody>

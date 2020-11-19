@@ -11,9 +11,12 @@ import StarComponent from '../Quiz/StarComponent';
 import Container from '../common/Container/Container';
 import DayPickerComponent from './DayPickerComponent';
 import QuizSummaryCard from './QuizSummaryCard';
+import QuizActivityBlock from './QuizActivityBlock.js';
 
 import questions from '../Quiz/questions';
-import { stars, SUMMARY_SLEEP, SUMMARY_NUTRITION, SUMMARY_HYDRATION } from '../../constants';
+import { stars, SUMMARY_SLEEP, SUMMARY_NUTRITION, SUMMARY_HYDRATION, CATEGORY_ACTIVITY } from '../../constants';
+
+
 
 class Day extends React.Component {
 
@@ -70,7 +73,7 @@ class Day extends React.Component {
 
     const timeDifferece = subtractTimeStrings(wentToBed, wokeUp); // 0H 20m, 8H 10m
 
-  
+
     const header = () => {
       if (sleptWell) {
         return `You have ${sleptWell ? '' : 'not'} slept well`
@@ -79,20 +82,20 @@ class Day extends React.Component {
       };
     };
 
-    let description = [];
+    let descriptionText = [];
     const qSleep = questions.filter(q => q.summaryCardCategory === SUMMARY_SLEEP);
     qSleep.map(q => {
       if (q.renderSummaryDetails) {
-        description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+        descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
       } if (q.name === 'wentToBed') {
-        description.unshift(timeDifferece);
+        descriptionText.unshift(timeDifferece);
       }
     });
 
     return (
       <QuizSummaryCard
-        headerText={header()}
-        descriptionText={description.join(', ')}
+        header={header()}
+        description={descriptionText.join(', ')}
       />
     );
   };
@@ -110,16 +113,16 @@ class Day extends React.Component {
       }
     };
 
-    let description = [];
+    let descriptionText = [];
     const qNutrition = questions.filter(q => q.summaryCardCategory === SUMMARY_NUTRITION);
     qNutrition.map(q => {
-      description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+      descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
     });
 
     return (
       <QuizSummaryCard
-        headerText={header()}
-        descriptionText={description.join(', ')}
+        header={header()}
+        description={descriptionText.join(', ')}
       />
     );
   };
@@ -141,21 +144,55 @@ class Day extends React.Component {
       }
     };
 
-    let description = [];
+    let descriptionText = [];
     const qHydration = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION)
 
 
     qHydration.map(q => {
-      description.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
+      descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
     });
 
     return (
       <QuizSummaryCard
-        headerText={header()}
-        descriptionText={description.join(', ')}
+        header={header()}
+        description={descriptionText.join(', ')}
       />
     );
   };
+
+  renderActivitiesCard = () => {
+
+    const qActivities = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
+    const alowedActivityKeys = qActivities.map(q => q.name);
+
+    const answerKeys = Object.keys(this.props.answersByDay);
+
+    const activityNames = [];
+    const activityDurations = [];
+    answerKeys.forEach(key => {
+      if (alowedActivityKeys.includes(key)) {
+        activityDurations.push(this.props.answersByDay[key].activityTime);
+        const questionName = qActivities.find(q => q.name === key).question;
+        activityNames.push(questionName);
+      }
+    });
+
+    return (
+      <div>
+        <QuizSummaryCard
+          header={'Activities'}
+          description={
+            <QuizActivityBlock
+              activityNames={activityNames}
+              activityDurations={activityDurations}
+            />
+          }
+        >
+        </QuizSummaryCard>
+
+      </div >
+    )
+  }
 
   render() {
 
@@ -185,6 +222,7 @@ class Day extends React.Component {
               {this.renderSleepCard()}
               {this.renderNutritionCard()}
               {this.renderHydrationCard()}
+              {this.renderActivitiesCard()}
             </Col>
           </Row>
         </Container>

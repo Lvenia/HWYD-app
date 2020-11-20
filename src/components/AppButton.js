@@ -1,7 +1,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-const AppButton = ({ label, variant, handleClick }) => {
+const AppButton = ({
+  label = '',
+  variant = 'primary',
+  handleClick = () => null
+}) => {
   return (
     <Button
       variant={variant}

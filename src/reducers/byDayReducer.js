@@ -29,6 +29,7 @@ export default function byDayReducer(state = initialState, action) {
 
       const alowedKeys = questions.map(q => { return q.name });
       const payloadKeys = Object.keys(action.payload);
+
       let answersByDay = {};
 
       payloadKeys.forEach(payloadKey => {
@@ -39,7 +40,7 @@ export default function byDayReducer(state = initialState, action) {
 
       return {
         ...state,
-        data: { ...state.data, ...answersByDay }
+        data: answersByDay
       };
 
     default:

@@ -16,7 +16,7 @@ class Start extends React.Component {
         </Row>
         <Row className="justify-content-md-center" >
           <SubmitButton
-            label="Click here to see the quiz!"
+            label="Click here to start the quiz!"
             handleClick={() => this.props.history.push('/quiz')}
           />
         </Row>

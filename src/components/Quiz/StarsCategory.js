@@ -69,7 +69,7 @@ class StarsComponent extends React.Component {
     return (
       <Container>
         <Row className="m-3 justify-content-md-center" >
-          <h4 >How Was Your Day?</h4>
+          <h1 >How Was Your Day?</h1>
         </Row>
         <Row className="justify-content-md-center" >
           {this.renderStars()}

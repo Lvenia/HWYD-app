@@ -106,10 +106,7 @@ export const getAnswersByDay = (day) => async dispatch => {
       type: GET_ANSWERS_BY_DAY_TRIGGER
     });
 
-    //make a request and dispatch an action
     const response = await axios.get(`/answers/${day}`);
-    //answersByDay.data may be an empty object or a response object
-
 
     if (response.status === 200) {
       dispatch({

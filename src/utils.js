@@ -1,4 +1,8 @@
 export const subtractTimeStrings = (startTimeString, finishTimeString) => {
+  if (!startTimeString || !finishTimeString) {
+    return null
+  }
+
   const [startHour, startMinutes] = startTimeString.split(':').map(Number);
   const [endHour, endMinutes] = finishTimeString.split(':').map(Number);
   let diffHours, diffMinutes;

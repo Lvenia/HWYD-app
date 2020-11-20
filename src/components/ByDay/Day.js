@@ -1,4 +1,4 @@
-import React, { useDebugValue } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
@@ -13,7 +13,6 @@ import SpinnerComponent from '../common/SpinnerComponent';
 import DayPickerComponent from './DayPickerComponent';
 import QuizSummaryCard from './QuizSummaryCard';
 import QuizActivityBlock from './QuizActivityBlock.js';
-import AppButton from '../AppButton';
 
 import questions from '../Quiz/questions';
 import { stars, SUMMARY_SLEEP, SUMMARY_NUTRITION, SUMMARY_HYDRATION, CATEGORY_ACTIVITY } from '../../constants';
@@ -22,11 +21,13 @@ class Day extends React.Component {
 
   state = {
     selectedDateUnformated: '',
+    firstRender: true,
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const today = this.renderTodaysDate();
-    this.props.getAnswersByDay(today);
+    await this.props.getAnswersByDay(today);
+    this.setState({ firstRender: false });
   }
 
   formatDate = (dateUTC) => {
@@ -52,7 +53,18 @@ class Day extends React.Component {
   renderDayDescription = rate => {
     const star = stars.find(star => star.rate === rate);
     if (star) {
-      return <h1>It was {star.description[0] !== 'a' ? 'a' : 'an'} {star.description} day!</h1>
+      return (
+        <h1>
+          It was {star.description[0] !== 'a' ? 'a' : 'an'} {star.description} day!
+        </h1>
+      )
+    }
+    if (!Object.keys(this.props.answersByDay).length) {
+      return (
+        <h1>
+          {`No data for given day`}
+        </h1>
+      );
     }
   };
 
@@ -86,14 +98,17 @@ class Day extends React.Component {
     let descriptionText = [];
 
     const qSleep = questions.filter(q => q.summaryCardCategory === SUMMARY_SLEEP);
-    qSleep.map(q => {
-      // if (this.props.answersByDay[q.name] !== undefined && q.renderSummaryDetails) {
+    qSleep.forEach(q => {
       if (this.props.answersByDay[q.name] && q.renderSummaryDetails) {
         descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
       } if (q.name === 'wentToBed' && timeDifferece !== null) {
         descriptionText.unshift(timeDifferece);
       }
     });
+
+    if (descriptionText.length < 1) {
+      return
+    }
 
     return (
       <QuizSummaryCard
@@ -104,7 +119,6 @@ class Day extends React.Component {
   };
 
   renderNutritionCard = () => {
-
     const { mealRegularity, skippedMeal, junkFood } = this.props.answersByDay;
 
     const header = () => {
@@ -118,11 +132,15 @@ class Day extends React.Component {
 
     let descriptionText = [];
     const qNutrition = questions.filter(q => q.summaryCardCategory === SUMMARY_NUTRITION);
-    qNutrition.map(q => {
+    qNutrition.forEach(q => {
       if (this.props.answersByDay[q.name] && q.renderSummaryDetails) {
         descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
       }
     });
+
+    if (descriptionText.length < 1) {
+      return;
+    }
 
     return (
       <QuizSummaryCard
@@ -133,8 +151,8 @@ class Day extends React.Component {
   };
 
   renderHydrationCard = () => {
+    const { waterGlasses } = this.props.answersByDay;
 
-    const { waterGlasses } = this.props.answersByDay
     const header = () => {
       if (waterGlasses) {
         if (waterGlasses >= 6) {
@@ -152,12 +170,15 @@ class Day extends React.Component {
     let descriptionText = [];
     const qHydration = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION)
 
-
-    qHydration.map(q => {
+    qHydration.forEach(q => {
       if (this.props.answersByDay[q.name] && q.renderSummaryDetails) {
         descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
       }
     });
+
+    if (descriptionText.length < 1) {
+      return;
+    }
 
     return (
       <QuizSummaryCard
@@ -176,6 +197,7 @@ class Day extends React.Component {
 
     const activityNames = [];
     const activityDurations = [];
+
     answerKeys.forEach(key => {
       if (alowedActivityKeys.includes(key)) {
         activityDurations.push(this.props.answersByDay[key].activityTime);
@@ -183,6 +205,10 @@ class Day extends React.Component {
         activityNames.push(questionName);
       }
     });
+
+    if (activityDurations.length < 1) {
+      return;
+    }
 
     return (
       <div>
@@ -196,73 +222,68 @@ class Day extends React.Component {
           }
         >
         </QuizSummaryCard>
-
       </div >
-    )
+    );
   }
 
-  render() {
-
-    if (Object.keys(this.props.answersByDay).length > 0 && this.props.isLoading === false) {
-      return (
-        <Container>
-          <Row className="m-3 justify-content-md-center">
-            {this.renderDayDescription(this.props.answersByDay.dayRate)}
-          </Row>
-          <Row className="justify-content-md-center" >
-            {this.renderStars()}
-          </Row>
-
-          <Row className="m-3 justify-content-md-center">
-
-            <Col xs={5}>
-              <DayPickerComponent
-                handleDayClick={this.handleDayClick}
-                selectedDay={this.state.selectedDateUnformated || new Date()}
-
-              />
-            </Col>
-
-            <Col xs={7}>
-              {this.renderSleepCard()}
-              {this.renderNutritionCard()}
-              {this.renderHydrationCard()}
-              {this.renderActivitiesCard()}
-            </Col>
-          </Row>
-        </Container>
-
-      );
-    } else if (this.props.isLoading) {
-      //////////////////////////
+  renderResults = () => {
+    if (this.props.isLoading) {
       return (
         <Container>
           <SpinnerComponent />
         </Container>
-      )
-    } else {
-      const formattedDate = this.formatDate(this.state.selectedDateUnformated);
-
-      return (
-        <Container>
-          <Row className="m-3 justify-content-md-center align-items-center">
-            <h1>
-              {`There is no data regarding ${formattedDate}`}
-            </h1>
-          </Row>
-          <Row className=" m-3 justify-content-md-center align-items-center">
-            {this.renderStars(5)}
-          </Row>
-          <Row className="justify-content-md-center" >
-            <AppButton
-              label={'Select another date'}
-              handleClick={() => this.props.history.go('/day')}
-            />
-          </Row>
-        </Container>
-      )
-      ///////////////////////////////////
+      );
     }
+
+    if (!Object.keys(this.props.answersByDay).length) {
+      return (
+        <>
+          <Row className=" m-3 justify-content-md-center align-items-center">
+            <h2>Please pick another day</h2>
+          </Row>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {this.renderSleepCard()}
+        {this.renderNutritionCard()}
+        {this.renderHydrationCard()}
+        {this.renderActivitiesCard()}
+      </>
+    );
+  };
+
+  render() {
+    if (this.state.firstRender) {
+      return null;
+    }
+
+    return (
+      <Container>
+        <Row className="m-3 justify-content-md-center">
+          {this.renderDayDescription(this.props.answersByDay.dayRate)}
+        </Row>
+        <Row className="justify-content-md-center" >
+          {this.renderStars()}
+        </Row>
+
+        <Row className="m-3 justify-content-md-center">
+
+          <Col xs={5}>
+            <DayPickerComponent
+              handleDayClick={this.handleDayClick}
+              selectedDay={this.state.selectedDateUnformated || new Date()}
+            />
+          </Col>
+
+          <Col xs={7}>
+            {this.renderResults()}
+          </Col>
+        </Row>
+      </Container>
+    );
   }
 }
 
@@ -270,7 +291,6 @@ const mapStateToProps = (state) => {
   return {
     answersByDay: state.byDayState.data,
     isLoading: state.byDayState.isLoading,
-
   }
 }
 

@@ -1,0 +1,199 @@
+[
+    {
+        "_id": "5fb2440cf5eaa53c01b05d59",
+        "userId": "5f9eeba4133b9070e3783765",
+        "dayRate": 5,
+        "sleptWell": true,
+        "wentToBed": "22:30",
+        "wokeUp": "07:30",
+        "sleepInterupted": true,
+        "snoozing": true,
+        "dayNap": false,
+        "mealRegularity": true,
+        "skippedMeal": false,
+        "junkFood": false,
+        "waterGlasses": 8,
+        "work": {
+            "_id": "5fb2440b2a57fce8ae4c75e6",
+            "activityTime": 6,
+            "energyImpact": "uplifting"
+        },
+        "sport": {
+            "_id": "5fb2440b2a57fce8ae4c75e7",
+            "activityTime": 0.5,
+            "energyImpact": "uplifting"
+        },
+        "dailyTasks": {
+            "_id": "5fb2440b2a57fce8ae4c75e8",
+            "activityTime": 0.5,
+            "energyImpact": "uplifting"
+        },
+        "friends": {
+            "_id": "5fb2440b2a57fce8ae4c75e9",
+            "activityTime": 0,
+            "energyImpact": "uplifting"
+        },
+        "family": {
+            "_id": "5fb2440b2a57fce8ae4c75ea",
+            "activityTime": 0.5,
+            "energyImpact": "uplifting"
+        },
+        "reading": {
+            "_id": "5fb2440b2a57fce8ae4c75eb",
+            "activityTime": 0.5,
+            "energyImpact": "uplifting"
+        },
+        "__v": 0,
+        "updatedAt": "2020-11-16T09:19:07.810Z",
+        "createdAt": "2020-11-16T09:19:07.810Z"
+    },
+    {
+        "_id": "5fb387b5f5eaa53c017f6037",
+        "userId": "5f9eeba4133b9070e3783765",
+        "dayRate": 4,
+        "sleptWell": true,
+        "wentToBed": "22:00",
+        "wokeUp": "23:59",
+        "sleepInterupted": true,
+        "snoozing": false,
+        "dayNap": false,
+        "mealRegularity": true,
+        "skippedMeal": false,
+        "junkFood": true,
+        "waterGlasses": 5.5,
+        "work": {
+            "_id": "5fb387b5740faa316e35587c",
+            "activityTime": 6,
+            "energyImpact": "uplifting"
+        },
+        "sport": {
+            "_id": "5fb387b5740faa316e35587d",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "dailyTasks": {
+            "_id": "5fb387b5740faa316e35587e",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "friends": {
+            "_id": "5fb387b5740faa316e35587f",
+            "activityTime": 0,
+            "energyImpact": "uplifting"
+        },
+        "family": {
+            "_id": "5fb387b5740faa316e355880",
+            "activityTime": 0,
+            "energyImpact": "uplifting"
+        },
+        "reading": {
+            "_id": "5fb387b5740faa316e355881",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "__v": 0,
+        "updatedAt": "2020-11-17T14:59:13.856Z",
+        "createdAt": "2020-11-17T14:59:13.856Z"
+    },
+    {
+        "_id": "5fb4df56f5eaa53c016177be",
+        "userId": "5f9eeba4133b9070e3783765",
+        "dayRate": 5,
+        "sleptWell": true,
+        "wentToBed": "00:45",
+        "wokeUp": "06:50",
+        "sleepInterupted": false,
+        "snoozing": false,
+        "dayNap": false,
+        "mealRegularity": true,
+        "skippedMeal": false,
+        "junkFood": false,
+        "waterGlasses": 5,
+        "work": {
+            "_id": "5fb4df60771fae4d84786afa",
+            "activityTime": 6,
+            "energyImpact": "uplifting"
+        },
+        "sport": {
+            "_id": "5fb4df60771fae4d84786afb",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "dailyTasks": {
+            "_id": "5fb4df60771fae4d84786afc",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "friends": {
+            "_id": "5fb4df60771fae4d84786afd",
+            "activityTime": 0.5,
+            "energyImpact": "neutral"
+        },
+        "family": {
+            "_id": "5fb4df60771fae4d84786afe",
+            "activityTime": 0.5,
+            "energyImpact": "uplifting"
+        },
+        "reading": {
+            "_id": "5fb4df60771fae4d84786aff",
+            "activityTime": 0.5,
+            "energyImpact": "uplifting"
+        },
+        "__v": 0,
+        "updatedAt": "2020-11-18T11:54:35.747Z",
+        "createdAt": "2020-11-18T11:54:35.747Z"
+    },
+    {
+        "_id": "5fb6446ff5eaa53c01336933",
+        "userId": "5f9eeba4133b9070e3783765",
+        "dayRate": 5,
+        "sleptWell": true,
+        "wentToBed": "22:30",
+        "wokeUp": "06:45",
+        "sleepInterupted": false,
+        "snoozing": true,
+        "dayNap": false,
+        "mealRegularity": true,
+        "skippedMeal": false,
+        "junkFood": false,
+        "waterGlasses": 8,
+        "work": {
+            "_id": "5fb6446f771fae4d8478766a",
+            "activityTime": 6,
+            "energyImpact": "uplifting"
+        },
+        "sport": {
+            "_id": "5fb6446f771fae4d8478766b",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "dailyTasks": {
+            "_id": "5fb6446f771fae4d8478766c",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "reading": {
+            "_id": "5fb6446f771fae4d8478766d",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "__v": 0,
+        "updatedAt": "2020-11-19T12:57:46.710Z",
+        "createdAt": "2020-11-19T12:57:46.710Z"
+    },
+    {
+        "_id": "5fb79a96f5eaa53c01ea3346",
+        "userId": "5f9eeba4133b9070e3783765",
+        "dayRate": 5,
+        "sleptWell": true,
+        "mealRegularity": true,
+        "work": {
+            "_id": "5fb79a966853cc39d1a5f511",
+            "activityTime": 1,
+            "energyImpact": "uplifting"
+        },
+        "__v": 0,
+        "updatedAt": "2020-11-20T10:29:42.404Z",
+        "createdAt": "2020-11-20T10:29:42.404Z"
+    }
+]

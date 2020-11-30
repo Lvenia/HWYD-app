@@ -9,7 +9,6 @@ import ActivitiesCategory from './ActivitiesCategory';
 import Container from '../common/Container/Container';
 import StarsCategory from './StarsCategory';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import AppButton from '../AppButton';
 
 import {
@@ -21,7 +20,7 @@ import {
 } from '../../constants';
 
 
-const Quiz = ({ getAnswers, submitQuiz }) => {
+const Quiz = ({ getAnswers, submitQuiz, history }) => {
 
   useEffect(() => {
     getAnswers();
@@ -64,22 +63,24 @@ const Quiz = ({ getAnswers, submitQuiz }) => {
 
       return (
         <Container>
-          <h3>Thank you! Your answers have been submited.</h3>
-          <br />
-          <h4>...to review or edit your data click "Go Back".</h4>
-          <Row >
-            <Col sm={12}>
-              <AppButton
-                variant={"light"}
-                label={'Go Back'}
-                handleClick={() => setCategoryNumber(ACTIVITY_CATEGORY_NUMBER)}
-              />
-              <AppButton
-                variant={"Succes"}
-                label={'Conform and send'}
-                handleClick={submitQuiz}
-              />
-            </Col>
+          <Row className="m-3 justify-content-md-center" >
+            <h3>You did great!</h3>
+          </Row>
+
+          <Row className="justify-content-md-center" >
+            <AppButton
+              variant="light"
+              label="Go back to edit / rewiev answers"
+              handleClick={() => setCategoryNumber(ACTIVITY_CATEGORY_NUMBER)}
+            />
+            <AppButton
+              variant="outline-primary"
+              label="Finish quiz and send answers"
+              handleClick={() => {
+                submitQuiz()
+                history.push('/day')
+              }}
+            />
           </Row>
         </Container>
       );

@@ -2,12 +2,14 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 const AppButton = ({
-  label = '',
+  label = " ",
   variant = 'primary',
-  handleClick = () => null
+  href = null,
+  handleClick = () => null,
 }) => {
   return (
     <Button
+      href={href}
       variant={variant}
       onClick={() => handleClick()}
     >

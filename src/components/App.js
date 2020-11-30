@@ -25,7 +25,7 @@ class App extends React.Component {
     if (this.props.auth.isAuthenticated) {
       return (
         <Switch>
-          <Route path="/home" component={Start} />
+          <Route exact path="/" component={Start} />
           <Route path="/quiz" component={Quiz} />
           <Route path="/day" component={Day} />
           <Route path="/data" component={Data} />

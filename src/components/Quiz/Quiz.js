@@ -76,9 +76,9 @@ const Quiz = ({ getAnswers, submitQuiz, history }) => {
             <AppButton
               variant="outline-primary"
               label="Finish quiz and send answers"
-              handleClick={() => {
-                submitQuiz()
-                history.push('/day')
+              handleClick={async () => {
+                await submitQuiz();
+                history.push('/day');
               }}
             />
           </Row>

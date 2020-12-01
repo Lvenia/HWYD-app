@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { getAnswersByDay } from '../../actions';
-import { subtractTimeStrings } from '../../utils'
+import { subtractTimeStrings, ifKeyExists } from '../../utils';
 
 import StarComponent from '../Quiz/StarComponent';
 import Container from '../common/Container/Container';
@@ -15,7 +15,13 @@ import QuizSummaryCard from './QuizSummaryCard';
 import QuizActivityBlock from './QuizActivityBlock.js';
 
 import questions from '../Quiz/questions';
-import { stars, SUMMARY_SLEEP, SUMMARY_NUTRITION, SUMMARY_HYDRATION, CATEGORY_ACTIVITY } from '../../constants';
+import {
+  stars,
+  SUMMARY_SLEEP,
+  SUMMARY_NUTRITION,
+  SUMMARY_HYDRATION,
+  CATEGORY_ACTIVITY
+} from '../../constants';
 
 class Day extends React.Component {
 
@@ -66,7 +72,7 @@ class Day extends React.Component {
         </h1>
       );
     }
-  };
+  }
 
   renderStars() {
     return stars.map(star => {
@@ -82,26 +88,25 @@ class Day extends React.Component {
   };
 
   renderSleepCard = () => {
-
     const { sleptWell, wentToBed, wokeUp } = this.props.answersByDay;
 
     const timeDifferece = subtractTimeStrings(wentToBed, wokeUp);
 
     const header = () => {
-      if (sleptWell) {
+      if (ifKeyExists('sleptWell', this.props.answersByDay)) {
         return `You have ${sleptWell ? '' : 'not'} slept well`
-      } else {
-        return 'Sleep details'
-      };
+      }
+      return 'Sleep details'
     };
 
     let descriptionText = [];
 
     const qSleep = questions.filter(q => q.summaryCardCategory === SUMMARY_SLEEP);
+
     qSleep.forEach(q => {
-      if (this.props.answersByDay[q.name] && q.renderSummaryDetails) {
+      if (ifKeyExists(q.name, this.props.answersByDay) && q.renderSummaryDetails) {
         descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
-      } if (q.name === 'wentToBed' && timeDifferece !== null) {
+      } if (q.name === 'wentToBed' && timeDifferece) {
         descriptionText.unshift(timeDifferece);
       }
     });
@@ -119,21 +124,25 @@ class Day extends React.Component {
   };
 
   renderNutritionCard = () => {
+
     const { mealRegularity, skippedMeal, junkFood } = this.props.answersByDay;
 
     const header = () => {
-      if (mealRegularity === undefined || skippedMeal === undefined || junkFood === undefined) {
-        return 'Nutrition details'
-      }
-      else {
+      const mealRegularityExists = ifKeyExists('mealRegularity', this.props.answersByDay);
+      const skippedMealExists = ifKeyExists('skippedMeal', this.props.answersByDay);
+      const junkFoodExists = ifKeyExists('junkFood', this.props.answersByDay);
+
+      if (mealRegularityExists && skippedMealExists && junkFoodExists) {
         return `${(mealRegularity && !skippedMeal && !junkFood) ? 'You have nourished yourself well' : 'You can nourishe yourself better'}`
       }
+      return 'Nutrition details'
     };
 
     let descriptionText = [];
     const qNutrition = questions.filter(q => q.summaryCardCategory === SUMMARY_NUTRITION);
+
     qNutrition.forEach(q => {
-      if (this.props.answersByDay[q.name] && q.renderSummaryDetails) {
+      if (ifKeyExists(q.name, this.props.answersByDay) && q.renderSummaryDetails) {
         descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
       }
     });
@@ -152,9 +161,10 @@ class Day extends React.Component {
 
   renderHydrationCard = () => {
     const { waterGlasses } = this.props.answersByDay;
+    const waterGlassesExists = ifKeyExists('waterGlasses', this.props.answersByDay);
 
     const header = () => {
-      if (waterGlasses) {
+      if (waterGlassesExists) {
         if (waterGlasses >= 6) {
           return 'Well hydrated'
         } else if (waterGlasses < 5) {
@@ -162,16 +172,15 @@ class Day extends React.Component {
         } else {
           return 'Hydrated'
         }
-      } else {
-        return 'Hydration'
       }
+      return 'Hydration'
     };
 
     let descriptionText = [];
-    const qHydration = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION)
+    const qHydration = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION);
 
     qHydration.forEach(q => {
-      if (this.props.answersByDay[q.name] && q.renderSummaryDetails) {
+      if (ifKeyExists(q.name, this.props.answersByDay) && q.renderSummaryDetails) {
         descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
       }
     });
@@ -191,20 +200,17 @@ class Day extends React.Component {
   renderActivitiesCard = () => {
 
     const qActivities = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
-    const alowedActivityKeys = qActivities.map(q => q.name);
-
-    const answerKeys = Object.keys(this.props.answersByDay);
 
     const activityNames = [];
     const activityDurations = [];
 
-    answerKeys.forEach(key => {
-      if (alowedActivityKeys.includes(key)) {
-        activityDurations.push(this.props.answersByDay[key].activityTime);
-        const questionName = qActivities.find(q => q.name === key).question;
-        activityNames.push(questionName);
+    qActivities.forEach(activity => {
+      if (ifKeyExists(activity.name, this.props.answersByDay)) {
+        activityDurations.push(this.props.answersByDay[activity.name].activityTime);
+        activityNames.push(activity.question)
       }
-    });
+      return
+    })
 
     if (activityDurations.length < 1) {
       return;

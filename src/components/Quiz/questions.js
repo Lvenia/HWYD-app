@@ -25,7 +25,6 @@ const questions = [
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (sleptWell) {
-      // if (!sleptWell) { return null }
       return `${sleptWell ? 'well-rested' : 'not well-rested'}`
     }
   },
@@ -51,20 +50,8 @@ const questions = [
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (sleepInterupted) {
-      // if (sleepInterupted === undefined) { return null } else {
-      //   return `${sleepInterupted ? 'interupted' : 'uninterupted'}`
-      // }
-
-      // if (sleepInterupted !== undefined) {
-      //   return `${sleepInterupted ? 'interupted' : 'uninterupted'}`
-      // }
       return `${sleepInterupted ? 'interupted' : 'uninterupted'}`
-
     }
-    //jaksho robuty if(!sleepinterupted) {return} abo if(sleepInteraupted === undefined) {return} to w deskripption text pushujetsia spacija;
-    //The expression whose value is to be returned. If omitted, undefined is returned instead.
-    //renderSummatyDetail called with undefined returns undefined; pushytsia spacija
-    //renderSummatyDetail called with null returns null; pushytsia spacija
   },
   {
     question: 'Snoozing in the morning?',
@@ -124,12 +111,11 @@ const questions = [
     answerType: INPUT_NUMBER,
     summaryCardCategory: SUMMARY_HYDRATION,
     renderSummaryDetails: function (waterGlasses) {
-      if (waterGlasses) {
+      if (waterGlasses > 1) {
         return `${waterGlasses} glasses of water`
       } else {
-        return null
+        return `${waterGlasses} glass of water`
       }
-
     }
   },
   {

@@ -31,4 +31,9 @@ export const subtractTimeStrings = (startTimeString, finishTimeString) => {
     }
   }
   return `${diffHours}H ${diffMinutes}m`;
-}
+};
+
+export const ifKeyExists = (key, obj) => {
+  const allowedKeys = Object.keys(obj)
+  return allowedKeys.includes(key)
+};

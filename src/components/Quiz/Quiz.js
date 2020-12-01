@@ -94,10 +94,9 @@ const Quiz = ({ getAnswers, submitQuiz, history }) => {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    appSate: state.quizState.data
-  };
+const mapDispatchToProps = {
+  submitQuiz,
+  getAnswers: getTodaysAnswers
 };
 
-export default connect(mapStateToProps, { submitQuiz, getAnswers: getTodaysAnswers })(Quiz);
+export default connect(null, mapDispatchToProps)(Quiz);

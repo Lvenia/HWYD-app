@@ -1,6 +1,8 @@
 import {
-  QUIZ_SUBMIT,
   CHECK_AUTH,
+  CHECK_AUTH_TRIGGER,
+  CHECK_AUTH_SUCCESS,
+  QUIZ_SUBMIT,
   QUIZ_SUBMIT_SUCCESS,
   QUIZ_SUBMIT_TRIGGER,
   GET_ANSWERS_BY_DAY,
@@ -14,15 +16,27 @@ import axios from '../apis/api';
 
 export const checkAthentification = () => async dispatch => {
   try {
+    dispatch({
+      type: CHECK_AUTH_TRIGGER
+    });
+
     const response = await axios.get('/auth/login/success');
 
-    dispatch({
-      type: CHECK_AUTH,
-      payload: {
-        isAuthenticated: response.data.success,
-        user: response.data.user
-      }
-    });
+    if (response.status === 200) {
+
+      dispatch({
+        type: CHECK_AUTH,
+        payload: {
+          isAuthenticated: response.data.success,
+          user: response.data.user
+        }
+      });
+
+      dispatch({
+        type: CHECK_AUTH_SUCCESS
+      });
+    }
+
 
   } catch (err) {
     alert(`Login failure, ${err.message}`)

@@ -167,7 +167,7 @@ class Day extends React.Component {
       if (waterGlassesExists) {
         if (waterGlasses >= 6) {
           return 'Well hydrated'
-        } else if (waterGlasses < 5) {
+        } else if (waterGlasses < 4) {
           return 'Poorly hydrated'
         } else {
           return 'Hydrated'

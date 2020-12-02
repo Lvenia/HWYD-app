@@ -39,3 +39,20 @@ export const stars = [{
   description: 'amazing'
 }];
 
+export const pleasant = {
+  label: 'pleasant',
+  value: 'uplifting'
+};
+
+export const neutral = {
+  label: 'neutral',
+  value: 'neutral'
+};
+
+export const unpleasant = {
+  label: 'unpleasant',
+  value: 'discouraging'
+};
+
+export const activityOptions = [pleasant, neutral, unpleasant]
+

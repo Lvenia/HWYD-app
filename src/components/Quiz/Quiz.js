@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { submitQuiz, getTodaysAnswers } from '../../actions'
 
@@ -99,4 +100,4 @@ const mapDispatchToProps = {
   getAnswers: getTodaysAnswers
 };
 
-export default connect(null, mapDispatchToProps)(Quiz);
+export default connect(null, mapDispatchToProps)(withRouter(Quiz));

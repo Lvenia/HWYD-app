@@ -26,7 +26,6 @@ class App extends React.Component {
 
   renderRoutes() {
     const { isAuthenticated, isLoading } = this.props.auth;
-    console.log(` is auth ${isAuthenticated}, is loading ${isLoading}`);
     const shouldRedirect = !isAuthenticated && !isLoading;
 
     if (isLoading) {

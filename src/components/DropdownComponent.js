@@ -3,27 +3,34 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 const DropdownComponent = (props) => {
 
+  let selectedLabel = null;
+
+  const selectedOption = props.options.find(option => {
+    return option.value === props.value
+  });
+  
+  selectedLabel = selectedOption ? selectedOption.label : 'Impression';
+
   return (
     <Dropdown>
       <Dropdown.Toggle
         style={{ width: '100%' }}
-        variant={!props.selectedOption ? 'outline-secondary' : 'secondary'}
+        variant={!props.value ? 'outline-secondary' : 'secondary'}
         id="dropdown-basic"
       >
-        {props.selectedOption || 'Mood Impact'}
+        {selectedLabel}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
         {props.options.map(option => {
           return (
             <Dropdown.Item
-              key={option}
-              title={option}
+              key={option.value}
               onClick={() => {
                 props.onImpactSelect(props.activity, option)
               }}
             >
-              {option}
+              {option.label}
             </Dropdown.Item>
           );
         })}

@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 
 import QuizCard from './QuizCard';
 import questions from './questions';
-import { CATEGORY_ACTIVITY } from '../../constants'
+import { CATEGORY_ACTIVITY, activityOptions } from '../../constants'
 import DropdownComponent from '../DropdownComponent';
 import AppButton from '../AppButton';
 import { submitAnswers } from '../../actions';
@@ -42,15 +42,19 @@ class ActivitiesCategory extends React.Component {
   }
 
   handleSelectChange = (activity, selectedOption) => {
+
     this.setState({
       [activity]: {
         ...this.state[activity],
-        energyImpact: selectedOption
+        energyImpact: selectedOption.value
       }
     })
   }
 
+
+
   renderActivityCards() {
+
 
     return activities.map(a => {
 
@@ -63,10 +67,10 @@ class ActivitiesCategory extends React.Component {
           onInputChange={this.handleInputChange}
         >
           <DropdownComponent
-            options={['uplifting', 'neutral', 'discouraging']}
+            options={activityOptions}
             activity={a.name}
             onImpactSelect={this.handleSelectChange}
-            selectedOption={this.state[a.name] ? this.state[a.name].energyImpact : null}
+            value={this.state[a.name] ? this.state[a.name].energyImpact : null}
           />
         </QuizCard>
       );

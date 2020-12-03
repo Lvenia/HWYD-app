@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Data extends React.Component {
+class Overview extends React.Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class Data extends React.Component {
   }
 }
 
-export default Data;
+export default Overview;

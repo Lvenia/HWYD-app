@@ -12,7 +12,7 @@ import NavBar from './NavBar';
 import Start from './Start';
 import Quiz from './Quiz/Quiz';
 import Day from './ByDay/Day';
-import Data from './Data';
+import Overview from './Overview';
 import SpinnerComponent from './common/SpinnerComponent';
 
 import { checkAthentification } from '../actions'
@@ -41,8 +41,8 @@ class App extends React.Component {
         <Route path="/day">
           {!shouldRedirect ? <Day /> : <Redirect to="/" />}
         </Route>
-        <Route path="/data">
-          {!shouldRedirect ? <Data /> : <Redirect to="/" />}
+        <Route path="/overview">
+          {!shouldRedirect ? <Overview /> : <Redirect to="/" />}
         </Route>
       </Switch>
     )

@@ -26,7 +26,7 @@ class NavBar extends React.Component {
       },
       {
         name: 'Overview',
-        path: "/data"
+        path: "/overview"
       }
     ];
 

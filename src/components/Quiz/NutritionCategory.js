@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import questions from './questions';
-import { CATEGORY_NUTRITION, INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
+import { INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
+import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS } from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 
@@ -12,11 +12,6 @@ import AppButton from '../AppButton';
 import InputField from '../InputField';
 
 import { submitAnswers } from '../../actions';
-
-const nutritionCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_NUTRITION);
-const nutritionCatKeys = nutritionCatQuestions.map(k => {
-  return k.name
-});
 
 class NutritionCategory extends React.Component {
 
@@ -26,7 +21,7 @@ class NutritionCategory extends React.Component {
 
     const toLocalState = {};
 
-    nutritionCatKeys.map(k => {
+    NUTRITION_CAT_KEYS.map(k => {
       if (k in this.props.appState) {
         toLocalState[k] = this.props.appState[k]
       }
@@ -43,7 +38,7 @@ class NutritionCategory extends React.Component {
   }
 
   renderNutritionCatQuestions() {
-    return nutritionCatQuestions.map(q => {
+    return NUTRITION_CAT_QUESTIONS.map(q => {
       if (q.answerType === INPUT_RADIOBUTTON) {
         return (
           <QuizRow key={q.name} question={q.question}>

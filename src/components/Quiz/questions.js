@@ -26,6 +26,9 @@ const questions = [
     summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (sleptWell) {
       return `${sleptWell ? 'well-rested' : 'not well-rested'}`
+    },
+    grantPoints: function (sleptWell) {
+      return sleptWell ? 10 : 0
     }
   },
 
@@ -51,6 +54,9 @@ const questions = [
     summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (sleepInterupted) {
       return `${sleepInterupted ? 'interupted' : 'uninterupted'}`
+    },
+    grantPoints: function (sleepInterupted) {
+      return sleepInterupted ? 0 : 10
     }
   },
   {
@@ -61,6 +67,9 @@ const questions = [
     summaryCardCategory: SUMMARY_SLEEP,
     renderSummaryDetails: function (snoozing) {
       return `${snoozing ? 'snoozing' : 'no snoozing'}`
+    },
+    grantPoints: function (snoozing) {
+      return snoozing ? 0 : 10
     }
   },
   {
@@ -81,6 +90,9 @@ const questions = [
     summaryCardCategory: SUMMARY_NUTRITION,
     renderSummaryDetails: function (mealRegularity) {
       return `${mealRegularity ? 'regular' : 'irregular'} meals`
+    },
+    grantPoints: function (mealRegularity) {
+      return mealRegularity ? 10 : 0
     }
   },
 
@@ -92,6 +104,9 @@ const questions = [
     summaryCardCategory: SUMMARY_NUTRITION,
     renderSummaryDetails: function (skippedMeal) {
       return `${skippedMeal ? '' : 'no'} skipped meals`
+    },
+    grantPoints: function (skippedMeal) {
+      return skippedMeal ? 0 : 10
     }
   },
   {
@@ -102,6 +117,9 @@ const questions = [
     summaryCardCategory: SUMMARY_NUTRITION,
     renderSummaryDetails: function (junkFood) {
       return `${junkFood ? 'some' : 'no'} junk food`
+    },
+    grantPoints: function (junkFood) {
+      return junkFood ? 0 : 10
     }
   },
   {
@@ -116,6 +134,21 @@ const questions = [
       } else {
         return `${waterGlasses} glass of water`
       }
+    },
+    grantPoints: function (waterGlasses) {
+      if (waterGlasses === 0) {
+        return 0
+      }
+
+      if (waterGlasses <= 3) {
+        return 10
+      }
+
+      if (waterGlasses > 3 && waterGlasses < 6) {
+        return 20
+      }
+
+      return 30
     }
   },
   {
@@ -157,3 +190,14 @@ const questions = [
 ];
 
 export default questions;
+
+export const ACTIVITIES = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
+
+export const NUTRITION_CAT_QUESTIONS = questions.filter(q => q.summaryCardCategory === SUMMARY_NUTRITION);
+export const HYDRATION_CAT_QUESTIONS = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION);
+export const SLEEP_CAT_QUESTIONS = questions.filter(q => q.questionCategory === CATEGORY_SLEEP);
+
+
+export const ACTIVITY_CAT_KEYS = ACTIVITIES.map(a => { return a.name });
+export const NUTRITION_CAT_KEYS = NUTRITION_CAT_QUESTIONS.map(k => { return k.name });
+export const SLEEP_CAT_KEYS = SLEEP_CAT_QUESTIONS.map(q => { return q.name });

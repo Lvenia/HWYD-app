@@ -3,17 +3,14 @@ import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import questions from './questions';
+import { SLEEP_CAT_QUESTIONS, SLEEP_CAT_KEYS } from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 import InputField from '../InputField';
 import AppButton from '../AppButton';
 import { submitAnswers } from '../../actions';
 
-import { CATEGORY_SLEEP, INPUT_RADIOBUTTON, INPUT_HOUR } from '../../constants';
-
-const sleepCatQuestions = questions.filter(q => q.questionCategory === CATEGORY_SLEEP);
-const sleepCatQuestionsKeys = sleepCatQuestions.map(q => { return q.name });
+import { INPUT_RADIOBUTTON, INPUT_HOUR } from '../../constants';
 
 class SleepCategory extends React.Component {
 
@@ -23,7 +20,7 @@ class SleepCategory extends React.Component {
 
     const toLocalState = {}
 
-    sleepCatQuestionsKeys.map(k => {
+    SLEEP_CAT_KEYS.map(k => {
 
       if (k in this.props.appState) {
         toLocalState[k] = this.props.appState[k]
@@ -42,7 +39,7 @@ class SleepCategory extends React.Component {
 
   renderSleepCatQuestions() {
 
-    return sleepCatQuestions.map((q) => {
+    return SLEEP_CAT_QUESTIONS.map((q) => {
 
       if (q.answerType === INPUT_RADIOBUTTON) {
         return (

@@ -12,7 +12,7 @@ import NavBar from './NavBar';
 import Start from './Start';
 import Quiz from './Quiz/Quiz';
 import Day from './ByDay/Day';
-import Overview from './Overview';
+import Overview from './Overview/Overview';
 import SpinnerComponent from './common/SpinnerComponent';
 
 import { checkAthentification } from '../actions'

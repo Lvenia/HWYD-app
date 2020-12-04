@@ -54,5 +54,5 @@ export const unpleasant = {
   value: 'discouraging'
 };
 
-export const activityOptions = [pleasant, neutral, unpleasant]
+export const ACTIVITY_OPTIONS = [pleasant, neutral, unpleasant];
 

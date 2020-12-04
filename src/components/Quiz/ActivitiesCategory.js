@@ -4,14 +4,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import QuizCard from './QuizCard';
-import questions from './questions';
-import { CATEGORY_ACTIVITY, activityOptions } from '../../constants'
+import { ACTIVITY_OPTIONS } from '../../constants';
+import { ACTIVITY_CAT_KEYS, ACTIVITIES } from './questions';
 import DropdownComponent from '../DropdownComponent';
 import AppButton from '../AppButton';
 import { submitAnswers } from '../../actions';
-
-const activities = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
-const activitiesCatKeys = activities.map(a => { return a.name });
 
 class ActivitiesCategory extends React.Component {
 
@@ -20,7 +17,7 @@ class ActivitiesCategory extends React.Component {
   componentDidMount() {
     const toLocalState = {}
 
-    activitiesCatKeys.map(k => {
+    ACTIVITY_CAT_KEYS.map(k => {
       if (k in this.props.appState) {
         toLocalState[k] = this.props.appState[k]
       }
@@ -55,8 +52,7 @@ class ActivitiesCategory extends React.Component {
 
   renderActivityCards() {
 
-
-    return activities.map(a => {
+    return ACTIVITIES.map(a => {
 
       return (
         <QuizCard
@@ -67,7 +63,7 @@ class ActivitiesCategory extends React.Component {
           onInputChange={this.handleInputChange}
         >
           <DropdownComponent
-            options={activityOptions}
+            options={ACTIVITY_OPTIONS}
             activity={a.name}
             onImpactSelect={this.handleSelectChange}
             value={this.state[a.name] ? this.state[a.name].energyImpact : null}

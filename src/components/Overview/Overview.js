@@ -6,7 +6,6 @@ import { testWeekData } from './testData';
 import { calculatePoints } from './calculatePoints';
 import Container from '../common/Container/Container';
 
-
 const weekData = testWeekData.map(day => calculatePoints(day));
 const sleepCatPointsByDay = weekData.map(day => day.points.sleepCatPoints);
 const nutritionCatPointsByDay = weekData.map(day => day.points.nutritionPoints);

@@ -28,7 +28,10 @@ const questions = [
       return `${sleptWell ? 'well-rested' : 'not well-rested'}`
     },
     grantPoints: function (sleptWell) {
-      return sleptWell ? 10 : 0
+      if (typeof sleptWell !== 'boolean') {
+        return 0
+      }
+      return sleptWell ? 10 : -10
     }
   },
 
@@ -56,7 +59,10 @@ const questions = [
       return `${sleepInterupted ? 'interupted' : 'uninterupted'}`
     },
     grantPoints: function (sleepInterupted) {
-      return sleepInterupted ? 0 : 10
+      if (typeof sleepInterupted !== 'boolean') {
+        return 0
+      }
+      return sleepInterupted ? -10 : 10
     }
   },
   {
@@ -69,7 +75,10 @@ const questions = [
       return `${snoozing ? 'snoozing' : 'no snoozing'}`
     },
     grantPoints: function (snoozing) {
-      return snoozing ? 0 : 10
+      if (typeof snoozing !== 'boolean') {
+        return 0
+      }
+      return snoozing ? -10 : 10
     }
   },
   {
@@ -92,7 +101,10 @@ const questions = [
       return `${mealRegularity ? 'regular' : 'irregular'} meals`
     },
     grantPoints: function (mealRegularity) {
-      return mealRegularity ? 10 : 0
+      if (typeof mealRegularity !== 'boolean') {
+        return 0
+      }
+      return mealRegularity ? 10 : -10
     }
   },
 
@@ -106,7 +118,10 @@ const questions = [
       return `${skippedMeal ? '' : 'no'} skipped meals`
     },
     grantPoints: function (skippedMeal) {
-      return skippedMeal ? 0 : 10
+      if (typeof skippedMeal !== 'boolean') {
+        return 0
+      }
+      return skippedMeal ? -10 : 10
     }
   },
   {
@@ -119,7 +134,10 @@ const questions = [
       return `${junkFood ? 'some' : 'no'} junk food`
     },
     grantPoints: function (junkFood) {
-      return junkFood ? 0 : 10
+      if (typeof junkFood !== 'boolean') {
+        return 0
+      }
+      return junkFood ? -10 : 10
     }
   },
   {
@@ -136,8 +154,12 @@ const questions = [
       }
     },
     grantPoints: function (waterGlasses) {
-      if (waterGlasses === 0) {
+      if (typeof waterGlasses !== 'number') {
         return 0
+      }
+
+      if (waterGlasses === 0) {
+        return -30
       }
 
       if (waterGlasses <= 3) {

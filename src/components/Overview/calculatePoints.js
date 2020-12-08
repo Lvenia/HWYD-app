@@ -8,30 +8,33 @@ import {
 import { pleasant, unpleasant } from '../../constants';
 
 export function calculatePoints(dataByDay) {
-  console.log(dataByDay);
 
-  let points = {
-    sleepCatPoints: 0,
-    nutritionPoints: 0,
-    hydrationPoints: 0,
-    ativitiesPoints: 0
+  let result = {
+    points: {
+      sleepCatPoints: 0,
+      nutritionPoints: 0,
+      hydrationPoints: 0,
+      ativitiesPoints: 0,
+      totalPointsByDay: 0,
+    },
+    dayRate: dataByDay.dayRate
   }
 
   SLEEP_CAT_QUESTIONS.forEach(question => {
     if (question.grantPoints) {
-      points.sleepCatPoints += question.grantPoints(dataByDay[question.name])
+      result.points.sleepCatPoints += question.grantPoints(dataByDay[question.name])
     };
   });
 
   NUTRITION_CAT_QUESTIONS.forEach(question => {
     if (question.grantPoints) {
-      points.nutritionPoints += question.grantPoints(dataByDay[question.name])
+      result.points.nutritionPoints += question.grantPoints(dataByDay[question.name])
     };
   });
 
   HYDRATION_CAT_QUESTIONS.forEach(question => {
     if (question.grantPoints) {
-      points.hydrationPoints += question.grantPoints(dataByDay[question.name])
+      result.points.hydrationPoints += question.grantPoints(dataByDay[question.name])
     };
   });
 
@@ -61,15 +64,13 @@ export function calculatePoints(dataByDay) {
     return accumulator + cur
   }, 0);
 
-  points.ativitiesPoints = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
+  result.points.ativitiesPoints = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
 
-  const pointCatKeys = Object.keys(points);
+  const pointCatKeys = Object.keys(result.points);
 
-  const totalPointsByDay = pointCatKeys.reduce((accumulator, key) => {
-    return accumulator + points[key]
-  }, 0)
+  result.points.totalPointsByDay = pointCatKeys.reduce((accumulator, key) => {
+    return accumulator + result.points[key]
+  }, 0);
 
-  console.log(`total ${totalPointsByDay}`)
-  console.log(points)
-
+  return result;
 };

@@ -1,7 +1,7 @@
 import {
-  GET_ANSWERS_BY_DAY,
-  GET_ANSWERS_BY_DAY_SUCCESS,
-  GET_ANSWERS_BY_DAY_TRIGGER
+  GET_DAY_REVIEW_ANSWERS,
+  GET_DAY_REVIEW_ANSWERS_SUCCESS,
+  GET_DAY_REVIEW_ANSWERS_TRIGGER
 } from '../actions/actionTypes';
 
 import questions from '../components/Quiz/questions';
@@ -11,21 +11,21 @@ const initialState = {
   isLoading: false
 };
 
-export default function byDayReducer(state = initialState, action) {
+export default function dayReviewReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_ANSWERS_BY_DAY_SUCCESS:
+    case GET_DAY_REVIEW_ANSWERS_SUCCESS:
       return {
         ...state,
         isLoading: false
       };
 
-    case GET_ANSWERS_BY_DAY_TRIGGER:
+    case GET_DAY_REVIEW_ANSWERS_TRIGGER:
       return {
         ...state,
         isLoading: true
       };
 
-    case GET_ANSWERS_BY_DAY:
+    case GET_DAY_REVIEW_ANSWERS:
 
       const alowedKeys = questions.map(q => { return q.name });
       const payloadKeys = Object.keys(action.payload);

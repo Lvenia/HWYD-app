@@ -2,12 +2,18 @@ import {
   CHECK_AUTH,
   CHECK_AUTH_TRIGGER,
   CHECK_AUTH_SUCCESS,
+
   QUIZ_SUBMIT,
   QUIZ_SUBMIT_SUCCESS,
   QUIZ_SUBMIT_TRIGGER,
-  GET_ANSWERS_BY_DAY,
-  GET_ANSWERS_BY_DAY_SUCCESS,
-  GET_ANSWERS_BY_DAY_TRIGGER
+
+  GET_DAY_REVIEW_ANSWERS,
+  GET_DAY_REVIEW_ANSWERS_SUCCESS,
+  GET_DAY_REVIEW_ANSWERS_TRIGGER,
+
+  GET_OVERVIEW_ANSWERS,
+  GET_OVERVIEW_ANSWERS_SUCCESS,
+  GET_OVERVIEW_ANSWERS_TRIGGER
 } from './actionTypes';
 
 import axios from '../apis/api';
@@ -23,7 +29,6 @@ export const checkAthentification = () => async dispatch => {
     const response = await axios.get('/auth/login/success');
 
     if (response.status === 200) {
-
       dispatch({
         type: CHECK_AUTH,
         payload: {
@@ -37,9 +42,8 @@ export const checkAthentification = () => async dispatch => {
       });
     }
 
-
   } catch (err) {
-    alert(`Login failure, ${err.message}`)
+    console.log(`Login failure, ${err.message}`)
   }
 };
 
@@ -61,7 +65,7 @@ export const logOut = () => async dispatch => {
     }
 
   } catch (err) {
-    alert(`Logout failure, ${err.message}`)
+    console.log(`Logout failure, ${err.message}`)
   }
 };
 
@@ -93,9 +97,11 @@ export const submitQuiz = () => async (dispatch, getState) => {
       throw new Error(`Answers have not been posted, response status is ${response.status}`);
     }
   } catch (err) {
-    alert(`Quiz submition failed, ${err.message}`);
+    console.log(`Quiz submition failed, ${err.message}`);
   }
 };
+
+// DAY SUMMARY
 
 export const getTodaysAnswers = () => async dispatch => {
   try {
@@ -109,40 +115,64 @@ export const getTodaysAnswers = () => async dispatch => {
       throw new Error(`Today's answers have not been loaded, ${response.status}`);
     }
   } catch (err) {
-    alert(`Error of the getTodaysAnswer request, ${err.message}`);
+    console.log(`Error of the getTodaysAnswer request, ${err.message}`);
   }
 };
 
-export const getAnswersByDay = (day) => async dispatch => {
+export const getDayReviewAnswers = (day) => async dispatch => {
   try {
 
     dispatch({
-      type: GET_ANSWERS_BY_DAY_TRIGGER
+      type: GET_DAY_REVIEW_ANSWERS_TRIGGER
     });
 
     const response = await axios.get(`/answers/${day}`);
 
     if (response.status === 200) {
       dispatch({
-        type: GET_ANSWERS_BY_DAY,
+        type: GET_DAY_REVIEW_ANSWERS,
         payload: response.data || {}
       });
 
       dispatch({
-        type: GET_ANSWERS_BY_DAY_SUCCESS
+        type: GET_DAY_REVIEW_ANSWERS_SUCCESS
       });
     } else {
-      throw new Error('GetAnswersByDay request feiled')
+      throw new Error('getDayReviewAnswers request feiled')
     }
 
   } catch (err) {
-    alert(`Something wron with the getAnswersByDate, ${err.message}`)
+    console.log(`Something wron with the getAnswersByDate, ${err.message}`)
   }
 };
 
+//OVERVIEW
 
+export const getOverviewAnswers = (timePeriod) => async dispatch => {
+  try {
+    dispatch({
+      type: GET_OVERVIEW_ANSWERS_TRIGGER
+    });
 
+    const response = await axios.get(`/answers/?range=${timePeriod}`);
 
+    if (response.status === 200) {
+      dispatch({
+        type: GET_OVERVIEW_ANSWERS,
+        payload: {
+          responseData: response.data,
+          timePeriod: timePeriod
+        } || {}
+      });
 
+      dispatch({
+        type: GET_OVERVIEW_ANSWERS_SUCCESS
+      });
+    } else {
+      throw new Error('getOverviewAnswers request failed')
+    }
 
-
+  } catch (err) {
+    console.log(`Something wrong with getOverviewAnswers, ${err.message}`)
+  }
+};

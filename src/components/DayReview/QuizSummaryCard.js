@@ -21,4 +21,3 @@ const QuizSummaryCard = ({ header, description }) => {
 };
 
 export default QuizSummaryCard;
-

@@ -11,7 +11,8 @@ import {
 import NavBar from './NavBar';
 import Start from './Start';
 import Quiz from './Quiz/Quiz';
-import Day from './ByDay/Day';
+import Day from './DayReview/Day';
+// import TestOverview from './Overview/testData/TestOverview';
 import Overview from './Overview/Overview';
 import SpinnerComponent from './common/SpinnerComponent';
 
@@ -44,6 +45,9 @@ class App extends React.Component {
         <Route path="/overview">
           {!shouldRedirect ? <Overview /> : <Redirect to="/" />}
         </Route>
+        {/* <Route path="/overview">
+          {!shouldRedirect ? <TestOverview /> : <Redirect to="/" />}
+        </Route> */}
       </Switch>
     )
   }

@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
-import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS } from './questions';
+import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS, HYDRATION_CAT_QUESTIONS, HYDRATION_CAT_KEYS } from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 
@@ -37,6 +37,8 @@ class NutritionCategory extends React.Component {
     this.setState({ [questionType]: value })
   }
 
+
+
   renderNutritionCatQuestions() {
     return NUTRITION_CAT_QUESTIONS.map(q => {
       if (q.answerType === INPUT_RADIOBUTTON) {
@@ -61,7 +63,15 @@ class NutritionCategory extends React.Component {
           </QuizRow>
         );
 
-      } else if (q.answerType === INPUT_NUMBER) {
+      } else {
+        return null;
+      }
+    })
+  };
+
+  renderHydrationCatQuestions() {
+    return HYDRATION_CAT_QUESTIONS.map(q => {
+      if (q.answerType === INPUT_NUMBER) {
         return (
           <QuizRow key={q.name} question={q.question}>
             <InputField
@@ -70,16 +80,14 @@ class NutritionCategory extends React.Component {
               min={0}
               max={24}
               step={0.5}
-              value={this.state[q.name]}
+              value={this.props.appState[q.name]}
               onInputChange={(value) => this.setState({ [q.name]: value })}
             />
-
           </QuizRow>
         );
       } else {
         return null;
       }
-
     })
   }
 
@@ -87,6 +95,7 @@ class NutritionCategory extends React.Component {
     return (
       <div>
         {this.renderNutritionCatQuestions()}
+        {this.renderHydrationCatQuestions()}
         <div className="p-3 justify-content-md-center">
           <Row>
             <Col sm={12}>

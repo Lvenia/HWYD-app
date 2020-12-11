@@ -222,4 +222,5 @@ export const SLEEP_CAT_QUESTIONS = questions.filter(q => q.questionCategory === 
 
 export const ACTIVITY_CAT_KEYS = ACTIVITIES.map(a => { return a.name });
 export const NUTRITION_CAT_KEYS = NUTRITION_CAT_QUESTIONS.map(k => { return k.name });
+export const HYDRATION_CAT_KEYS = HYDRATION_CAT_QUESTIONS.map(k => { return k.name });
 export const SLEEP_CAT_KEYS = SLEEP_CAT_QUESTIONS.map(q => { return q.name });

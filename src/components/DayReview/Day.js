@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { getAnswersByDay } from '../../actions';
+import { getDayReviewAnswers } from '../../actions';
 import { subtractTimeStrings, ifKeyExists } from '../../utils';
 
 import StarComponent from '../Quiz/StarComponent';
@@ -16,7 +16,7 @@ import QuizActivityBlock from './QuizActivityBlock.js';
 
 import questions from '../Quiz/questions';
 import {
-  stars,
+  STARS,
   SUMMARY_SLEEP,
   SUMMARY_NUTRITION,
   SUMMARY_HYDRATION,
@@ -32,13 +32,12 @@ class Day extends React.Component {
 
   componentDidMount = async () => {
     const today = this.renderTodaysDate();
-    await this.props.getAnswersByDay(today);
+    await this.props.getDayReviewAnswers(today);
     this.setState({ firstRender: false });
   }
 
   formatDate = (dateUTC) => {
     if (!dateUTC) return null;
-
     const dateFormated = dateUTC.toISOString();
     const dayString = dateFormated.slice(0, 10);
     return dayString;
@@ -53,18 +52,20 @@ class Day extends React.Component {
     this.setState({
       selectedDateUnformated: value,
     });
-    this.props.getAnswersByDay(this.formatDate(value));
+    this.props.getDayReviewAnswers(this.formatDate(value));
   }
 
   renderDayDescription = rate => {
-    const star = stars.find(star => star.rate === rate);
+    const star = STARS.find(star => star.rate === rate);
+
     if (star) {
       return (
         <h1>
           It was {star.description[0] !== 'a' ? 'a' : 'an'} {star.description} day!
         </h1>
-      )
+      );
     }
+
     if (!Object.keys(this.props.answersByDay).length) {
       return (
         <h1>
@@ -75,7 +76,7 @@ class Day extends React.Component {
   }
 
   renderStars() {
-    return stars.map(star => {
+    return STARS.map(star => {
       return (
         <StarComponent
           readOnly={true}
@@ -84,8 +85,8 @@ class Day extends React.Component {
           hoveredStarRate={this.props.answersByDay.dayRate}
         />
       );
-    })
-  };
+    });
+  }
 
   renderSleepCard = () => {
     const { sleptWell, wentToBed, wokeUp } = this.props.answersByDay;
@@ -93,10 +94,12 @@ class Day extends React.Component {
     const timeDifferece = subtractTimeStrings(wentToBed, wokeUp);
 
     const header = () => {
+
       if (ifKeyExists('sleptWell', this.props.answersByDay)) {
         return `You have ${sleptWell ? '' : 'not'} slept well`
       }
-      return 'Sleep details'
+
+      return 'Sleep details';
     };
 
     let descriptionText = [];
@@ -106,7 +109,9 @@ class Day extends React.Component {
     qSleep.forEach(q => {
       if (ifKeyExists(q.name, this.props.answersByDay) && q.renderSummaryDetails) {
         descriptionText.push(q.renderSummaryDetails(this.props.answersByDay[q.name]))
-      } if (q.name === 'wentToBed' && timeDifferece) {
+      }
+
+      if (q.name === 'wentToBed' && timeDifferece) {
         descriptionText.unshift(timeDifferece);
       }
     });
@@ -121,7 +126,7 @@ class Day extends React.Component {
         description={descriptionText.join(', ')}
       />
     );
-  };
+  }
 
   renderNutritionCard = () => {
 
@@ -135,7 +140,8 @@ class Day extends React.Component {
       if (mealRegularityExists && skippedMealExists && junkFoodExists) {
         return `${(mealRegularity && !skippedMeal && !junkFood) ? 'You have nourished yourself well' : 'You can nourishe yourself better'}`
       }
-      return 'Nutrition details'
+
+      return 'Nutrition details';
     };
 
     let descriptionText = [];
@@ -148,7 +154,7 @@ class Day extends React.Component {
     });
 
     if (descriptionText.length < 1) {
-      return;
+      return
     }
 
     return (
@@ -157,7 +163,7 @@ class Day extends React.Component {
         description={descriptionText.join(', ')}
       />
     );
-  };
+  }
 
   renderHydrationCard = () => {
     const { waterGlasses } = this.props.answersByDay;
@@ -276,7 +282,6 @@ class Day extends React.Component {
         </Row>
 
         <Row className="m-3 justify-content-md-center">
-
           <Col xs={5}>
             <DayPickerComponent
               handleDayClick={this.handleDayClick}
@@ -295,9 +300,9 @@ class Day extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    answersByDay: state.byDayState.data,
-    isLoading: state.byDayState.isLoading,
+    answersByDay: state.dayReviewState.data,
+    isLoading: state.dayReviewState.isLoading,
   }
 }
 
-export default connect(mapStateToProps, { getAnswersByDay })(Day);
+export default connect(mapStateToProps, { getDayReviewAnswers })(Day);

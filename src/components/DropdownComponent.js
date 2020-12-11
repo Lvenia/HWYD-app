@@ -1,33 +1,40 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const DropdownComponent = (props) => {
+const DropdownComponent = ({
+  options = [],
+  value = "",
+  onSelect = () => null,
+  variant = "primary",
+  defaultLabel = "Dropdown"
+}) => {
 
   let selectedLabel = null;
 
-  const selectedOption = props.options.find(option => {
-    return option.value === props.value
+  const selectedOption = options.find(option => {
+    return option.value === value
   });
-  
-  selectedLabel = selectedOption ? selectedOption.label : 'Impression';
+
+  selectedLabel = selectedOption ? selectedOption.label : defaultLabel;
 
   return (
     <Dropdown>
       <Dropdown.Toggle
         style={{ width: '100%' }}
-        variant={!props.value ? 'outline-secondary' : 'secondary'}
+        variant={variant}
         id="dropdown-basic"
       >
         {selectedLabel}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {props.options.map(option => {
+        {options.map(option => {
           return (
             <Dropdown.Item
+              style={{ width: '100%' }}
               key={option.value}
               onClick={() => {
-                props.onImpactSelect(props.activity, option)
+                onSelect(option)
               }}
             >
               {option.label}

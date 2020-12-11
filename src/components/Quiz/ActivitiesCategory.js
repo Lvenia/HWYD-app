@@ -38,22 +38,19 @@ class ActivitiesCategory extends React.Component {
     })
   }
 
-  handleSelectChange = (activity, selectedOption) => {
+  handleSelectChange = (title, selectedOption) => {
 
     this.setState({
-      [activity]: {
-        ...this.state[activity],
+      [title]: {
+        ...this.state[title],
         energyImpact: selectedOption.value
       }
     })
   }
 
-
-
   renderActivityCards() {
 
     return ACTIVITIES.map(a => {
-
       return (
         <QuizCard
           key={a.name}
@@ -64,9 +61,10 @@ class ActivitiesCategory extends React.Component {
         >
           <DropdownComponent
             options={ACTIVITY_OPTIONS}
-            activity={a.name}
-            onImpactSelect={this.handleSelectChange}
+            onSelect={(option) => this.handleSelectChange(a.name, option)}
             value={this.state[a.name] ? this.state[a.name].energyImpact : null}
+            variant={(this.state[a.name] && this.state[a.name].energyImpact) ? 'secondary' : 'outline-secondary'}
+            defaultLabel="Impression"
           />
         </QuizCard>
       );

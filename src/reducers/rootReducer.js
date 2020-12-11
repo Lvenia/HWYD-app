@@ -1,12 +1,14 @@
 import authReducer from './authReducer';
 import quizReducer from './quizReducer';
-import byDayReducer from './byDayReducer';
+import dayReviewReducer from './dayReviewReducer';
+import overviewReducer from './overviewReducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   quizState: quizReducer,
-  byDayState: byDayReducer
+  dayReviewState: dayReviewReducer,
+  overviewState: overviewReducer
 });
 
 export default rootReducer;

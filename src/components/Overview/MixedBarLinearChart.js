@@ -1,20 +1,16 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import starImg from '../common/Icons/StarImg';
 import { weekdayDDMMbyDate } from '../../utils';
 import { calculatePoints } from './calculatePoints';
 
 const MixedBarLinearChart = ({
   data = {},
   stacked = false,
-  chartTitle = 'Review',
-
+  chartTitle = 'Title',
+  pointStyle = 'circle',
   y1Ticks = {},
-  y2Ticks = {},
-
+  y2Ticks = {}
 }) => {
-
-
 
   const xAxisLabels = data.map(dataSet => {
     const dateUTCFormat = new Date(dataSet.createdAt);
@@ -30,7 +26,6 @@ const MixedBarLinearChart = ({
   const activityCatPointsByDay = pointsPerDay.map(day => day.points.ativitiesPoints);
   const ratesByDay = pointsPerDay.map(day => day.dayRate);
 
-
   const chartData = {
     data: {
       labels: xAxisLabels,
@@ -41,7 +36,7 @@ const MixedBarLinearChart = ({
         order: 0,
         backgroundColor: 'rgba(254, 241, 96, 1)',
         borderColor: '#343a40',
-        pointStyle: starImg,
+        pointStyle: pointStyle,
         radius: 20,
         showLine: false,
         yAxisID: 'y-axis-2',

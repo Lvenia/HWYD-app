@@ -3,63 +3,51 @@ import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import WeekOverview from './WeekOverview';
-
-import NewMonthOvervieW from './NewMonthOverview';
 import MixedBarLinearChart from './MixedBarLinearChart';
-import { starImg, samllStarImg } from '../common/Icons/StarImg';
+import starImg from '../common/Icons/StarImg';
+import smallStarImg from '../common/Icons/SmallStarImg';
 import Container from '../common/Container/Container';
 import SpinnerComponent from '../common/SpinnerComponent';
 import DropdownComponent from '../DropdownComponent';
-import { TIME_PERIOD_OPTIONS, THIS_WEEK, LAST_WEEK, THIS_MONTH, LAST_MONTH } from '../../constants';
+import {
+  TIME_PERIOD_OPTIONS,
+  THIS_WEEK,
+  LAST_WEEK,
+  THIS_MONTH,
+  LAST_MONTH
+} from '../../constants';
 import { getOverviewAnswers } from '../../actions';
-
-
 
 class Overview extends React.Component {
 
   state = {
-    selectedPeriod: THIS_WEEK.value //thisWeek, lastWeek
+    selectedPeriod: THIS_WEEK.value
   }
 
   componentDidMount = async () => {
     await this.props.getOverviewAnswers(THIS_WEEK.value)
   }
 
-  // renderHeader = () => {
-  //   if (this.props.isLoading) {
-  //     return <SpinnerComponent />
-  //   }
-  //   if (this.state.selectedPeriod === this.props.timePeriod) {
-  //     return TIME_PERIOD_OPTIONS.map(option => {
-  //       if (option.value === this.state.selectedPeriod) {
-  //         return <h1 key={option.value}>Overview for  {option.label}!</h1>
-  //       } else {
-  //         return null
-  //       }
-  //     })
-  //   }
-
-  // }
-
   renderContent = () => {
 
-    let y1Ticks, chartTitle, stacked;
+    let y1Ticks, chartTitle, stacked, pointStyle;
 
     if (this.state.selectedPeriod === THIS_WEEK.value || this.state.selectedPeriod === LAST_WEEK.value) {
+
+      pointStyle = starImg;
 
       y1Ticks = {
         min: -30,
         max: 36,
         stepSize: 10
       }
+
+      chartTitle = this.state.selectedPeriod === THIS_WEEK.value ? 'This is your current week overview!' : 'This is your last week overview!'
     };
-    chartTitle = this.state.selectedPeriod === THIS_WEEK.value ? 'This is your current week overview!' : 'This is your last week overview!'
-
-
 
     if (this.state.selectedPeriod === THIS_MONTH.value || this.state.selectedPeriod === LAST_MONTH.value) {
       stacked = true;
+      pointStyle = smallStarImg;
 
       y1Ticks = {
         min: -120,
@@ -76,9 +64,6 @@ class Overview extends React.Component {
       stepSize: 1,
     };
 
-
-
-
     return (
       <MixedBarLinearChart
         data={this.props.data}
@@ -86,8 +71,7 @@ class Overview extends React.Component {
         y2Ticks={y2Ticks}
         chartTitle={chartTitle}
         stacked={stacked}
-      // stacked={true}
-
+        pointStyle={pointStyle}
       />
     )
   }
@@ -97,20 +81,16 @@ class Overview extends React.Component {
     this.props.getOverviewAnswers(option.value)
   }
 
-
-
   render() {
 
-    if (!this.props.data.length) {
+    if (!this.props.data.length || this.props.isLoading) {
       return <SpinnerComponent />
     }
-
 
     if (this.props.data.length) {
       return (
         <Container >
           {this.renderContent()}
-
           <Row className="justify-content-md-center">
             <p>{'=> Select another timeperiod <='} </p>
           </Row>
@@ -124,11 +104,6 @@ class Overview extends React.Component {
               />
             </Col>
           </Row>
-
-
-
-
-
         </Container>
       )
     }
@@ -143,9 +118,3 @@ const mapStateToProps = (state) => {
   }
 }
 export default connect(mapStateToProps, { getOverviewAnswers })(Overview);
-
-
-//the whole overview component should has two purposes - to show the chart and to change chart based on the selected option
-
-//the best option would be to dispatch action and change the redux state here
-//cahrt component would recieve the data, it will perform calculations and return a chart

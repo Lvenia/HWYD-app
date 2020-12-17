@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
-import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS, HYDRATION_CAT_QUESTIONS, HYDRATION_CAT_KEYS } from './questions';
+import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS, HYDRATION_CAT_QUESTIONS } from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 

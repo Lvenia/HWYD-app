@@ -6,7 +6,8 @@ const DropdownComponent = ({
   value = "",
   onSelect = () => null,
   variant = "primary",
-  defaultLabel = "Dropdown"
+  defaultLabel = "Dropdown",
+  style = { width: '100%' }
 }) => {
 
   let selectedLabel = null;
@@ -20,7 +21,7 @@ const DropdownComponent = ({
   return (
     <Dropdown>
       <Dropdown.Toggle
-        style={{ width: '100%' }}
+        style={style}
         variant={variant}
         id="dropdown-basic"
       >
@@ -31,7 +32,6 @@ const DropdownComponent = ({
         {options.map(option => {
           return (
             <Dropdown.Item
-              style={{ width: '100%' }}
               key={option.value}
               onClick={() => {
                 onSelect(option)
@@ -42,7 +42,7 @@ const DropdownComponent = ({
           );
         })}
       </Dropdown.Menu>
-    </Dropdown>
+    </Dropdown >
   );
 };
 

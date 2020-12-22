@@ -27,10 +27,11 @@ class Start extends React.Component {
   }
 
   render() {
+    const userName = this.props.auth.user ? this.props.auth.user.givenName : 'there'
     return (
       <Container>
         <Row className="m-3 justify-content-md-center" >
-          <h1 >Hi there! How Was Your Day?</h1>
+          <h1 >Hi {userName}! How Was Your Day?</h1>
         </Row>
         <Row className="justify-content-md-center" >
           <h4>Take 5 minutes to spot how simple daily actions affect your perception of the 1/365th of the year. </h4>

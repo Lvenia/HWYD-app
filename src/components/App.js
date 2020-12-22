@@ -44,9 +44,6 @@ class App extends React.Component {
         <Route path="/overview">
           {!shouldRedirect ? <Overview /> : <Redirect to="/" />}
         </Route>
-        {/* <Route path="/overview">
-          {!shouldRedirect ? <TestOverview /> : <Redirect to="/" />}
-        </Route> */}
       </Switch>
     )
   }

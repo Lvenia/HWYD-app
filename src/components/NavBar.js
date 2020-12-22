@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logOut } from '../actions';
 import AppButton from '../components/AppButton';
+import DropdownComponent from './DropdownComponent';
 import { withRouter } from 'react-router-dom';
+import Row from 'react-bootstrap/esm/Row';
 
 
 class NavBar extends React.Component {
-
 
   renderTabs() {
 
@@ -53,40 +54,72 @@ class NavBar extends React.Component {
         </NavLink>
       )
     }
-
   }
 
   renderAuthButtons() {
     if (this.props.auth.isAuthenticated) {
       return (
-        <AppButton
-          label='Log Out'
-          handleClick={() => {
+        <DropdownComponent
+          style={{
+            width: "200px",
+            display: "flex",
+            alignItems: "center"
+          }}
+          options={[{ value: "LogOut", label: "Log Out" }]}
+          value={"Value"}
+          onSelect={() => {
             this.props.logOut()
             this.props.history.push("/")
           }}
-          variant='outline-primary'
+          variant="link"
+          defaultLabel={
+            <>
+              <div>
+                {this.props.auth.user.givenName} {this.props.auth.user.familyName}
+              </div>
+
+              <img
+                src={this.props.auth.user.avatar}
+                style={{
+                  width: "20%",
+                  borderRadius: "50%",
+                  padding: "5px"
+                }}
+              />
+            </>
+          }
         />
-      )
+      );
     } else {
       return (
-        <AppButton
-          href="http://localhost:4000/auth/google"
-          label='Log in with Google'
-          variant='outline-danger'
-        />
-      )
+        <div style={{ marginRight: "20px", marginTop: "1.5px" }}>
+          <AppButton
+            href="http://localhost:4000/auth/google"
+            label='Log in with Google'
+            variant='outline-danger'
+          />
+        </div>
+      );
     }
   }
 
   render() {
     return (
-      <div>
-        <ul className="nav nav-tabs" >
+      <Row style={{
+        justifyContent: "space-between",
+        borderBottom: "1px solid #dee2e6",
+      }
+      }>
+        <ul
+          style={{
+            borderBottom: "none",
+            marginLeft: "20px",
+          }}
+          className="nav nav-tabs" >
           {this.renderTabs()}
-          {this.renderAuthButtons()}
         </ul>
-      </div >
+        { this.renderAuthButtons()}
+      </Row >
     );
   }
 };

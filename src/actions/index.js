@@ -160,9 +160,9 @@ export const getOverviewAnswers = (timePeriod) => async dispatch => {
       dispatch({
         type: GET_OVERVIEW_ANSWERS,
         payload: {
-          responseData: response.data,
+          responseData: response.data || {},
           timePeriod: timePeriod
-        } || {}
+        }
       });
 
       dispatch({

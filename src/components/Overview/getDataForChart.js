@@ -7,7 +7,7 @@ import {
 
 import { pleasant, unpleasant } from '../../constants';
 
-export function calculatePoints(dataByDay) {
+export function getDataForChart(dataByDay) {
 
   let result = {
     points: {
@@ -17,7 +17,8 @@ export function calculatePoints(dataByDay) {
       ativitiesPoints: 0,
       totalPointsByDay: 0,
     },
-    dayRate: dataByDay.dayRate
+    dayRate: dataByDay.dayRate,
+    monthIndex: (new Date(dataByDay.createdAt)).getMonth()
   }
 
   SLEEP_CAT_QUESTIONS.forEach(question => {

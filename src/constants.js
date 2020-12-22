@@ -76,6 +76,15 @@ export const LAST_MONTH = {
   value: 'lastMonth'
 };
 
-export const TIME_PERIOD_OPTIONS = [THIS_WEEK, LAST_WEEK, THIS_MONTH, LAST_MONTH];
+export const THIS_YEAR = {
+  label: 'This Year',
+  value: 'thisYear'
+};
 
+export const LAST_YEAR = {
+  label: 'Last Year',
+  value: 'lastYear'
+};
+
+export const TIME_PERIOD_OPTIONS = [THIS_WEEK, LAST_WEEK, THIS_MONTH, LAST_MONTH, THIS_YEAR, LAST_YEAR];
 

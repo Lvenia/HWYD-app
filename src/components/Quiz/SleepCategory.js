@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import { SLEEP_CAT_QUESTIONS, SLEEP_CAT_KEYS } from './questions';
 import QuizRow from './QuizRow';
+import { Heading, Row } from '../common/Layout/Layout';
 import RadioButton from '../RadioButton';
 import InputField from '../InputField';
 import AppButton from '../AppButton';
@@ -18,7 +17,7 @@ class SleepCategory extends React.Component {
 
   componentDidMount() {
 
-    const toLocalState = {}
+    const toLocalState = {};
 
     SLEEP_CAT_KEYS.map(k => {
 
@@ -90,30 +89,31 @@ class SleepCategory extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
+        <Heading >Quiz: Sleep Category</Heading>
         {this.renderSleepCatQuestions()}
-        <div className="p-3 justify-content-md-center">
-          <Row >
-            <Col sm={12}>
-              <AppButton
-                variant={"light"}
-                label={'Previous Section'}
-                handleClick={() => {
-                  this.props.moveToPrevioustSection()
-                }}
-              />
-              <AppButton
-                variant={"primary"}
-                label={'Next Section'}
-                handleClick={() => {
-                  this.props.submitAnswers(this.state)
-                  this.props.moveToNextSection()
-                }}
-              />
-            </Col>
-          </Row>
-        </div>
-      </div>
+        <Row
+          style={{
+            justifyContent: "space-between"
+          }}
+        >
+          <AppButton
+            variant={"light"}
+            label={'Previous Section'}
+            handleClick={() => {
+              this.props.moveToPrevioustSection()
+            }}
+          />
+          <AppButton
+            variant={"primary"}
+            label={'Next Section'}
+            handleClick={() => {
+              this.props.submitAnswers(this.state)
+              this.props.moveToNextSection()
+            }}
+          />
+        </Row>
+      </>
     );
   }
 }

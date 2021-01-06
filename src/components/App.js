@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import {
   BrowserRouter as Router,
   Route,
@@ -16,7 +15,6 @@ import Overview from './Overview/Overview';
 import SpinnerComponent from './common/SpinnerComponent';
 
 import { checkAthentification } from '../actions'
-
 
 class App extends React.Component {
 
@@ -51,10 +49,8 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <React.Fragment>
-          <NavBar />
-          {this.renderRoutes()}
-        </React.Fragment >
+        <NavBar />
+        {this.renderRoutes()}
       </Router >
     );
   }

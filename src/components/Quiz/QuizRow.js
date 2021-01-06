@@ -1,21 +1,34 @@
 import React from 'react';
+import { Row, Paragraph } from '../common/Layout/Layout';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 
 class QuizRow extends React.Component {
 
   render() {
     return (
-      <div className="p-3 justify-content-md-center">
-        <Row className="justify-content-md-center">
-          <Col xs={9}>
-            <h4>{this.props.question}</h4>
-          </Col>
-          <Col xs={3}>
-            {this.props.children}
-          </Col>
-        </Row>
-      </div>
+      <Row
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingInline: "20px"
+        }}
+      >
+        <Paragraph>{this.props.question}</Paragraph>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "flex-end",
+            alignItems: "center"
+          }}
+        >
+          {this.props.children}
+        </div>
+      </Row >
     );
   }
 }

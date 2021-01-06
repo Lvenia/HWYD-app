@@ -7,10 +7,9 @@ import { submitQuiz, getTodaysAnswers } from '../../actions'
 import SleepCategory from './SleepCategory';
 import NutritionCategory from './NutritionCategory';
 import ActivitiesCategory from './ActivitiesCategory';
-import Container from '../common/Container/Container';
 import StarsCategory from './StarsCategory';
-import Row from 'react-bootstrap/Row';
 import AppButton from '../AppButton';
+import { Container, Heading, Row } from '../common/Layout/Layout';
 
 import {
   STARS_CATEGORY_NUMBER,
@@ -63,12 +62,13 @@ const Quiz = ({ getAnswers, submitQuiz, history }) => {
     } else if (categoryNumber === QUIZ_COMPLETED) {
 
       return (
-        <Container>
-          <Row className="m-3 justify-content-md-center" >
-            <h3>You did great!</h3>
-          </Row>
-
-          <Row className="justify-content-md-center" >
+        <>
+          <Heading>You did great!</Heading>
+          <Row
+            style={{
+              justifyContent: "space-between"
+            }}
+          >
             <AppButton
               variant="light"
               label="Go back to edit / rewiev answers"
@@ -83,7 +83,7 @@ const Quiz = ({ getAnswers, submitQuiz, history }) => {
               }}
             />
           </Row>
-        </Container>
+        </>
       );
     }
   }

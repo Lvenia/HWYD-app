@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { Bar } from 'react-chartjs-2';
 
-import Container from '../common/Container/Container';
+import { Container, Row, Paragraph, Heading } from '../common/Layout/Layout';
 import SpinnerComponent from '../common/SpinnerComponent';
 import DropdownComponent from '../DropdownComponent';
 import {
@@ -29,9 +27,7 @@ class Overview extends React.Component {
     if (!this.props.data.length) {
 
       return (
-        <Row className="justify-content-md-center">
-          <h1>No data for selected period</h1>
-        </Row>
+        <Heading>No data for selected period</Heading>
       );
     }
 
@@ -56,18 +52,15 @@ class Overview extends React.Component {
     return (
       <Container >
         {this.renderContent()}
-        <Row className="justify-content-md-center">
-          <p>{'=> Select another timeperiod <='} </p>
-        </Row>
-        <Row className="justify-content-md-center">
-          <Col xs={4}>
-            <DropdownComponent
-              options={TIME_PERIOD_OPTIONS}
-              defaultLabel={THIS_WEEK.label}
-              value={this.state.selectedPeriod}
-              onSelect={this.handleDropdownSelect}
-            />
-          </Col>
+        <Paragraph>{'=> Select another timeperiod <='} </Paragraph>
+        <Row>
+          <DropdownComponent
+            options={TIME_PERIOD_OPTIONS}
+            defaultLabel={THIS_WEEK.label}
+            value={this.state.selectedPeriod}
+            onSelect={this.handleDropdownSelect}
+            style={{width: "200px", textAlign: "center"}}
+          />
         </Row>
       </Container>
     );

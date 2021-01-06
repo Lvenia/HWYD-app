@@ -1,15 +1,17 @@
 import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Row from 'react-bootstrap/Row';
+import { Container, Row } from './Layout/Layout';
 
 const SpinnerComponent = ({
   animation = "border",
   variant = "primary"
 }) => {
   return (
-    <Row className="m-3 justify-content-md-center align-items-center" >
-      <Spinner animation={animation} variant={variant} />
-    </Row>
+    <Container>
+      <Row>
+        <Spinner animation={animation} variant={variant} />
+      </Row>
+    </Container>
   )
 };
 

@@ -7,7 +7,7 @@ const DropdownComponent = ({
   onSelect = () => null,
   variant = "primary",
   defaultLabel = "Dropdown",
-  style = { width: '100%' }
+  style = { width: "100%", textAlign: "center" }
 }) => {
 
   let selectedLabel = null;
@@ -32,6 +32,7 @@ const DropdownComponent = ({
         {options.map(option => {
           return (
             <Dropdown.Item
+              style={style}
               key={option.value}
               onClick={() => {
                 onSelect(option)

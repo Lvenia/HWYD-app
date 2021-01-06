@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Heading, Row } from '../common/Layout/Layout';
 
 import QuizCard from './QuizCard';
 import { ACTIVITY_OPTIONS } from '../../constants';
@@ -73,14 +72,24 @@ class ActivitiesCategory extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="p-3 justify-content-md-left">
-          <h4>How much time have you spent on...</h4>
-        </div>
-        <Row className="justify-content-md-center">
+      <>
+        <Heading>Quiz: How much time have you spent on...</Heading>
+        <div
+          style={{
+            justifyContent: "space-evenly",
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "center"
+          }}
+        >
           {this.renderActivityCards()}
-        </Row>
-        <Col sm={12}>
+        </div>
+        <Row
+          style={{
+            justifyContent: "space-between"
+          }}
+        >
           <AppButton
             variant={"light"}
             label={'Previous Section'}
@@ -96,8 +105,8 @@ class ActivitiesCategory extends React.Component {
               this.props.moveToNextSection()
             }}
           />
-        </Col>
-      </div>
+        </Row>
+      </>
     );
   }
 }

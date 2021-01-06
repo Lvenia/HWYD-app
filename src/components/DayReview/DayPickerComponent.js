@@ -1,26 +1,30 @@
 import React from 'react';
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import { DayPickerStyled} from '../common/DayPickerComponent'
+import { Paragraph } from '../common/Layout/Layout';
 
 const DayPickerComponent = ({ handleDayClick, selectedDay }) => {
   return (
-    <div>
-      <DayPicker
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        flexGrow: "1"
+      }}>
+      <DayPickerStyled
         selectedDays={selectedDay}
         onDayClick={handleDayClick}
       />
-      <p
+      <Paragraph
         style={{
-          paddingLeft: "1.5rem",
-          textAlign: "left",
           fontStyle: "italic",
-          fontSize: "small",
           fontWeight: "200",
-          position: "inherit"
+          position: "inherit",
+          margin: "0px 0px 5px 0px"
         }}
       >
-        {'=> Click to select another day <='}
-      </p>
+        ...click to select another day
+      </Paragraph>
     </div>
   );
 };

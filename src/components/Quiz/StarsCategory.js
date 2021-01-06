@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Row, Heading } from '../common/Layout/Layout';
 
 import StarComponent from './StarComponent';
 
@@ -20,7 +18,8 @@ class StarsComponent extends React.Component {
 
   state = {
     dayRate: this.props.choosenDayRate || 0,
-    hoveredStarRate: 0
+    hoveredStarRate: 0,
+    isClicked: false
   }
 
   handleHoveredStar = (rate) => this.setState({ hoveredStarRate: rate })
@@ -54,8 +53,9 @@ class StarsComponent extends React.Component {
           description={star.description}
           starRate={star.rate}
           hoveredStarRate={this.state.hoveredStarRate || this.state.dayRate}
-          handleStarHover={(rate) => this.setState({ hoveredStarRate: rate })}
-          handleClick={(rate) => this.setState({ dayRate: rate })}
+          handleStarHover={(rate) => this.setState({ hoveredStarRate: rate, isClicked: false })}
+          handleClick={(rate) => this.setState({ dayRate: rate, isClicked: true })}
+          isClicked={this.state.isClicked}
         />
       );
     })
@@ -67,27 +67,20 @@ class StarsComponent extends React.Component {
     };
 
     return (
-      <Container>
-        <Row className="m-3 justify-content-md-center" >
-          <h1 >How Was Your Day?</h1>
-        </Row>
-        <Row className="justify-content-md-center" >
-          {this.renderStars()}
-        </Row>
+      <>
+        <Heading >How Was Your Day?</Heading>
+        <Row>{this.renderStars()}</Row>
         <Row>
-          <Col xs={6}>
-            <AppButton
-              variant={"primary"}
-              label={'Next Section'}
-              handleClick={() => {
-                this.props.submitAnswers(payload)
-                this.props.moveToNextSection()
-              }
-              }
-            />
-          </Col>
+          <AppButton
+            variant={"primary"}
+            label={'Next Section'}
+            handleClick={() => {
+              this.props.submitAnswers(payload)
+              this.props.moveToNextSection()
+            }}
+          />
         </Row>
-      </Container >
+      </ >
     );
   }
 }

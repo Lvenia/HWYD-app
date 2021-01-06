@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
+import { Heading, Row } from '../common/Layout/Layout';
 import { INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
 import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS, HYDRATION_CAT_QUESTIONS } from './questions';
 import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
-
 import AppButton from '../AppButton';
 import InputField from '../InputField';
 
@@ -36,8 +34,6 @@ class NutritionCategory extends React.Component {
   handleClick = (questionType, value) => {
     this.setState({ [questionType]: value })
   }
-
-
 
   renderNutritionCatQuestions() {
     return NUTRITION_CAT_QUESTIONS.map(q => {
@@ -93,12 +89,15 @@ class NutritionCategory extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
+        <Heading >Quiz: Nutrition Category</Heading>
         {this.renderNutritionCatQuestions()}
         {this.renderHydrationCatQuestions()}
-        <div className="p-3 justify-content-md-center">
-          <Row>
-            <Col sm={12}>
+          <Row
+            style={{
+              justifyContent: "space-between"
+            }}
+          >
               <AppButton
                 variant={"light"}
                 label={'Previous Section'}
@@ -114,19 +113,16 @@ class NutritionCategory extends React.Component {
                   this.props.moveToNextSection();
                 }}
               />
-            </Col>
           </Row>
-        </div>
-      </div>
+      </>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {
   return {
     appState: state.quizState.data
   }
-}
+};
 
 export default connect(mapStateToProps, { submitAnswers })(NutritionCategory);

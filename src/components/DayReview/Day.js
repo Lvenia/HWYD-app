@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { getDayReviewAnswers } from '../../actions';
 import { subtractTimeStrings, ifKeyExists } from '../../utils';
 
 import StarComponent from '../Quiz/StarComponent';
-import Container from '../common/Container/Container';
+import { Container, Heading, Paragraph, Row } from '../common/Layout/Layout';
 import SpinnerComponent from '../common/SpinnerComponent';
 import DayPickerComponent from './DayPickerComponent';
 import QuizSummaryCard from './QuizSummaryCard';
@@ -60,17 +59,15 @@ class Day extends React.Component {
 
     if (star) {
       return (
-        <h1>
+        <Heading>
           It was {star.description[0] !== 'a' ? 'a' : 'an'} {star.description} day!
-        </h1>
+        </Heading>
       );
     }
 
     if (!Object.keys(this.props.answersByDay).length) {
       return (
-        <h1>
-          {`No data for given day`}
-        </h1>
+        <Heading> No data for given day...</Heading>
       );
     }
   }
@@ -138,7 +135,7 @@ class Day extends React.Component {
       const junkFoodExists = ifKeyExists('junkFood', this.props.answersByDay);
 
       if (mealRegularityExists && skippedMealExists && junkFoodExists) {
-        return `${(mealRegularity && !skippedMeal && !junkFood) ? 'You have nourished yourself well' : 'You can nourishe yourself better'}`
+        return `${(mealRegularity && !skippedMeal && !junkFood) ? 'You have nourished yourself well' : 'You have nourished yourself poorly'}`
       }
 
       return 'Nutrition details';
@@ -223,9 +220,9 @@ class Day extends React.Component {
     }
 
     return (
-      <div>
+      <>
         <QuizSummaryCard
-          header={'Activities'}
+          header={'You have spent your time on'}
           description={
             <QuizActivityBlock
               activityNames={activityNames}
@@ -234,26 +231,18 @@ class Day extends React.Component {
           }
         >
         </QuizSummaryCard>
-      </div >
+      </ >
     );
   }
 
   renderResults = () => {
     if (this.props.isLoading) {
-      return (
-        <Container>
-          <SpinnerComponent />
-        </Container>
-      );
+      return <SpinnerComponent />
     }
 
     if (!Object.keys(this.props.answersByDay).length) {
       return (
-        <>
-          <Row className=" m-3 justify-content-md-center align-items-center">
-            <h2>Please pick another day</h2>
-          </Row>
-        </>
+        <Paragraph>...please pick another date</Paragraph>
       );
     }
 
@@ -274,24 +263,44 @@ class Day extends React.Component {
 
     return (
       <Container>
-        <Row className="m-3 justify-content-md-center">
-          {this.renderDayDescription(this.props.answersByDay.dayRate)}
-        </Row>
-        <Row className="justify-content-md-center" >
+        {this.renderDayDescription(this.props.answersByDay.dayRate)}
+        <Row
+          style={{
+            display: "flex",
+            flexWrap: "nowrap"
+          }}
+        >
           {this.renderStars()}
         </Row>
 
-        <Row className="m-3 justify-content-md-center">
-          <Col xs={5}>
-            <DayPickerComponent
-              handleDayClick={this.handleDayClick}
-              selectedDay={this.state.selectedDateUnformated || new Date()}
-            />
-          </Col>
+        <Row
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap-reverse",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            margin: "15px 0px"
+          }}>
 
-          <Col xs={7}>
+
+          <DayPickerComponent
+            handleDayClick={this.handleDayClick}
+            selectedDay={this.state.selectedDateUnformated || new Date()}
+          />
+
+
+          <div
+            style={{
+              display: "flex",
+              flex: "2 50%",
+              flexDirection: "column",
+              margin: "0px 10px"
+            }}
+          >
             {this.renderResults()}
-          </Col>
+          </div>
+
         </Row>
       </Container>
     );

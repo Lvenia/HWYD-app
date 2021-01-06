@@ -271,8 +271,8 @@ export const getOptionsForLinearBarChart = (timePeriod) => {
       title: {
         display: true,
         text: chartTitle,
-        fontSize: 32,
-        padding: 30,
+        fontSize: 18,
+        margin: "15px 0px",
         position: 'top',
         fontStyle: 'normal',
         fontColor: '#212529',

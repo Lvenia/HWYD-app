@@ -1,7 +1,6 @@
 import React from 'react';
 import Icon from '../common/Icons/Icon';
 import Wrapper from '../common/Wrapper';
-import Col from 'react-bootstrap/Col';
 
 const StarComponent = ({
   description,
@@ -10,26 +9,32 @@ const StarComponent = ({
   readOnly = false,
 
   handleClick,
-  handleStarHover
+  handleStarHover,
+  isClicked
+
 }) => {
 
   let onMouseEnter;
   let onMouseLeave;
   let onClick;
 
+
   const shouldBeHighlighted = starRate <= hoveredStarRate;
 
   if (!readOnly) {
-    onClick = () => handleClick(starRate);
+    onClick = () => {
+      handleClick(starRate)
+      console.log()
+    };
     onMouseEnter = () => handleStarHover(starRate);
     onMouseLeave = () => { handleStarHover(0) }
   }
 
   return (
-    <Col>
       <Wrapper
         isHighlighed={shouldBeHighlighted}
         onClick={onClick}
+        isClicked={isClicked}
       >
         <div
           onMouseEnter={onMouseEnter}
@@ -42,7 +47,7 @@ const StarComponent = ({
           <p>{description}</p>
         </div>
       </Wrapper>
-    </Col>
+
   );
 };
 

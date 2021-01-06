@@ -5,7 +5,6 @@ const RadioButton = (props) => {
   return props.options.map(option => {
     return (
       <Button
-        className="justify-content-md-center mr-1"
         key={option.label}
         type='radio'
         onClick={() => {

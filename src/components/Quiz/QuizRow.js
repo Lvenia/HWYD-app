@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Paragraph } from '../common/Layout/Layout';
-import Col from 'react-bootstrap/Col';
 
 class QuizRow extends React.Component {
 

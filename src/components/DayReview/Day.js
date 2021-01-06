@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Col from 'react-bootstrap/Col';
-
 import { getDayReviewAnswers } from '../../actions';
 import { subtractTimeStrings, ifKeyExists } from '../../utils';
 

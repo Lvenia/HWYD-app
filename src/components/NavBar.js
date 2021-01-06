@@ -65,6 +65,7 @@ class NavBar extends React.Component {
 
         <img
           src={this.props.auth.user.avatar}
+          alt={"avatar"}
           style={{
             width: "20%",
             borderRadius: "50%",

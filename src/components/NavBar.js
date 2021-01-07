@@ -4,11 +4,16 @@ import { NavLink } from 'react-router-dom';
 import { logOut } from '../actions';
 import AppButton from '../components/AppButton';
 import DropdownComponent from './DropdownComponent';
+import HamburgerMenu from './HamburgerMenu';
 import { withRouter } from 'react-router-dom';
-import { Row } from './common/Layout/Layout';
+import {NavBarRow, Menu } from './common/Layout/Layout';
 
 
 class NavBar extends React.Component {
+
+  state = {
+    hamburgerOpen: false
+  }
 
   renderTabs() {
     const navBarTabs = [
@@ -59,9 +64,9 @@ class NavBar extends React.Component {
   renderLoginLogoutLabel = () => {
     return (
       <>
-        <div>
+        <span>
           {this.props.auth.user.givenName} {this.props.auth.user.familyName}
-        </div>
+        </span>
 
         <img
           src={this.props.auth.user.avatar}
@@ -76,7 +81,7 @@ class NavBar extends React.Component {
     )
   }
 
-  renderAuthButtons() {
+  renderAuthButtons = () => {
     if (this.props.auth.isAuthenticated) {
       return (
         <DropdownComponent
@@ -97,7 +102,7 @@ class NavBar extends React.Component {
       )
     } else {
       return (
-        <div style={{ marginRight: "1rem", marginTop: "1.5px" }}>
+        <div style={{ marginTop: "1.5px" }}>
           <AppButton
             href="http://localhost:4000/auth/google"
             label='Log in with Google'
@@ -108,25 +113,27 @@ class NavBar extends React.Component {
     }
   }
 
+  handleClick = () => {
+    this.setState({ hamburgerOpen: !this.state.hamburgerOpen })
+  }
+
   render() {
     return (
-      <Row
-        style={{
-          justifyContent: "space-between",
-          borderBottom: "1px solid #dee2e6"
-        }}
-      >
-        <ul
-          style={{
-            borderBottom: "none",
-            marginLeft: "1rem",
-          }}
+      <NavBarRow>
+        <HamburgerMenu
+          isOpened={this.state.hamburgerOpen}
+          onClick={this.handleClick}
+        />
+        <Menu
+          onClick={this.handleClick}
           className="nav nav-tabs"
+          isOpened={this.state.hamburgerOpen}
         >
           {this.renderTabs()}
-        </ul>
+        </Menu>
+
         { this.renderAuthButtons()}
-      </Row >
+      </NavBarRow>
     );
   }
 };

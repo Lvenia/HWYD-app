@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ContainerBasic from 'react-bootstrap/Container';
 import RowBasic from 'react-bootstrap/Row';
+import CarouselBasic from 'react-bootstrap/Carousel';
 
 export const Container = styled(ContainerBasic)`
   max-width: 850px;
@@ -95,5 +96,36 @@ export const Hamburger = styled.div`
     }
   `
   }
+
+`
+
+export const CarouselCaption = styled(CarouselBasic.Caption)`
+  top: 0;
+  padding: 0;
+
+  h4{
+    color: white;
+    font-weight: 300;
+    margin: 10px;
+  }
+
+  table {
+    width: 100%;
+    display: inline-table;
+  }
+
+  td {
+  text-align: center;
+  padding: 0px 5px;
+}
+
+th {
+  padding-bottom: 5px;
+}
+small {
+  margin-top:10px;
+    line-height: 1.3;
+    display: inline-block;
+}
 
 `

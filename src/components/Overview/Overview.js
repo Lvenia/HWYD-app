@@ -5,6 +5,8 @@ import { Bar } from 'react-chartjs-2';
 import { Container, Row, Paragraph, Heading } from '../common/Layout/Layout';
 import SpinnerComponent from '../common/SpinnerComponent';
 import DropdownComponent from '../DropdownComponent';
+import AppButton from '../AppButton';
+import RulesModal from './RulesModal';
 import {
   TIME_PERIOD_OPTIONS,
   THIS_WEEK
@@ -15,7 +17,8 @@ import { getDataForLinearBarChart, getOptionsForLinearBarChart } from '../../uti
 class Overview extends React.Component {
 
   state = {
-    selectedPeriod: THIS_WEEK.value
+    selectedPeriod: THIS_WEEK.value,
+    showModal: false
   }
 
   componentDidMount = async () => {
@@ -48,21 +51,35 @@ class Overview extends React.Component {
     if (!this.props.data.length && this.props.isLoading) {
       return <SpinnerComponent />
     }
-
+    
     return (
-      <Container >
+      <Container>
         {this.renderContent()}
-        <Paragraph>{'=> Select another timeperiod <='} </Paragraph>
+        <Paragraph>{"Select another timeperiod"} </Paragraph>
         <Row>
           <DropdownComponent
             options={TIME_PERIOD_OPTIONS}
             defaultLabel={THIS_WEEK.label}
             value={this.state.selectedPeriod}
             onSelect={this.handleDropdownSelect}
-            style={{width: "200px", textAlign: "center"}}
+            style={{ width: "200px", textAlign: "center" }}
           />
         </Row>
-      </Container>
+        <Row>
+          <AppButton
+            label={"Show the rules"}
+            variant={"light"}
+            style={{
+              width: "200px"
+            }}
+            handleClick={() => this.setState({ showModal: true })}
+          />
+        </Row>
+        <RulesModal
+          showModal={this.state.showModal}
+          hideModal={() => this.setState({ showModal: false })}
+        />
+      </Container >
     );
   }
 };

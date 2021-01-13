@@ -5,12 +5,14 @@ const AppButton = ({
   label = " ",
   variant = 'primary',
   href = null,
+  style = {},
   handleClick = () => null,
 }) => {
   return (
     <Button
       href={href}
       variant={variant}
+      style={style}
       onClick={() => handleClick()}
     >
       {label}

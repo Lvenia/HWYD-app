@@ -8,7 +8,6 @@ export const DayPickerStyled = styled(DayPicker)`
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
-  border: 2px solid blue;
 
 
  .DayPicker-wrapper {

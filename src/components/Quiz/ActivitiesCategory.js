@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Heading, Row } from '../common/Layout/Layout';
+import { Heading, ButtonsRow } from '../common/Layout/Layout';
 
 import QuizCard from './QuizCard';
 import { ACTIVITY_OPTIONS } from '../../constants';
@@ -85,11 +85,7 @@ class ActivitiesCategory extends React.Component {
         >
           {this.renderActivityCards()}
         </div>
-        <Row
-          style={{
-            justifyContent: "space-between"
-          }}
-        >
+        <ButtonsRow>
           <AppButton
             variant={"light"}
             label={'Previous Section'}
@@ -105,7 +101,7 @@ class ActivitiesCategory extends React.Component {
               this.props.moveToNextSection()
             }}
           />
-        </Row>
+        </ButtonsRow>
       </>
     );
   }

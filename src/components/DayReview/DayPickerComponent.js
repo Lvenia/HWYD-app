@@ -23,7 +23,7 @@ const DayPickerComponent = ({ handleDayClick, selectedDay }) => {
           margin: "0px 0px 5px 0px"
         }}
       >
-        ...click to select another day
+        <small>...click to select another day</small>
       </Paragraph>
     </div>
   );

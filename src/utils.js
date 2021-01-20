@@ -154,7 +154,6 @@ export const getDataForLinearBarChart = (data, timePeriod) => {
       }
     });
 
-    console.log(groupedDataMonthly)
     //now days are sorted by month in the groupedDataMonthly object
     // const data = {};
 
@@ -225,30 +224,7 @@ export const getDataForLinearBarChart = (data, timePeriod) => {
 };
 
 export const getOptionsForLinearBarChart = (timePeriod) => {
-  let chartTitle, isStacked, y1Ticks;
-
-  switch (timePeriod) {
-    case THIS_WEEK.value:
-      chartTitle = 'This is your current week overview!'
-      break;
-    case LAST_WEEK.value:
-      chartTitle = 'This is your last week overview!'
-      break;
-    case THIS_MONTH.value:
-      chartTitle = 'This is your overview for the current month!'
-      break;
-    case LAST_MONTH.value:
-      chartTitle = 'This is your overview for the last month!'
-      break;
-    case THIS_YEAR.value:
-      chartTitle = 'This is your overview for the current year!'
-      break;
-    case LAST_YEAR.value:
-      chartTitle = 'This is your overview for the previous year!'
-      break;
-    default:
-      chartTitle = 'Chart'
-  }
+  let isStacked, y1Ticks;
 
   if (timePeriod === THIS_WEEK.value || timePeriod === LAST_WEEK.value) {
     isStacked = false;
@@ -268,16 +244,6 @@ export const getOptionsForLinearBarChart = (timePeriod) => {
 
   return (
     {
-      title: {
-        display: true,
-        text: chartTitle,
-        fontSize: 18,
-        margin: "15px 0px",
-        position: 'top',
-        fontStyle: 'normal',
-        fontColor: '#212529',
-        fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'
-      },
       legend: {
         display: true,
         position: 'bottom',
@@ -317,7 +283,7 @@ export const getOptionsForLinearBarChart = (timePeriod) => {
           position: 'right',
           ticks: {
             min: 0,
-            max: 5.3,
+            max: 5.7,
             stepSize: 1,
           },
           afterTickToLabelConversion: function (scaleInstance) {

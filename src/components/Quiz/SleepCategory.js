@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { SLEEP_CAT_QUESTIONS, SLEEP_CAT_KEYS } from './questions';
 import QuizRow from './QuizRow';
-import { Heading, Row } from '../common/Layout/Layout';
+import { Heading, ButtonsRow } from '../common/Layout/Layout';
 import RadioButton from '../RadioButton';
 import InputField from '../InputField';
 import AppButton from '../AppButton';
@@ -73,7 +73,6 @@ class SleepCategory extends React.Component {
             question={q.question}
           >
             <InputField
-              style={{ width: '105px' }}
               type="time"
               value={this.state[q.name]}
               onInputChange={(value) => this.setState({ [q.name]: value })}
@@ -92,11 +91,7 @@ class SleepCategory extends React.Component {
       <>
         <Heading >Quiz: Sleep Category</Heading>
         {this.renderSleepCatQuestions()}
-        <Row
-          style={{
-            justifyContent: "space-between"
-          }}
-        >
+        <ButtonsRow>
           <AppButton
             variant={"light"}
             label={'Previous Section'}
@@ -112,7 +107,7 @@ class SleepCategory extends React.Component {
               this.props.moveToNextSection()
             }}
           />
-        </Row>
+        </ButtonsRow>
       </>
     );
   }

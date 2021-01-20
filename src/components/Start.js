@@ -26,11 +26,11 @@ class Start extends React.Component {
 
   render() {
     const userName = this.props.auth.user ? this.props.auth.user.givenName : 'there';
-    
+
     return (
       <Container>
         <Heading >Hi {userName}! How Was Your Day?</Heading>
-        <Paragraph>Take 5 minutes to spot how simple daily actions affect your perception of the 1/365th of the year. </Paragraph>
+        <Paragraph>Take 5 minutes to notice how simple daily actions affect your perception of the 1/365th of the year. </Paragraph>
         <Row>
           {this.renderGetStartedButton()}
         </Row>

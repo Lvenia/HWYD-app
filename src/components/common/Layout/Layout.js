@@ -4,17 +4,37 @@ import RowBasic from 'react-bootstrap/Row';
 import CarouselBasic from 'react-bootstrap/Carousel';
 
 export const Container = styled(ContainerBasic)`
+  text-align: center;
   max-width: 850px;
   padding: 0px;
-  border: 1px solid red;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 16px;
 `;
+
+export const BarWrapper = styled.div`
+  @media (max-width: 610px) {
+     background-color: aliceblue;
+     min-width: 500px;
+     overflow-x: hidden;
+  }
+`
 
 export const Row = styled(RowBasic)`
   text-align: center;
   justify-content: center;
   margin: 0;
   padding: 0;
-  border: 2px solid green;
+`
+export const ButtonsRow = styled(RowBasic)`
+  justify-content: space-between;
+  margin: 16px 0px 0px;
+  padding: 0;
+
+  @media (max-width: 610px) {
+     display: flex;
+     flex-wrap: nowrap;
+     flex-direction: row;
+  }
 `
 
 export const NavBarRow = styled(RowBasic)`
@@ -51,14 +71,12 @@ export const Menu = styled.ul`
 `
 export const Heading = styled.h1`
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   margin: 15px 0px;
-  border: 1px solid black;
 `
 export const Paragraph = styled.h4`
   text-align: center;
-  font-size: 14px;
-  border: 1px solid black;
+  font-size: 16px;
   margin: 15px 0px;
 `
 export const Hamburger = styled.div`
@@ -96,7 +114,6 @@ export const Hamburger = styled.div`
     }
   `
   }
-
 `
 
 export const CarouselCaption = styled(CarouselBasic.Caption)`

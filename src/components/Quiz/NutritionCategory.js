@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Heading, Row } from '../common/Layout/Layout';
+import { Heading, ButtonsRow } from '../common/Layout/Layout';
 import { INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
 import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS, HYDRATION_CAT_QUESTIONS } from './questions';
 import QuizRow from './QuizRow';
@@ -71,11 +71,10 @@ class NutritionCategory extends React.Component {
         return (
           <QuizRow key={q.name} question={q.question}>
             <InputField
-              style={{ width: '105px' }}
               type="number"
               min={0}
               max={24}
-              step={0.5}
+              step={1}
               value={this.props.appState[q.name]}
               onInputChange={(value) => this.setState({ [q.name]: value })}
             />
@@ -93,27 +92,23 @@ class NutritionCategory extends React.Component {
         <Heading >Quiz: Nutrition Category</Heading>
         {this.renderNutritionCatQuestions()}
         {this.renderHydrationCatQuestions()}
-          <Row
-            style={{
-              justifyContent: "space-between"
+        <ButtonsRow>
+          <AppButton
+            variant={"light"}
+            label={'Previous Section'}
+            handleClick={() => {
+              this.props.moveToPrevioustSection()
             }}
-          >
-              <AppButton
-                variant={"light"}
-                label={'Previous Section'}
-                handleClick={() => {
-                  this.props.moveToPrevioustSection()
-                }}
-              />
-              <AppButton
-                variant={"primary"}
-                label={'Next Section'}
-                handleClick={() => {
-                  this.props.submitAnswers(this.state);
-                  this.props.moveToNextSection();
-                }}
-              />
-          </Row>
+          />
+          <AppButton
+            variant={"primary"}
+            label={'Next Section'}
+            handleClick={() => {
+              this.props.submitAnswers(this.state);
+              this.props.moveToNextSection();
+            }}
+          />
+        </ButtonsRow>
       </>
     );
   }

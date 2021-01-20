@@ -9,7 +9,7 @@ import NutritionCategory from './NutritionCategory';
 import ActivitiesCategory from './ActivitiesCategory';
 import StarsCategory from './StarsCategory';
 import AppButton from '../AppButton';
-import { Container, Heading, Row } from '../common/Layout/Layout';
+import { Container, Heading, ButtonsRow } from '../common/Layout/Layout';
 
 import {
   STARS_CATEGORY_NUMBER,
@@ -64,11 +64,7 @@ const Quiz = ({ getAnswers, submitQuiz, history }) => {
       return (
         <>
           <Heading>You did great!</Heading>
-          <Row
-            style={{
-              justifyContent: "space-between"
-            }}
-          >
+          <ButtonsRow>
             <AppButton
               variant="light"
               label="Go back to edit / rewiev answers"
@@ -82,7 +78,7 @@ const Quiz = ({ getAnswers, submitQuiz, history }) => {
                 history.push('/day');
               }}
             />
-          </Row>
+          </ButtonsRow>
         </>
       );
     }

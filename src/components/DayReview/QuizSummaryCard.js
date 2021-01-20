@@ -8,10 +8,11 @@ const QuizSummaryCard = ({ header, description }) => {
         <tr>
           <th style={{
             textAlign: "left",
-            fontSize: "18px",
+            textIndent: "10px",
+            fontSize: "16px",
             fontWeight: "400",
-            padding: "0px",
-            border: "1px solid yellow",
+            padding: "5px 0px",
+
           }}>
             {header}
           </th>
@@ -24,8 +25,7 @@ const QuizSummaryCard = ({ header, description }) => {
               textAlign: "left",
               fontSize: "14px",
               fontWeight: "300",
-              border: "1px solid green",
-              padding: "5px 5px 10px 10px"
+              padding: "10px"
             }}>
             {description}
           </td>

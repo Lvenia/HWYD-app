@@ -4,7 +4,6 @@ const Wrapper = styled.div`
   color: "#3c3c3";
   text-align: center;
   width: 120px;
-  border: 1px solid red;
 
   @keyframes fade-in-keyframes {
   from {opacity: 0}

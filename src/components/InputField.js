@@ -2,7 +2,15 @@ import React from 'react';
 
 import Form from 'react-bootstrap/Form';
 
-const InputField = ({ style, type, onInputChange, min, max, step, value }) => {
+const InputField = ({
+  style = { width: "105px", fontSize: "90%" },
+  type,
+  onInputChange,
+  min,
+  max,
+  step,
+  value
+}) => {
 
   return (
     <Form.Control

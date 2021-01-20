@@ -6,11 +6,11 @@ const QuizActivityBlock = ({ activityNames, activityDurations }) => {
     padding: 5,
     fontSize: 14,
     fontWeight: "300",
-    textAlign: 'center'
+    textAlign: 'center',
   };
 
   return (
-    <Table bordered>
+    <Table >
       <tbody>
         <tr>
           {activityNames.map((name, index) => {
@@ -26,7 +26,7 @@ const QuizActivityBlock = ({ activityNames, activityDurations }) => {
         </tr>
         <tr>
           {activityDurations.map((duration, index) => {
-            return <td key={index} style={{ ...tdStyles, fontWeight: "200"}}>{duration}h</td>
+            return <td key={index} style={{ ...tdStyles, fontWeight: "200" }}>{duration}h</td>
           })}
         </tr>
       </tbody>

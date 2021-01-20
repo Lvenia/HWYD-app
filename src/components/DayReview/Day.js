@@ -57,7 +57,9 @@ class Day extends React.Component {
 
     if (star) {
       return (
-        <Heading>
+        <Heading
+          style={{ textTransform: "capitalize" }}
+        >
           It was {star.description[0] !== 'a' ? 'a' : 'an'} {star.description} day!
         </Heading>
       );
@@ -65,7 +67,10 @@ class Day extends React.Component {
 
     if (!Object.keys(this.props.answersByDay).length) {
       return (
-        <Heading> No data for given day...</Heading>
+        <Heading
+          style={{ textTransform: "capitalize" }}
+        >
+          No data for given day...</Heading>
       );
     }
   }

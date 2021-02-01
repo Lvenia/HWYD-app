@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  color: "#3c3c3";
+  color: "#FFDF00";
   text-align: center;
   width: 120px;
 
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 }
 
 span {
-    color: ${props => props.isHighlighed ? '#ffff4d' : 'none'};
+    color: ${props => props.isHighlighed ? '#FFDF00' : 'none'};
     animation:${props => props.isClicked ? 'fade-in-keyframes 1s' : 'none'};
   }
 `

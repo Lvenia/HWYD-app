@@ -19,9 +19,7 @@ import {
 import { getOverviewAnswers } from '../../actions';
 import { getDataForLinearBarChart, getOptionsForLinearBarChart } from '../../utils';
 
-
-
-class Overview extends React.Component {
+class OverviewComponent extends React.Component {
 
   state = {
     selectedPeriod: THIS_WEEK.value,
@@ -33,7 +31,6 @@ class Overview extends React.Component {
   }
 
   renderContent = () => {
-
     if (!this.props.data.length) {
 
       return (
@@ -50,8 +47,6 @@ class Overview extends React.Component {
           />
         </BarWrapper>
       </div>
-
-
     );
   }
 
@@ -61,28 +56,26 @@ class Overview extends React.Component {
   }
 
   renderChartTitle = (timePeriod) => {
+    if (this.props.data.length === 0) {
+      return;
+    }
+
     switch (timePeriod) {
       case THIS_WEEK.value:
-        return 'This Is Your Current Week Overview!'
-        break;
+        return 'This Is Your Current Week Overview!';
       case LAST_WEEK.value:
-        return 'This Is Your Last Week Overview!'
-        break;
+        return 'This Is Your Last Week Overview!';
       case THIS_MONTH.value:
-        return 'This Is Your Overview For The Current Month!'
-        break;
+        return 'This Is Your Overview For The Current Month!';
       case LAST_MONTH.value:
-        return 'This Is Your Overview For The Last Month!'
-        break;
+        return 'This Is Your Overview For The Last Month!';
       case THIS_YEAR.value:
-        return 'This Is Your Overview For The Current Year!'
-        break;
+        return 'This Is Your Overview For The Current Year!';
       case LAST_YEAR.value:
-        return 'This Is Your Overview For The Previous Year!'
-        break;
+        return 'This Is Your Overview For The Previous Year!';
       default:
-        return 'Chart'
-    }
+        return 'Chart';
+    };
   }
 
   render() {
@@ -91,7 +84,7 @@ class Overview extends React.Component {
     }
 
     return (
-      <Container  >
+      <Container>
         <Heading>{this.renderChartTitle(this.state.selectedPeriod)}</Heading>
         {this.renderContent()}
         <div >
@@ -122,8 +115,7 @@ class Overview extends React.Component {
             hideModal={() => this.setState({ showModal: false })}
           />
         </div>
-
-      </Container >
+      </Container>
     );
   }
 };
@@ -136,4 +128,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { getOverviewAnswers })(Overview);
+export default connect(mapStateToProps, { getOverviewAnswers })(OverviewComponent);

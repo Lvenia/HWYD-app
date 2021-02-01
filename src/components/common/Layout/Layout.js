@@ -116,10 +116,22 @@ export const Hamburger = styled.div`
   }
 `
 
+export const CarouselItem = styled(CarouselBasic.Item)`
+  color: blue;
+  width: 100%;
+  height: 450px;
+  background-color: gray;
+`
+
 export const CarouselCaption = styled(CarouselBasic.Caption)`
   top: 0;
   padding: 0;
+  overflow: scroll;
+  text-align: left;
 
+.alignCenter {
+  text-align: center;
+}
   h4{
     color: white;
     font-weight: 300;
@@ -129,20 +141,25 @@ export const CarouselCaption = styled(CarouselBasic.Caption)`
   table {
     width: 100%;
     display: inline-table;
+    margin: 1%;
   }
 
   td {
-  text-align: center;
-  padding: 0px 5px;
-}
+    line-height: 180%;
+    }
 
-th {
+  th {
   padding-bottom: 5px;
-}
-small {
+  line-height: 180%;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+
+  small {
   margin-top:10px;
     line-height: 1.3;
     display: inline-block;
-}
+  }
 
 `
+
+

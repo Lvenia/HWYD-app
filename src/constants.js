@@ -17,7 +17,6 @@ export const NUTRITION_CATEGORY_NUMBER = "3";
 export const ACTIVITY_CATEGORY_NUMBER = "4";
 export const QUIZ_COMPLETED = "5";
 
-
 export const STARS = [{
   rate: 1,
   description: 'tough'

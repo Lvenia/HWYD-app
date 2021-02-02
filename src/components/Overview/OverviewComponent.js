@@ -17,7 +17,7 @@ import {
   LAST_YEAR
 } from '../../constants';
 import { getOverviewAnswers } from '../../actions';
-import { getDataForLinearBarChart, getOptionsForLinearBarChart } from '../../utils';
+import { getDataForLinearBarChart, getOptionsForLinearBarChart } from './getDataForChart';
 
 class OverviewComponent extends React.Component {
 

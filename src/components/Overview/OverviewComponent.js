@@ -83,7 +83,7 @@ class OverviewComponent extends React.Component {
       return <SpinnerComponent />
     }
 
-    return (
+      return (
       <Container>
         <Heading>{this.renderChartTitle(this.state.selectedPeriod)}</Heading>
         {this.renderContent()}

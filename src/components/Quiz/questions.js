@@ -154,7 +154,11 @@ const questions = [
       }
     },
     grantPoints: function (waterGlasses) {
-      if (typeof waterGlasses !== 'number') {
+      if (typeof waterGlasses !== 'number' || waterGlasses < 0) {
+        return 0
+      }
+
+      if (waterGlasses < 0) {
         return 0
       }
 

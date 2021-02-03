@@ -16,13 +16,13 @@ import {
   unpleasant
 } from '../../constants.js';
 
-import { weekdayDDMMbyDate} from '../../utils';
+import { weekdayDDMMbyDate } from '../../utils';
 
 import starImg from '../common/Icons/StarImg';
 import smallStarImg from '../common/Icons/SmallStarImg';
 
 export const getDataForLinearBarChart = (data, timePeriod) => {
-  let pointStyle, showLine, xAxisLabels
+  let pointStyle, showLine, xAxisLabels;
 
   if (timePeriod === THIS_WEEK.value || timePeriod === LAST_WEEK.value) {
     pointStyle = starImg;
@@ -320,6 +320,14 @@ export function getDataForChart(dataByDay) {
   }, 0);
 
   result.points.ativitiesPoints = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
+
+  // const activityPointsCalc = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
+
+  // if (isNaN(activityPointsCalc)) {
+  //   result.points.ativitiesPoints = 0
+  // }
+
+  // result.points.ativitiesPoints = activityPointsCalc;
 
   const pointCatKeys = Object.keys(result.points);
 

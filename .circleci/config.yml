@@ -14,7 +14,3 @@ jobs:
             - run: npm install
       - run: npm run test
 
-workflows:
-  app-tests:
-    jobs:
-      - build

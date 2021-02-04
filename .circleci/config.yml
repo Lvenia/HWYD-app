@@ -3,7 +3,7 @@ version: 2.1
 # Use a package of configuration called an orb.
 orbs:
   node: circleci/node@4.1.0
-
+  
 jobs:
   build:
     executor:
@@ -16,9 +16,9 @@ jobs:
             - run: npm install
       - run: npm run test
 # Orchestrate or schedule a set of jobs
-workflows:
   # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  
+workflows:
+  app-tests:
     jobs:
-      - welcome/run
+      - node/test

@@ -4,21 +4,22 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
 
-jobs:
-  build:
-    executor:
-      name: node/default
-      tag: '10.4'
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-      - run: npm run test
-# Orchestrate or schedule a set of jobs
+# jobs:
+#   build:
+#     executor:
+#       name: node/default
+#       tag: '10.4'
+#     steps:
+#       - checkout
+#       - node/with-cache:
+#           steps:
+#             - run: npm install
+#       - run: npm run test
+# # Orchestrate or schedule a set of jobs
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  app-tests:
     jobs:
-      - welcome/run
+      - run: npm install
+      - run: npm run test
+

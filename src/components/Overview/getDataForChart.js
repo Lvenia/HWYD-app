@@ -1,22 +1,13 @@
 import {
-  ACTIVITY_CAT_KEYS,
-  SLEEP_CAT_QUESTIONS,
-  NUTRITION_CAT_QUESTIONS,
-  HYDRATION_CAT_QUESTIONS,
-} from '../Quiz/questions';
-
-import {
   THIS_WEEK,
   LAST_WEEK,
   THIS_MONTH,
   LAST_MONTH,
   THIS_YEAR,
-  LAST_YEAR,
-  pleasant,
-  unpleasant
+  LAST_YEAR
 } from '../../constants.js';
 
-import { weekdayDDMMbyDate } from '../../utils';
+import { weekdayDDMMbyDate, calculatePoints } from '../../utils';
 
 import starImg from '../common/Icons/StarImg';
 import smallStarImg from '../common/Icons/SmallStarImg';
@@ -32,7 +23,7 @@ export const getDataForLinearBarChart = (data, timePeriod) => {
     showLine = true
   }
 
-  const chartDataPerDay = data.map(day => getDataForChart(day));
+  const chartDataPerDay = data.map(day => getDataSetForChart(day));
 
   if (timePeriod === THIS_WEEK.value || timePeriod === LAST_WEEK.value || timePeriod === THIS_MONTH.value || timePeriod === LAST_MONTH.value) {
 
@@ -261,79 +252,12 @@ export const getOptionsForLinearBarChart = (timePeriod) => {
   )
 };
 
-export function getDataForChart(dataByDay) {
+export function getDataSetForChart(dataByDay) {
 
-  let result = {
-    points: {
-      sleepCatPoints: 0,
-      nutritionPoints: 0,
-      hydrationPoints: 0,
-      ativitiesPoints: 0,
-      totalPointsByDay: 0,
-    },
+  let dataSet = {
     dayRate: dataByDay.dayRate,
-    monthIndex: (new Date(dataByDay.createdAt)).getMonth()
+    monthIndex: (new Date(dataByDay.createdAt)).getMonth(),
+    points: calculatePoints(dataByDay),
   }
-
-  SLEEP_CAT_QUESTIONS.forEach(question => {
-    if (question.grantPoints) {
-      result.points.sleepCatPoints += question.grantPoints(dataByDay[question.name])
-    };
-  });
-
-  NUTRITION_CAT_QUESTIONS.forEach(question => {
-    if (question.grantPoints) {
-      result.points.nutritionPoints += question.grantPoints(dataByDay[question.name])
-    };
-  });
-
-  HYDRATION_CAT_QUESTIONS.forEach(question => {
-    if (question.grantPoints) {
-      result.points.hydrationPoints += question.grantPoints(dataByDay[question.name])
-    };
-  });
-
-  let allActivitiesTime = [];
-  let pleasantActivitiesTime = [];
-  let unpleasantActivitiesTime = [];
-
-  ACTIVITY_CAT_KEYS.forEach(key => {
-    if (dataByDay[key]) {
-      allActivitiesTime.push(dataByDay[key].activityTime);
-
-      pleasantActivitiesTime.push(dataByDay[key].energyImpact === pleasant.value ? dataByDay[key].activityTime : 0);
-
-      unpleasantActivitiesTime.push(dataByDay[key].energyImpact === unpleasant.value ? dataByDay[key].activityTime : 0);
-    }
-  });
-
-  const totalActivityTime = allActivitiesTime.reduce((accumulator, cur) => {
-    return accumulator + cur
-  }, 0);
-
-  const pleasantActivityTotal = pleasantActivitiesTime.reduce((accumulator, cur) => {
-    return accumulator + cur
-  }, 0);
-
-  const unpleasantActivityTotal = unpleasantActivitiesTime.reduce((accumulator, cur) => {
-    return accumulator + cur
-  }, 0);
-
-  result.points.ativitiesPoints = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
-
-  // const activityPointsCalc = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
-
-  // if (isNaN(activityPointsCalc)) {
-  //   result.points.ativitiesPoints = 0
-  // }
-
-  // result.points.ativitiesPoints = activityPointsCalc;
-
-  const pointCatKeys = Object.keys(result.points);
-
-  result.points.totalPointsByDay = pointCatKeys.reduce((accumulator, key) => {
-    return accumulator + result.points[key]
-  }, 0);
-
-  return result;
+  return dataSet;
 };

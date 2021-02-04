@@ -1,3 +1,15 @@
+import {
+  pleasant,
+  unpleasant
+} from '../src/constants';
+
+import {
+  ACTIVITY_CAT_KEYS,
+  SLEEP_CAT_QUESTIONS,
+  NUTRITION_CAT_QUESTIONS,
+  HYDRATION_CAT_QUESTIONS,
+} from '../src/components/Quiz/questions';
+
 export const subtractTimeStrings = (startTimeString, finishTimeString) => {
   if (!startTimeString || !finishTimeString) {
     return null;
@@ -51,4 +63,69 @@ export const weekdayDDMMbyDate = (dateUTCFormat) => {
   const weekDay = weekDays[weekDayIndex];
 
   return `${weekDay}, ${day}/${month}`
+};
+
+export function calculatePoints(dataByDay) {
+
+  let result = {
+    sleepCatPoints: 0,
+    nutritionPoints: 0,
+    hydrationPoints: 0,
+    ativitiesPoints: 0,
+    totalPointsByDay: 0,
+  };
+
+  SLEEP_CAT_QUESTIONS.forEach(question => {
+    if (question.grantPoints) {
+      result.sleepCatPoints += question.grantPoints(dataByDay[question.name])
+    };
+  });
+
+  NUTRITION_CAT_QUESTIONS.forEach(question => {
+    if (question.grantPoints) {
+      result.nutritionPoints += question.grantPoints(dataByDay[question.name])
+    };
+  });
+
+  HYDRATION_CAT_QUESTIONS.forEach(question => {
+    if (question.grantPoints) {
+      result.hydrationPoints += question.grantPoints(dataByDay[question.name])
+    };
+  });
+
+  let allActivitiesTime = [];
+  let pleasantActivitiesTime = [];
+  let unpleasantActivitiesTime = [];
+
+  ACTIVITY_CAT_KEYS.forEach(key => {
+    if (dataByDay[key]) {
+      allActivitiesTime.push(dataByDay[key].activityTime);
+
+      pleasantActivitiesTime.push(dataByDay[key].energyImpact === pleasant.value ? dataByDay[key].activityTime : 0);
+
+      unpleasantActivitiesTime.push(dataByDay[key].energyImpact === unpleasant.value ? dataByDay[key].activityTime : 0);
+    }
+  });
+
+  const totalActivityTime = allActivitiesTime.reduce((accumulator, cur) => {
+    return accumulator + cur
+  }, 0);
+
+  const pleasantActivityTotal = pleasantActivitiesTime.reduce((accumulator, cur) => {
+    return accumulator + cur
+  }, 0);
+
+  const unpleasantActivityTotal = unpleasantActivitiesTime.reduce((accumulator, cur) => {
+    return accumulator + cur
+  }, 0);
+
+  result.ativitiesPoints = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
+
+  const pointCatKeys = Object.keys(result);
+
+  result.totalPointsByDay = pointCatKeys.reduce((accumulator, key) => {
+    return accumulator + result[key]
+  }, 0);
+
+  return result;
 };

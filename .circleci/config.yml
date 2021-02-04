@@ -1,9 +1,12 @@
-# declare the circleci version
 version: 2.1
-job:
+orbs:
+  node: circleci/node@1.1
+jobs:
   build:
-    orbs:
-      node: circleci/node@1.1
+    executor:
+      name: node/default
+      tag: '12.19'
+
     steps:
       - checkout
       - node/with-cache:
@@ -11,43 +14,7 @@ job:
             - run: npm install
       - run: npm run test
 
-
-# jobs:
-#   build:
-#     executor:
-#       name: node/default
-#       tag: '12.19'
-
-
-# # # Orchestrate or schedule a set of jobs
-
-# workflows:
-#   app-tests:
-#     jobs:
-#       - build
-
-
-# # declare the circleci version
-# version: 2.1
-# # Use a package of configuration called an orb. previously docker: -image: circleci/node@1.1
-# orbs:
-#   node: circleci/node@1.1
-
-# jobs:
-#   build:
-#     executor:
-#       name: node/default
-#       tag: '12.19'
-
-#     steps:
-#       - checkout
-#       - node/with-cache:
-#           steps:
-#             - run: npm install
-#       - run: npm run test
-# # # Orchestrate or schedule a set of jobs
-
-# workflows:
-#   app-tests:
-#     jobs:
-#       - build
+workflows:
+  app-tests:
+    jobs:
+      - build

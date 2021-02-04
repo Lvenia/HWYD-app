@@ -2,8 +2,8 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  node: circleci/node@12.19
-  
+  node: circleci/node@4.1.0
+
 jobs:
   build:
     executor:

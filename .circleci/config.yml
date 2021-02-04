@@ -2,24 +2,25 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  node: circleci/node@4.1.0
+  node: circleci/node@1.1
 
-# jobs:
-#   build:
-#     executor:
-#       name: node/default
-#       tag: '10.4'
-#     steps:
-#       - checkout
-#       - node/with-cache:
-#           steps:
-#             - run: npm install
-#       - run: npm run test
+jobs:
+  build:
+
+    executor:
+      name: node/default
+      tag: '12.19'
+
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: npm run test
 # # Orchestrate or schedule a set of jobs
 
 workflows:
   app-tests:
     jobs:
-      - run: npm install
-      - run: npm run test
+      - build
 

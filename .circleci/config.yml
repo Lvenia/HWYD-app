@@ -8,7 +8,7 @@ jobs:
       tag: '12.19'
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/project
       - run: npm run build
   test:
     executor:

@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1
 jobs:
-  install_and_run_tests:
+  build:
     executor:
       name: node/default
       tag: '12.19'
@@ -12,18 +12,20 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-      - run: npm run test
-  build:
+      - run: npm run build
+  test:
     executor:
       name: node/default
       tag: '12.19'
 
     steps:
-      - run: npm run build
+      requires:
+        - build
+      - run: npm run test
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - install_and_run_tests
       - build
+      - test

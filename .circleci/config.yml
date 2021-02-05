@@ -3,12 +3,13 @@ orbs:
   node: circleci/node@1.1
 jobs:
   build:
+    
     executor:
       name: node/default
       tag: '12.19'
     steps:
       - attach_workspace:
-          at: ~/app
+          at: root/app
       - run: npm run build
   test:
     working_directory: ~/app

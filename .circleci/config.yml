@@ -6,6 +6,9 @@ jobs:
     executor:
       name: node/default
       tag: '12.19'
+    filters:
+      branches:
+        only: master
     steps:
       - checkout
       - node/with-cache:

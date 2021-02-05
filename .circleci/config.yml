@@ -13,8 +13,7 @@ jobs:
           steps:
             - run: npm install
       - run: npm run test
-
-   build:
+  build:
     executor:
       name: node/default
       tag: '12.19'

@@ -6,7 +6,6 @@ jobs:
     executor:
       name: node/default
       tag: '12.19'
-
     steps:
       - checkout
       - node/with-cache:
@@ -17,10 +16,7 @@ jobs:
     executor:
       name: node/default
       tag: '12.19'
-
     steps:
-      requires:
-        - build
       - run: npm run test
 
 workflows:
@@ -28,4 +24,6 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test
+      - test:
+          requires:
+           - build

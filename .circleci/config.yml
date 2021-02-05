@@ -6,9 +6,6 @@ jobs:
     executor:
       name: node/default
       tag: '12.19'
-    filters:
-      branches:
-        only: master
     steps:
       - checkout
       - node/with-cache:
@@ -31,4 +28,7 @@ workflows:
   build_and_test:
     jobs:
       - test
-      - build
+      - build:
+          filters:
+            branches:
+              only: master

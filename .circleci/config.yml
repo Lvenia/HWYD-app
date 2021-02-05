@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1
+
 jobs:
   build:
     executor:
@@ -10,6 +11,7 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: npm run build
+      
   test:
     executor:
       name: node/default

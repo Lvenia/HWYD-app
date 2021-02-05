@@ -7,6 +7,10 @@ jobs:
       name: node/default
       tag: '12.19'
     steps:
+      - checkout
+      - node/with-cache:
+        steps:
+          - run: npm install
       - run: npm run build
   test:
     executor:

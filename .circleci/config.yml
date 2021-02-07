@@ -1,17 +1,9 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1
+  heroku: circleci/heroku@0.0.10
 
 jobs:
-  build:
-    executor:
-      name: node/default
-      tag: '12.19'
-    steps:
-      - attach_workspace:
-          at: ~/project
-      - run: npm run build
-      
   test:
     executor:
       name: node/default
@@ -32,6 +24,27 @@ jobs:
           paths:
            - '*'
 
+  build:
+    executor:
+      name: node/default
+      tag: '12.19'
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: npm run build
+      - persist_to_workspace:
+          root: ./build
+          paths:
+           - '*'
+
+  deploy:
+    executor:
+      name: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git
+
 workflows:
   version: 2
   build_and_test:
@@ -40,6 +53,12 @@ workflows:
       - build:
           requires:
             - test
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
           filters:
             branches:
               only: master

@@ -11,7 +11,7 @@ class Start extends React.Component {
         <AppButton
           variant="outline-primary"
           label="Click here to log in and get started!"
-          href="http://localhost:4000/auth/google"
+          href={`${process.env.REACT_APP_BASE_URL}/auth/google`}
         />
       )
     }

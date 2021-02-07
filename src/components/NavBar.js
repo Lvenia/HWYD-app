@@ -104,7 +104,7 @@ class NavBar extends React.Component {
       return (
         <div style={{ marginTop: "1.5px" }}>
           <AppButton
-            href="http://localhost:4000/auth/google"
+            href={`${process.env.REACT_APP_BASE_URL}/auth/google`}
             label='Log in with Google'
             variant='outline-danger'
           />

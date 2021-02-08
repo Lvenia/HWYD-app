@@ -16,6 +16,6 @@ const RadioButton = (props) => {
       </Button>
     )
   })
-}
+};
 
 export default RadioButton;

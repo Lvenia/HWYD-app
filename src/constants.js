@@ -11,79 +11,80 @@ export const SUMMARY_SLEEP = 'SUMMARY_SLEEP';
 export const SUMMARY_NUTRITION = 'SUMMARY_NUTRITION';
 export const SUMMARY_HYDRATION = 'SUMMARY_HYDRATION';
 
-export const STARS_CATEGORY_NUMBER = "1";
-export const SLEEP_CATEGORY_NUMBER = "2";
-export const NUTRITION_CATEGORY_NUMBER = "3";
-export const ACTIVITY_CATEGORY_NUMBER = "4";
-export const QUIZ_COMPLETED = "5";
+export const STARS_CATEGORY_NUMBER = '1';
+export const SLEEP_CATEGORY_NUMBER = '2';
+export const NUTRITION_CATEGORY_NUMBER = '3';
+export const ACTIVITY_CATEGORY_NUMBER = '4';
+export const QUIZ_COMPLETED = '5';
 
 export const STARS = [{
   rate: 1,
-  description: 'tough'
+  description: 'tough',
 },
 {
   rate: 2,
-  description: 'challenging'
+  description: 'challenging',
 },
 {
   rate: 3,
-  description: 'acceptable'
+  description: 'acceptable',
 },
 {
   rate: 4,
-  description: 'pleasant'
+  description: 'pleasant',
 },
 {
   rate: 5,
-  description: 'amazing'
+  description: 'amazing',
 }];
 
 export const pleasant = {
   label: 'pleasant',
-  value: 'uplifting'
+  value: 'uplifting',
 };
 
 export const neutral = {
   label: 'neutral',
-  value: 'neutral'
+  value: 'neutral',
 };
 
 export const unpleasant = {
   label: 'unpleasant',
-  value: 'discouraging'
+  value: 'discouraging',
 };
 
 export const ACTIVITY_OPTIONS = [pleasant, neutral, unpleasant];
 
 export const THIS_WEEK = {
   label: 'This Week',
-  value: 'thisWeek'
+  value: 'thisWeek',
 };
 
 export const LAST_WEEK = {
   label: 'Last Week',
-  value: 'lastWeek'
+  value: 'lastWeek',
 };
 
 export const THIS_MONTH = {
   label: 'This Month',
-  value: 'thisMonth'
+  value: 'thisMonth',
 };
 
 export const LAST_MONTH = {
   label: 'Last Month',
-  value: 'lastMonth'
+  value: 'lastMonth',
 };
 
 export const THIS_YEAR = {
   label: 'This Year',
-  value: 'thisYear'
+  value: 'thisYear',
 };
 
 export const LAST_YEAR = {
   label: 'Last Year',
-  value: 'lastYear'
+  value: 'lastYear',
 };
 
-export const TIME_PERIOD_OPTIONS = [THIS_WEEK, LAST_WEEK, THIS_MONTH, LAST_MONTH, THIS_YEAR, LAST_YEAR];
-
+export const TIME_PERIOD_OPTIONS = [
+  THIS_WEEK, LAST_WEEK, THIS_MONTH, LAST_MONTH, THIS_YEAR, LAST_YEAR,
+];

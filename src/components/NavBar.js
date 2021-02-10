@@ -1,133 +1,132 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { logOut } from '../actions';
-import AppButton from '../components/AppButton';
+import { NavLink, withRouter } from 'react-router-dom';
+import * as actions from '../actions';
+import AppButton from './AppButton';
 import DropdownComponent from './DropdownComponent';
 import HamburgerMenu from './HamburgerMenu';
-import { withRouter } from 'react-router-dom';
-import {NavBarRow, Menu } from './common/Layout/Layout';
-
+import { NavBarRow, Menu } from './common/Layout/Layout';
 
 class NavBar extends React.Component {
-
   state = {
-    hamburgerOpen: false
+    hamburgerOpen: false,
+  }
+
+  handleClick = () => {
+    const { hamburgerOpen } = this.state;
+    this.setState({ hamburgerOpen: !hamburgerOpen });
   }
 
   renderTabs() {
     const navBarTabs = [
       {
         name: 'Home',
-        path: "/"
+        path: '/',
       },
       {
         name: 'Quiz',
-        path: "/quiz"
+        path: '/quiz',
       },
       {
         name: 'Day Review',
-        path: "/day"
+        path: '/day',
       },
       {
         name: 'Overview',
-        path: "/overview"
-      }
+        path: '/overview',
+      },
     ];
 
-    if (this.props.auth.isAuthenticated) {
-
-      return navBarTabs.map((tab, index) => {
-        return (
-          <NavLink
-            className="nav-link"
-            exact to={tab.path}
-            key={index}
-          >
-            <li className="nav-item">{tab.name}</li>
-          </NavLink>
-        );
-      });
-    } else {
-
-      return (
+    const { auth } = this.props;
+    if (auth.isAuthenticated) {
+      return navBarTabs.map((tab) => (
         <NavLink
           className="nav-link"
-          exact to={navBarTabs[0].path}
+          // eslint-disable-next-line react/jsx-max-props-per-line
+          exact to={tab.path}
+          key={tab.name}
         >
-          <li className="nav-item">{navBarTabs[0].name}</li>
+          <li className="nav-item">{tab.name}</li>
         </NavLink>
-      )
+      ));
     }
+    return (
+      <NavLink
+        className="nav-link"
+          // eslint-disable-next-line react/jsx-max-props-per-line
+        exact to={navBarTabs[0].path}
+      >
+        <li className="nav-item">{navBarTabs[0].name}</li>
+      </NavLink>
+    );
   }
 
   renderLoginLogoutLabel = () => {
+    const { auth } = this.props;
     return (
       <>
         <span>
-          {this.props.auth.user.givenName} {this.props.auth.user.familyName}
+          {auth.user.givenName}
+          {auth.user.familyName}
         </span>
 
         <img
-          src={this.props.auth.user.avatar}
-          alt={"avatar"}
+          src={auth.user.avatar}
+          alt="avatar"
           style={{
-            width: "20%",
-            borderRadius: "50%",
-            padding: "5px"
+            width: '20%',
+            borderRadius: '50%',
+            padding: '5px',
           }}
         />
       </>
-    )
+    );
   }
 
   renderAuthButtons = () => {
-    if (this.props.auth.isAuthenticated) {
+    const { auth, logOut, history } = this.props;
+    if (auth.isAuthenticated) {
       return (
         <DropdownComponent
           style={{
-            width: "200px",
-            display: "flex",
-            alignItems: "center",
-            padding: "0px 10px"
+            width: '200px',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0px 10px',
           }}
-          options={[{ value: "LogOut", label: "Log Out" }]}
+          options={[{ value: 'LogOut', label: 'Log Out' }]}
           onSelect={() => {
-            this.props.logOut()
-            this.props.history.push("/")
+            logOut();
+            history.push('/');
           }}
           variant="link"
           defaultLabel={this.renderLoginLogoutLabel()}
         />
-      )
-    } else {
-      return (
-        <div style={{ marginTop: "1.5px" }}>
-          <AppButton
-            href={`${process.env.REACT_APP_BASE_URL}/auth/google`}
-            label='Log in with Google'
-            variant='outline-danger'
-          />
-        </div>
       );
     }
-  }
-
-  handleClick = () => {
-    this.setState({ hamburgerOpen: !this.state.hamburgerOpen })
+    return (
+      <div style={{ marginTop: '1.5px' }}>
+        <AppButton
+          href={`${process.env.REACT_APP_BASE_URL}/auth/google`}
+          label="Log in with Google"
+          variant="outline-danger"
+        />
+      </div>
+    );
   }
 
   render() {
+    const { hamburgerOpen } = this.state;
     return (
       <NavBarRow>
         <HamburgerMenu
-          isOpened={this.state.hamburgerOpen}
+          isOpened={hamburgerOpen}
           onClick={this.handleClick}
         />
         <Menu
           onClick={this.handleClick}
           className="nav nav-tabs"
-          isOpened={this.state.hamburgerOpen}
+          isOpened={hamburgerOpen}
         >
           {this.renderTabs()}
         </Menu>
@@ -136,12 +135,12 @@ class NavBar extends React.Component {
       </NavBarRow>
     );
   }
-};
+}
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth
-  }
-};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-export default connect(mapStateToProps, { logOut })(withRouter(NavBar));
+export default connect(mapStateToProps, {
+  logOut: actions.logOut,
+})(withRouter(NavBar));

@@ -1,8 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
-
-import { Container, Row, Paragraph, Heading, BarWrapper } from '../common/Layout/Layout';
+import {
+  Container,
+  Row,
+  Paragraph,
+  Heading,
+  BarWrapper,
+} from '../common/Layout/Layout';
 import SpinnerComponent from '../common/SpinnerComponent';
 import DropdownComponent from '../DropdownComponent';
 import AppButton from '../AppButton';
@@ -14,36 +19,36 @@ import {
   THIS_MONTH,
   LAST_MONTH,
   THIS_YEAR,
-  LAST_YEAR
+  LAST_YEAR,
 } from '../../constants';
-import { getOverviewAnswers } from '../../actions';
+import * as actions from '../../actions';
 import { getDataForLinearBarChart, getOptionsForLinearBarChart } from './getDataForChart';
 
 class OverviewComponent extends React.Component {
-
   state = {
     selectedPeriod: THIS_WEEK.value,
-    showModal: false
+    showModal: false,
   }
 
   componentDidMount = async () => {
-    await this.props.getOverviewAnswers(THIS_WEEK.value)
+    const { getOverviewAnswers } = this.props;
+    await getOverviewAnswers(THIS_WEEK.value);
   }
 
   renderContent = () => {
-    if (!this.props.data.length) {
-
+    const { data, timePeriod } = this.props;
+    if (!data.length) {
       return (
         <Heading>No data for selected period</Heading>
       );
     }
 
     return (
-      <div style={{ overflow: "auto" }}>
+      <div style={{ overflow: 'auto' }}>
         <BarWrapper>
           <Bar
-            data={getDataForLinearBarChart(this.props.data, this.props.timePeriod)}
-            options={getOptionsForLinearBarChart(this.props.timePeriod)}
+            data={getDataForLinearBarChart(data, timePeriod)}
+            options={getOptionsForLinearBarChart(timePeriod)}
           />
         </BarWrapper>
       </div>
@@ -51,12 +56,14 @@ class OverviewComponent extends React.Component {
   }
 
   handleDropdownSelect = (option) => {
-    this.setState({ selectedPeriod: option.value })
-    this.props.getOverviewAnswers(option.value)
+    const { getOverviewAnswers } = this.props;
+    this.setState({ selectedPeriod: option.value });
+    getOverviewAnswers(option.value);
   }
 
   renderChartTitle = (timePeriod) => {
-    if (this.props.data.length === 0) {
+    const { data } = this.props;
+    if (data.length === 0) {
       return;
     }
 
@@ -75,57 +82,59 @@ class OverviewComponent extends React.Component {
         return 'This Is Your Overview For The Previous Year!';
       default:
         return 'Chart';
-    };
+    }
   }
 
   render() {
-    if (!this.props.data.length && this.props.isLoading) {
-      return <SpinnerComponent />
+    const { data, isLoading } = this.props;
+    const { selectedPeriod, showModal } = this.state;
+    if (!data.length && isLoading) {
+      return <SpinnerComponent />;
     }
 
-      return (
+    return (
       <Container>
-        <Heading>{this.renderChartTitle(this.state.selectedPeriod)}</Heading>
+        <Heading>{this.renderChartTitle(selectedPeriod)}</Heading>
         {this.renderContent()}
-        <div >
-          <Paragraph>{"Select another timeperiod"} </Paragraph>
+        <div>
+          <Paragraph>Select another timeperiod </Paragraph>
           <Row>
             <DropdownComponent
               options={TIME_PERIOD_OPTIONS}
               defaultLabel={THIS_WEEK.label}
-              value={this.state.selectedPeriod}
+              value={selectedPeriod}
               onSelect={this.handleDropdownSelect}
-              style={{ width: "200px", textAlign: "center" }}
+              style={{ width: '200px', textAlign: 'center' }}
             />
           </Row>
           <Row>
             <AppButton
-              label={"Show the rules"}
-              variant={"light"}
+              label="Show the rules"
+              variant="light"
               style={{
-                marginTop: "3px",
-                width: "200px",
-                border: "1px solid #007bff"
+                marginTop: '3px',
+                width: '200px',
+                border: '1px solid #007bff',
               }}
               handleClick={() => this.setState({ showModal: true })}
             />
           </Row>
           <RulesModal
-            showModal={this.state.showModal}
+            showModal={showModal}
             hideModal={() => this.setState({ showModal: false })}
           />
         </div>
       </Container>
     );
   }
-};
+}
 
-const mapStateToProps = (state) => {
-  return {
-    data: state.overviewState.data,
-    timePeriod: state.overviewState.timePeriod,
-    isLoading: state.overviewState.isLoading
-  }
-};
+const mapStateToProps = (state) => ({
+  data: state.overviewState.data,
+  timePeriod: state.overviewState.timePeriod,
+  isLoading: state.overviewState.isLoading,
+});
 
-export default connect(mapStateToProps, { getOverviewAnswers })(OverviewComponent);
+export default connect(mapStateToProps, {
+  getOverviewAnswers: actions.getOverviewAnswers,
+})(OverviewComponent);

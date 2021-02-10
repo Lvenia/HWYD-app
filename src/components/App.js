@@ -4,30 +4,29 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
-
 import NavBar from './NavBar';
 import Start from './Start';
 import Quiz from './Quiz/Quiz';
 import Day from './DayReview/Day';
 import Overview from './Overview/OverviewComponent';
 import SpinnerComponent from './common/SpinnerComponent';
-
-import { checkAthentification } from '../actions'
+import * as actions from '../actions';
 
 class App extends React.Component {
-
   componentDidMount = () => {
-    this.props.checkAthentification()
+    const { checkAthentification } = this.props;
+    checkAthentification();
   }
 
   renderRoutes() {
-    const { isAuthenticated, isLoading } = this.props.auth;
+    const { auth } = this.props;
+    const { isAuthenticated, isLoading } = auth;
     const shouldRedirect = !isAuthenticated && !isLoading;
 
     if (isLoading) {
-      return <SpinnerComponent />
+      return <SpinnerComponent />;
     }
 
     return (
@@ -43,7 +42,7 @@ class App extends React.Component {
           {!shouldRedirect ? <Overview /> : <Redirect to="/" />}
         </Route>
       </Switch>
-    )
+    );
   }
 
   render() {
@@ -51,14 +50,15 @@ class App extends React.Component {
       <Router>
         <NavBar />
         {this.renderRoutes()}
-      </Router >
+      </Router>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth
-  }
-}
-export default connect(mapStateToProps, { checkAthentification })(App);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  checkAthentification: actions.checkAthentification,
+})(App);

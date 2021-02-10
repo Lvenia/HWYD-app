@@ -17,14 +17,15 @@ export const BarWrapper = styled.div`
      min-width: 500px;
      overflow-x: hidden;
   }
-`
+`;
 
 export const Row = styled(RowBasic)`
   text-align: center;
   justify-content: center;
   margin: 0;
   padding: 0;
-`
+`;
+
 export const ButtonsRow = styled(RowBasic)`
   justify-content: space-between;
   margin: 16px 0px 0px;
@@ -35,7 +36,7 @@ export const ButtonsRow = styled(RowBasic)`
      flex-wrap: nowrap;
      flex-direction: row;
   }
-`
+`;
 
 export const NavBarRow = styled(RowBasic)`
   display: flex;
@@ -46,9 +47,9 @@ export const NavBarRow = styled(RowBasic)`
   flex-wrap: nowrap;
 
   @media (max-width: 610px) {
-     height: ${props => props.isOpened ? "200px" : "auto"} ;
+     height: ${(props) => (props.isOpened ? '200px' : 'auto')} ;
   }
-`
+`;
 
 export const Menu = styled.ul`
   display: flex;
@@ -60,36 +61,40 @@ export const Menu = styled.ul`
     left: 0px;
     bottom: 0px;
     width: 100%;
+    z-index:10;
     background-color: whitesmoke;
-    display: ${props => props.isOpened ? "flex" : "none"} ;
+    display: ${(props) => (props.isOpened ? 'flex' : 'none')} ;
     flex-direction: column;
 
       .nav-link.active {
         border: none;
       }
 }
-`
+`;
 export const Heading = styled.h1`
   text-align: center;
   font-size: 20px;
   margin: 15px 0px;
-`
+`;
+
 export const Paragraph = styled.h4`
   text-align: center;
   font-size: 16px;
   margin: 15px 0px;
-`
+`;
+
 export const Hamburger = styled.div`
   display: none;
   width: 24px;
   height: 24px;
-  justify-content: ${props => props.isOpened ? "center" : "space-around"};
+  justify-content: ${(props) => (props.isOpened ? 'center' : 'space-around')};
   align-content: center;
   flex-direction: column;
   cursor: pointer;
 
   @media (max-width: 610px) {
     display: flex;
+    z-index: 10;
   }
 
   div {
@@ -100,7 +105,7 @@ export const Hamburger = styled.div`
     transition: transform 0.3s
   }
 
-  ${props => props.isOpened && `
+  ${(props) => props.isOpened && `
     .middle {
       display: none;
     }
@@ -113,15 +118,15 @@ export const Hamburger = styled.div`
       transform: translate(0px, -1px) rotate(-45deg);
     }
   `
-  }
-`
+}
+`;
 
 export const CarouselItem = styled(CarouselBasic.Item)`
   color: blue;
   width: 100%;
   height: 450px;
   background-color: gray;
-`
+`;
 
 export const CarouselCaption = styled(CarouselBasic.Caption)`
   top: 0;
@@ -159,7 +164,4 @@ export const CarouselCaption = styled(CarouselBasic.Caption)`
     line-height: 1.3;
     display: inline-block;
   }
-
-`
-
-
+`;

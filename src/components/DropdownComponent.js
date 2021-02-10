@@ -3,18 +3,15 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 const DropdownComponent = ({
   options = [],
-  value = "",
+  value = '',
   onSelect = () => null,
-  variant = "primary",
-  defaultLabel = "Dropdown",
-  style = { width: "100%", textAlign: "center" }
+  variant = 'primary',
+  defaultLabel = 'Dropdown',
+  style = { width: '100%', textAlign: 'center' },
 }) => {
-
   let selectedLabel = null;
 
-  const selectedOption = options.find(option => {
-    return option.value === value
-  });
+  const selectedOption = options.find((option) => option.value === value);
 
   selectedLabel = selectedOption ? selectedOption.label : defaultLabel;
 
@@ -29,21 +26,19 @@ const DropdownComponent = ({
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {options.map(option => {
-          return (
-            <Dropdown.Item
-              style={style}
-              key={option.value}
-              onClick={() => {
-                onSelect(option)
-              }}
-            >
-              {option.label}
-            </Dropdown.Item>
-          );
-        })}
+        {options.map((option) => (
+          <Dropdown.Item
+            style={style}
+            key={option.value}
+            onClick={() => {
+              onSelect(option);
+            }}
+          >
+            {option.label}
+          </Dropdown.Item>
+        ))}
       </Dropdown.Menu>
-    </Dropdown >
+    </Dropdown>
   );
 };
 

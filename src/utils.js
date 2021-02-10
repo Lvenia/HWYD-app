@@ -1,14 +1,15 @@
+/* eslint-disable max-len */
 import {
   pleasant,
-  unpleasant
-} from '../src/constants';
+  unpleasant,
+} from './constants';
 
 import {
   ACTIVITY_CAT_KEYS,
   SLEEP_CAT_QUESTIONS,
   NUTRITION_CAT_QUESTIONS,
   HYDRATION_CAT_QUESTIONS,
-} from '../src/components/Quiz/questions';
+} from './components/Quiz/questions';
 
 export const subtractTimeStrings = (startTimeString, finishTimeString) => {
   if (!startTimeString || !finishTimeString) {
@@ -21,24 +22,22 @@ export const subtractTimeStrings = (startTimeString, finishTimeString) => {
 
   const [startHour, startMinutes] = startTimeString.split(':').map(Number);
   const [endHour, endMinutes] = finishTimeString.split(':').map(Number);
-  let diffHours, diffMinutes;
+  let diffHours;
+  let diffMinutes;
 
   if (startHour > endHour) {
-
     const minutesToMidnight = 60 - startMinutes;
     const hoursToMidnight = 24 - 1 - startHour;
     const minutes = endMinutes + minutesToMidnight;
 
     if (minutes >= 60) {
       diffMinutes = minutes - 60;
-      diffHours = endHour + hoursToMidnight + 1
+      diffHours = endHour + hoursToMidnight + 1;
     } else {
       diffMinutes = minutes;
-      diffHours = endHour + hoursToMidnight
+      diffHours = endHour + hoursToMidnight;
     }
-
   } else if (endHour > startHour) {
-
     if (endMinutes >= startMinutes) {
       diffMinutes = endMinutes - startMinutes;
       diffHours = endHour - startHour;
@@ -51,8 +50,8 @@ export const subtractTimeStrings = (startTimeString, finishTimeString) => {
 };
 
 export const ifKeyExists = (key, obj) => {
-  const allowedKeys = Object.keys(obj)
-  return allowedKeys.includes(key)
+  const allowedKeys = Object.keys(obj);
+  return allowedKeys.includes(key);
 };
 
 export const weekdayDDMMbyDate = (dateUTCFormat) => {
@@ -62,12 +61,11 @@ export const weekdayDDMMbyDate = (dateUTCFormat) => {
   const weekDayIndex = dateUTCFormat.getDay();
   const weekDay = weekDays[weekDayIndex];
 
-  return `${weekDay}, ${day}/${month}`
+  return `${weekDay}, ${day}/${month}`;
 };
 
 export function calculatePoints(dataByDay) {
-
-  let result = {
+  const result = {
     sleepCatPoints: 0,
     nutritionPoints: 0,
     hydrationPoints: 0,
@@ -75,29 +73,29 @@ export function calculatePoints(dataByDay) {
     totalPointsByDay: 0,
   };
 
-  SLEEP_CAT_QUESTIONS.forEach(question => {
+  SLEEP_CAT_QUESTIONS.forEach((question) => {
     if (question.grantPoints) {
-      result.sleepCatPoints += question.grantPoints(dataByDay[question.name])
-    };
+      result.sleepCatPoints += question.grantPoints(dataByDay[question.name]);
+    }
   });
 
-  NUTRITION_CAT_QUESTIONS.forEach(question => {
+  NUTRITION_CAT_QUESTIONS.forEach((question) => {
     if (question.grantPoints) {
-      result.nutritionPoints += question.grantPoints(dataByDay[question.name])
-    };
+      result.nutritionPoints += question.grantPoints(dataByDay[question.name]);
+    }
   });
 
-  HYDRATION_CAT_QUESTIONS.forEach(question => {
+  HYDRATION_CAT_QUESTIONS.forEach((question) => {
     if (question.grantPoints) {
-      result.hydrationPoints += question.grantPoints(dataByDay[question.name])
-    };
+      result.hydrationPoints += question.grantPoints(dataByDay[question.name]);
+    }
   });
 
-  let allActivitiesTime = [];
-  let pleasantActivitiesTime = [];
-  let unpleasantActivitiesTime = [];
+  const allActivitiesTime = [];
+  const pleasantActivitiesTime = [];
+  const unpleasantActivitiesTime = [];
 
-  ACTIVITY_CAT_KEYS.forEach(key => {
+  ACTIVITY_CAT_KEYS.forEach((key) => {
     if (dataByDay[key]) {
       allActivitiesTime.push(dataByDay[key].activityTime);
 
@@ -107,25 +105,17 @@ export function calculatePoints(dataByDay) {
     }
   });
 
-  const totalActivityTime = allActivitiesTime.reduce((accumulator, cur) => {
-    return accumulator + cur
-  }, 0);
+  const totalActivityTime = allActivitiesTime.reduce((accumulator, cur) => accumulator + cur, 0);
 
-  const pleasantActivityTotal = pleasantActivitiesTime.reduce((accumulator, cur) => {
-    return accumulator + cur
-  }, 0);
+  const pleasantActivityTotal = pleasantActivitiesTime.reduce((accumulator, cur) => accumulator + cur, 0);
 
-  const unpleasantActivityTotal = unpleasantActivitiesTime.reduce((accumulator, cur) => {
-    return accumulator + cur
-  }, 0);
+  const unpleasantActivityTotal = unpleasantActivitiesTime.reduce((accumulator, cur) => accumulator + cur, 0);
 
-  result.ativitiesPoints = Math.ceil((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime * 3) * 10;
+  result.ativitiesPoints = Math.ceil(((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime) * 3) * 10;
 
   const pointCatKeys = Object.keys(result);
 
-  result.totalPointsByDay = pointCatKeys.reduce((accumulator, key) => {
-    return accumulator + result[key]
-  }, 0);
+  result.totalPointsByDay = pointCatKeys.reduce((accumulator, key) => accumulator + result[key], 0);
 
   return result;
-};
+}

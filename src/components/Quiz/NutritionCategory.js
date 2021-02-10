@@ -1,6 +1,6 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { Heading, ButtonsRow } from '../common/Layout/Layout';
 import { INPUT_NUMBER, INPUT_RADIOBUTTON } from '../../constants';
 import { NUTRITION_CAT_QUESTIONS, NUTRITION_CAT_KEYS, HYDRATION_CAT_QUESTIONS } from './questions';
@@ -8,35 +8,33 @@ import QuizRow from './QuizRow';
 import RadioButton from '../RadioButton';
 import AppButton from '../AppButton';
 import InputField from '../InputField';
-
-import { submitAnswers } from '../../actions';
+import * as actions from '../../actions';
 
 class NutritionCategory extends React.Component {
-
   state = {}
 
   componentDidMount() {
-
     const toLocalState = {};
+    const { appState } = this.props;
 
-    NUTRITION_CAT_KEYS.map(k => {
-      if (k in this.props.appState) {
-        toLocalState[k] = this.props.appState[k]
+    NUTRITION_CAT_KEYS.map((k) => {
+      if (k in appState) {
+        toLocalState[k] = appState[k];
       }
       return toLocalState;
     });
 
     if (Object.keys(toLocalState).length > 0) {
-      this.setState(toLocalState)
+      this.setState(toLocalState);
     }
   }
 
   handleClick = (questionType, value) => {
-    this.setState({ [questionType]: value })
+    this.setState({ [questionType]: value });
   }
 
   renderNutritionCatQuestions() {
-    return NUTRITION_CAT_QUESTIONS.map(q => {
+    return NUTRITION_CAT_QUESTIONS.map((q) => {
       if (q.answerType === INPUT_RADIOBUTTON) {
         return (
           <QuizRow key={q.name} question={q.question}>
@@ -45,11 +43,11 @@ class NutritionCategory extends React.Component {
               options={
                 [{
                   label: 'YES',
-                  value: true
+                  value: true,
                 },
                 {
                   label: 'NO',
-                  value: false
+                  value: false,
                 }]
               }
               questionType={q.name}
@@ -58,15 +56,14 @@ class NutritionCategory extends React.Component {
             />
           </QuizRow>
         );
-
-      } else {
-        return null;
       }
-    })
-  };
+      return null;
+    });
+  }
 
   renderHydrationCatQuestions() {
-    return HYDRATION_CAT_QUESTIONS.map(q => {
+    const { appState } = this.props;
+    return HYDRATION_CAT_QUESTIONS.map((q) => {
       if (q.answerType === INPUT_NUMBER) {
         return (
           <QuizRow key={q.name} question={q.question}>
@@ -75,37 +72,37 @@ class NutritionCategory extends React.Component {
               min={0}
               max={24}
               step={1}
-              value={this.props.appState[q.name]}
+              value={appState[q.name]}
               onInputChange={(value) => this.setState({ [q.name]: value })}
             />
           </QuizRow>
         );
-      } else {
-        return null;
       }
-    })
+      return null;
+    });
   }
 
   render() {
+    const { moveToPrevioustSection, submitAnswers, moveToNextSection } = this.props;
     return (
       <>
-        <Heading >Quiz: Nutrition Category</Heading>
+        <Heading>Quiz: Nutrition Category</Heading>
         {this.renderNutritionCatQuestions()}
         {this.renderHydrationCatQuestions()}
         <ButtonsRow>
           <AppButton
-            variant={"light"}
-            label={'Previous Section'}
+            variant="light"
+            label="Previous Section"
             handleClick={() => {
-              this.props.moveToPrevioustSection()
+              moveToPrevioustSection();
             }}
           />
           <AppButton
-            variant={"primary"}
-            label={'Next Section'}
+            variant="primary"
+            label="Next Section"
             handleClick={() => {
-              this.props.submitAnswers(this.state);
-              this.props.moveToNextSection();
+              submitAnswers(this.state);
+              moveToNextSection();
             }}
           />
         </ButtonsRow>
@@ -114,10 +111,10 @@ class NutritionCategory extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    appState: state.quizState.data
-  }
-};
+const mapStateToProps = (state) => ({
+  appState: state.quizState.data,
+});
 
-export default connect(mapStateToProps, { submitAnswers })(NutritionCategory);
+export default connect(mapStateToProps, {
+  submitAnswers: actions.submitAnswers,
+})(NutritionCategory);

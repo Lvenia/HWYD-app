@@ -11,8 +11,8 @@ const Wrapper = styled.div`
 }
 
 span {
-    color: ${props => props.isHighlighed ? '#FFDF00' : 'none'};
-    animation:${props => props.isClicked ? 'fade-in-keyframes 1s' : 'none'};
+    color: ${(props) => (props.isHighlighed ? '#FFDF00' : 'none')};
+    animation:${(props) => (props.isClicked ? 'fade-in-keyframes 1s' : 'none')};
   }
-`
+`;
 export default Wrapper;

@@ -1,5 +1,4 @@
 import {
-
   CATEGORY_SLEEP,
   CATEGORY_NUTRITION,
   CATEGORY_ACTIVITY,
@@ -9,13 +8,12 @@ import {
   INPUT_HOUR,
   SUMMARY_SLEEP,
   SUMMARY_NUTRITION,
-  SUMMARY_HYDRATION
-
+  SUMMARY_HYDRATION,
 } from '../../constants';
 
 const questions = [
   {
-    name: 'dayRate'
+    name: 'dayRate',
   },
 
   {
@@ -24,15 +22,15 @@ const questions = [
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_SLEEP,
-    renderSummaryDetails: function (sleptWell) {
-      return `${sleptWell ? 'well-rested' : 'not well-rested'}`
+    renderSummaryDetails(sleptWell) {
+      return `${sleptWell ? 'well-rested' : 'not well-rested'}`;
     },
-    grantPoints: function (sleptWell) {
+    grantPoints(sleptWell) {
       if (typeof sleptWell !== 'boolean') {
-        return 0
+        return 0;
       }
-      return sleptWell ? 10 : -10
-    }
+      return sleptWell ? 10 : -10;
+    },
   },
 
   {
@@ -47,7 +45,7 @@ const questions = [
     question: 'What time did you wake up?',
     name: 'wokeUp',
     questionCategory: CATEGORY_SLEEP,
-    answerType: INPUT_HOUR
+    answerType: INPUT_HOUR,
   },
   {
     question: 'Have you wake up in the night?',
@@ -55,15 +53,15 @@ const questions = [
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_SLEEP,
-    renderSummaryDetails: function (sleepInterupted) {
-      return `${sleepInterupted ? 'interupted' : 'uninterupted'}`
+    renderSummaryDetails(sleepInterupted) {
+      return `${sleepInterupted ? 'interupted' : 'uninterupted'}`;
     },
-    grantPoints: function (sleepInterupted) {
+    grantPoints(sleepInterupted) {
       if (typeof sleepInterupted !== 'boolean') {
-        return 0
+        return 0;
       }
-      return sleepInterupted ? -10 : 10
-    }
+      return sleepInterupted ? -10 : 10;
+    },
   },
   {
     question: 'Snoozing in the morning?',
@@ -71,15 +69,15 @@ const questions = [
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_SLEEP,
-    renderSummaryDetails: function (snoozing) {
-      return `${snoozing ? 'snoozing' : 'no snoozing'}`
+    renderSummaryDetails(snoozing) {
+      return `${snoozing ? 'snoozing' : 'no snoozing'}`;
     },
-    grantPoints: function (snoozing) {
+    grantPoints(snoozing) {
       if (typeof snoozing !== 'boolean') {
-        return 0
+        return 0;
       }
-      return snoozing ? -10 : 10
-    }
+      return snoozing ? -10 : 10;
+    },
   },
   {
     question: 'Or naps during the day?',
@@ -87,9 +85,9 @@ const questions = [
     questionCategory: CATEGORY_SLEEP,
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_SLEEP,
-    renderSummaryDetails: function (dayNap) {
-      return `${dayNap ? 'day nap' : 'no day naps'}`
-    }
+    renderSummaryDetails(dayNap) {
+      return `${dayNap ? 'day nap' : 'no day naps'}`;
+    },
   },
   {
     question: 'Have you eaten regularly?',
@@ -97,15 +95,15 @@ const questions = [
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_NUTRITION,
-    renderSummaryDetails: function (mealRegularity) {
-      return `${mealRegularity ? 'regular' : 'irregular'} meals`
+    renderSummaryDetails(mealRegularity) {
+      return `${mealRegularity ? 'regular' : 'irregular'} meals`;
     },
-    grantPoints: function (mealRegularity) {
+    grantPoints(mealRegularity) {
       if (typeof mealRegularity !== 'boolean') {
-        return 0
+        return 0;
       }
-      return mealRegularity ? 10 : -10
-    }
+      return mealRegularity ? 10 : -10;
+    },
   },
 
   {
@@ -114,15 +112,15 @@ const questions = [
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_NUTRITION,
-    renderSummaryDetails: function (skippedMeal) {
-      return `${skippedMeal ? '' : 'no'} skipped meals`
+    renderSummaryDetails(skippedMeal) {
+      return `${skippedMeal ? '' : 'no'} skipped meals`;
     },
-    grantPoints: function (skippedMeal) {
+    grantPoints(skippedMeal) {
       if (typeof skippedMeal !== 'boolean') {
-        return 0
+        return 0;
       }
-      return skippedMeal ? -10 : 10
-    }
+      return skippedMeal ? -10 : 10;
+    },
   },
   {
     question: 'Junk food?',
@@ -130,15 +128,15 @@ const questions = [
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_RADIOBUTTON,
     summaryCardCategory: SUMMARY_NUTRITION,
-    renderSummaryDetails: function (junkFood) {
-      return `${junkFood ? 'some' : 'no'} junk food`
+    renderSummaryDetails(junkFood) {
+      return `${junkFood ? 'some' : 'no'} junk food`;
     },
-    grantPoints: function (junkFood) {
+    grantPoints(junkFood) {
       if (typeof junkFood !== 'boolean') {
-        return 0
+        return 0;
       }
-      return junkFood ? -10 : 10
-    }
+      return junkFood ? -10 : 10;
+    },
   },
   {
     question: 'How many glasses of water have you had?',
@@ -146,85 +144,87 @@ const questions = [
     questionCategory: CATEGORY_NUTRITION,
     answerType: INPUT_NUMBER,
     summaryCardCategory: SUMMARY_HYDRATION,
-    renderSummaryDetails: function (waterGlasses) {
+    renderSummaryDetails(waterGlasses) {
       if (waterGlasses > 1) {
-        return `${waterGlasses} glasses of water`
-      } else {
-        return `${waterGlasses} glass of water`
+        return `${waterGlasses} glasses of water`;
       }
+      return `${waterGlasses} glass of water`;
     },
-    grantPoints: function (waterGlasses) {
+    grantPoints(waterGlasses) {
       if (typeof waterGlasses !== 'number' || waterGlasses < 0) {
-        return 0
+        return 0;
       }
 
       if (waterGlasses < 0) {
-        return 0
+        return 0;
       }
 
       if (waterGlasses === 0) {
-        return -30
+        return -30;
       }
 
       if (waterGlasses <= 3) {
-        return 10
+        return 10;
       }
 
       if (waterGlasses > 3 && waterGlasses < 6) {
-        return 20
+        return 20;
       }
 
-      return 30
-    }
+      return 30;
+    },
   },
   {
     question: 'Work',
     name: 'work',
     questionCategory: CATEGORY_ACTIVITY,
-    answerType: INPUT_COMBINED_SELECT_NUMBER
+    answerType: INPUT_COMBINED_SELECT_NUMBER,
   },
   {
     question: 'Sport',
     name: 'sport',
     questionCategory: CATEGORY_ACTIVITY,
-    answerType: INPUT_COMBINED_SELECT_NUMBER
+    answerType: INPUT_COMBINED_SELECT_NUMBER,
   },
   {
     question: 'Daily tasks',
     name: 'dailyTasks',
     questionCategory: CATEGORY_ACTIVITY,
-    answerType: INPUT_COMBINED_SELECT_NUMBER
+    answerType: INPUT_COMBINED_SELECT_NUMBER,
   },
   {
     question: 'Friends',
     name: 'friends',
     questionCategory: CATEGORY_ACTIVITY,
-    answerType: INPUT_COMBINED_SELECT_NUMBER
+    answerType: INPUT_COMBINED_SELECT_NUMBER,
   },
   {
     question: 'Family',
     name: 'family',
     questionCategory: CATEGORY_ACTIVITY,
-    answerType: INPUT_COMBINED_SELECT_NUMBER
+    answerType: INPUT_COMBINED_SELECT_NUMBER,
   },
   {
     question: 'Reading',
     name: 'reading',
     questionCategory: CATEGORY_ACTIVITY,
-    answerType: INPUT_COMBINED_SELECT_NUMBER
+    answerType: INPUT_COMBINED_SELECT_NUMBER,
   },
 ];
 
 export default questions;
 
-export const ACTIVITIES = questions.filter(q => q.questionCategory === CATEGORY_ACTIVITY);
+export const ACTIVITIES = questions.filter((q) => q.questionCategory === CATEGORY_ACTIVITY);
 
-export const NUTRITION_CAT_QUESTIONS = questions.filter(q => q.summaryCardCategory === SUMMARY_NUTRITION);
-export const HYDRATION_CAT_QUESTIONS = questions.filter(q => q.summaryCardCategory === SUMMARY_HYDRATION);
-export const SLEEP_CAT_QUESTIONS = questions.filter(q => q.questionCategory === CATEGORY_SLEEP);
+export const NUTRITION_CAT_QUESTIONS = questions.filter(
+  (q) => q.summaryCardCategory === SUMMARY_NUTRITION,
+);
+export const HYDRATION_CAT_QUESTIONS = questions.filter(
+  (q) => q.summaryCardCategory === SUMMARY_HYDRATION,
+);
+export const SLEEP_CAT_QUESTIONS = questions.filter((q) => q.questionCategory === CATEGORY_SLEEP);
 
-
-export const ACTIVITY_CAT_KEYS = ACTIVITIES.map(a => { return a.name });
-export const NUTRITION_CAT_KEYS = NUTRITION_CAT_QUESTIONS.map(k => { return k.name });
-export const HYDRATION_CAT_KEYS = HYDRATION_CAT_QUESTIONS.map(k => { return k.name });
-export const SLEEP_CAT_KEYS = SLEEP_CAT_QUESTIONS.map(q => { return q.name });
+export const ACTIVITY_CAT_KEYS = ACTIVITIES.map((a) => a.name);
+export const NUTRITION_CAT_KEYS = NUTRITION_CAT_QUESTIONS.map((k) => k.name);
+export const HYDRATION_CAT_KEYS = HYDRATION_CAT_QUESTIONS.map((k) => k.name);
+export const SLEEP_CAT_KEYS = SLEEP_CAT_QUESTIONS.map((q) => q.name);

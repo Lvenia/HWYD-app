@@ -6,77 +6,81 @@ import StarComponent from './StarComponent';
 
 import AppButton from '../AppButton';
 
-import { submitAnswers } from '../../actions'
+import * as actions from '../../actions';
 
 class StarsComponent extends React.Component {
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.choosenDayRate !== this.props.choosenDayRate) {
-      this.setState({ dayRate: this.props.choosenDayRate })
-    }
-  }
-
   state = {
+    // eslint-disable-next-line react/destructuring-assignment
     dayRate: this.props.choosenDayRate || 0,
     hoveredStarRate: 0,
-    isClicked: false
+    isClicked: false,
+  }
+
+  componentDidUpdate(prevProps) {
+    const { choosenDayRate } = this.props;
+    if (prevProps.choosenDayRate !== choosenDayRate) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ dayRate: choosenDayRate });
+    }
   }
 
   handleHoveredStar = (rate) => this.setState({ hoveredStarRate: rate })
 
   renderStars() {
+    const { dayRate, hoveredStarRate, isClicked } = this.state;
+
     const stars = [{
       rate: 1,
-      description: 'tough'
+      description: 'tough',
     },
     {
       rate: 2,
-      description: 'challenging'
+      description: 'challenging',
     },
     {
       rate: 3,
-      description: 'acceptable'
+      description: 'acceptable',
     },
     {
       rate: 4,
-      description: 'pleasant'
+      description: 'pleasant',
     },
     {
       rate: 5,
-      description: 'amazing'
+      description: 'amazing',
     }];
 
-    return stars.map(star => {
-      return (
-        <StarComponent
-          key={star.rate}
-          description={star.description}
-          starRate={star.rate}
-          hoveredStarRate={this.state.hoveredStarRate || this.state.dayRate}
-          handleStarHover={(rate) => this.setState({ hoveredStarRate: rate, isClicked: false })}
-          handleClick={(rate) => this.setState({ dayRate: rate, isClicked: true })}
-          isClicked={this.state.isClicked}
-        />
-      );
-    })
+    return stars.map((star) => (
+      <StarComponent
+        key={star.rate}
+        description={star.description}
+        starRate={star.rate}
+        hoveredStarRate={hoveredStarRate || dayRate}
+        handleStarHover={(rate) => this.setState({ hoveredStarRate: rate, isClicked: false })}
+        handleClick={(rate) => this.setState({ dayRate: rate, isClicked: true })}
+        isClicked={isClicked}
+      />
+    ));
   }
 
   render() {
+    const { dayRate } = this.state;
+    const { submitAnswers, moveToNextSection } = this.props;
     const payload = {
-      dayRate: this.state.dayRate,
+      dayRate,
     };
 
     return (
       <>
-        <Heading >How Was Your Day?</Heading>
+        <Heading>How Was Your Day?</Heading>
         <Row>{this.renderStars()}</Row>
         <Row>
           <AppButton
-            variant={"primary"}
-            label={'Next Section'}
+            variant="primary"
+            label="Next Section"
             handleClick={() => {
-              this.props.submitAnswers(payload)
-              this.props.moveToNextSection()
+              submitAnswers(payload);
+              moveToNextSection();
             }}
           />
         </Row>
@@ -85,10 +89,10 @@ class StarsComponent extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    choosenDayRate: state.quizState.data.dayRate
-  }
-};
+const mapStateToProps = (state) => ({
+  choosenDayRate: state.quizState.data.dayRate,
+});
 
-export default connect(mapStateToProps, { submitAnswers })(StarsComponent);
+export default connect(mapStateToProps, {
+  submitAnswers: actions.submitAnswers,
+})(StarsComponent);

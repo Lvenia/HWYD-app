@@ -7,46 +7,38 @@ const StarComponent = ({
   starRate,
   hoveredStarRate,
   readOnly = false,
-
   handleClick,
   handleStarHover,
-  isClicked
-
+  isClicked,
 }) => {
-
   let onMouseEnter;
   let onMouseLeave;
   let onClick;
-
-
   const shouldBeHighlighted = starRate <= hoveredStarRate;
 
   if (!readOnly) {
-    onClick = () => {
-      handleClick(starRate)
-      console.log()
-    };
+    onClick = () => handleClick(starRate);
     onMouseEnter = () => handleStarHover(starRate);
-    onMouseLeave = () => { handleStarHover(0) }
+    onMouseLeave = () => handleStarHover(0);
   }
 
   return (
-      <Wrapper
-        isHighlighed={shouldBeHighlighted}
-        onClick={onClick}
-        isClicked={isClicked}
+    <Wrapper
+      isHighlighed={shouldBeHighlighted}
+      onClick={onClick}
+      isClicked={isClicked}
+    >
+      <div
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
-        <div
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          <Icon
-            size="50px"
-            icon={shouldBeHighlighted ? 'fa-star' : 'fa-star-o'}
-          />
-          <p>{description}</p>
-        </div>
-      </Wrapper>
+        <Icon
+          size="50px"
+          icon={shouldBeHighlighted ? 'fa-star' : 'fa-star-o'}
+        />
+        <p>{description}</p>
+      </div>
+    </Wrapper>
 
   );
 };

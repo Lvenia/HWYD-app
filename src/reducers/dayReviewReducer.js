@@ -1,14 +1,14 @@
 import {
   GET_DAY_REVIEW_ANSWERS,
   GET_DAY_REVIEW_ANSWERS_SUCCESS,
-  GET_DAY_REVIEW_ANSWERS_TRIGGER
+  GET_DAY_REVIEW_ANSWERS_TRIGGER,
 } from '../actions/actionTypes';
 
 import questions from '../components/Quiz/questions';
 
 const initialState = {
   data: {},
-  isLoading: false
+  isLoading: false,
 };
 
 export default function dayReviewReducer(state = initialState, action) {
@@ -16,23 +16,22 @@ export default function dayReviewReducer(state = initialState, action) {
     case GET_DAY_REVIEW_ANSWERS_SUCCESS:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
       };
 
     case GET_DAY_REVIEW_ANSWERS_TRIGGER:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
-    case GET_DAY_REVIEW_ANSWERS:
-
-      const alowedKeys = questions.map(q => { return q.name });
+    case GET_DAY_REVIEW_ANSWERS: {
+      const alowedKeys = questions.map((q) => q.name);
       const payloadKeys = Object.keys(action.payload);
 
-      let answersByDay = {};
+      const answersByDay = {};
 
-      payloadKeys.forEach(payloadKey => {
+      payloadKeys.forEach((payloadKey) => {
         if (alowedKeys.includes(payloadKey)) {
           answersByDay[payloadKey] = action.payload[payloadKey];
         }
@@ -40,8 +39,9 @@ export default function dayReviewReducer(state = initialState, action) {
 
       return {
         ...state,
-        data: answersByDay
+        data: answersByDay,
       };
+    }
 
     default:
       return state;

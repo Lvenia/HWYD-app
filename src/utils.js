@@ -3,13 +3,13 @@ import {
   unpleasant,
 } from './constants';
 
-
 import {
   ACTIVITY_CAT_KEYS,
   SLEEP_CAT_QUESTIONS,
   NUTRITION_CAT_QUESTIONS,
   HYDRATION_CAT_QUESTIONS,
 } from './components/Quiz/questions';
+
 
 export const subtractTimeStrings = (startTimeString, finishTimeString) => {
   if (!startTimeString || !finishTimeString) {

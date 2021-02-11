@@ -11,8 +11,6 @@ import {
 } from './components/Quiz/questions';
 
 
-
-
 export const subtractTimeStrings = (startTimeString, finishTimeString) => {
   if (!startTimeString || !finishTimeString) {
     return null;

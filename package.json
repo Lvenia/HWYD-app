@@ -35,14 +35,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run eslint"
     }
   },
-  "lint-staged": {
-    "*": [
-      "npm run eslint"
-    ]
-  },
+  
   "browserslist": {
     "production": [
       ">0.2%",

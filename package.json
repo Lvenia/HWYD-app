@@ -29,7 +29,8 @@
     "mocha:watch": "mocha test --watch --require esm",
     "eslint": "eslint ./src",
     "eject": "react-scripts eject",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "pre-commit": "npm run test && npm run eslint"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -568,7 +568,7 @@ describe('calculatePoints', () => {
           },
         };
         const result = calculatePoints(dataByDay);
-        expect(result.totalPointsByDay).to.be.equal(10);
+        expect(result.totalPointsByDay).to.be.equal(0);
       });
     });
   });

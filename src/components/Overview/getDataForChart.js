@@ -127,23 +127,19 @@ export const getDataForLinearBarChart = (data, timePeriod) => {
 
     monthGroupIndexes.forEach((monthGroupIndex) => {
       // prevent cases where only stars were marcked (total points is undefined)
-      const noNaN = groupedDataMonthly[monthGroupIndex].filter(
-        (day) => day.points.totalPointsByDay > 0,
-      );
+      const groupedDataByMonth = groupedDataMonthly[monthGroupIndex];
+      const noNaN = groupedDataByMonth.filter((day) => day.points.totalPointsByDay > 0);
 
       // calculate total points
       const total = noNaN.reduce((acc, day) => acc += day.points.totalPointsByDay, 0);
 
-      const average = Math.ceil(total / groupedDataMonthly[monthGroupIndex].length);
+      const average = Math.ceil(total / groupedDataByMonth.length);
       averageMonthly.push(average);
 
       // calculate average for the dayRates :
-      const totalStars = groupedDataMonthly[monthGroupIndex].reduce(
-        (acc, day) => acc += day.dayRate,
-        0,
-      );
+      const totalStars = groupedDataByMonth.reduce((acc, day) => acc += day.dayRate, 0);
 
-      const averageStars = totalStars / groupedDataMonthly[monthGroupIndex].length;
+      const averageStars = totalStars / groupedDataByMonth.length;
       const averageStarsString = averageStars.toString();
       starsMonthly.push(averageStarsString.slice(0, 3));
 

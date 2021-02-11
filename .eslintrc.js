@@ -2,7 +2,6 @@ module.exports = {
   parser: 'babel-eslint',
   env: {
     browser: true,
-    es2021: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -19,6 +18,7 @@ module.exports = {
   plugins: [
     'react',
     '@babel',
+    'react-hooks',
   ],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
@@ -30,5 +30,6 @@ module.exports = {
     'no-return-assign': [0],
     'react/no-access-state-in-setstate': [0],
     'no-case-declarations': [0],
+    'react-hooks/exhaustive-deps': [0],
   },
 };

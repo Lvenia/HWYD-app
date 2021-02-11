@@ -30,18 +30,20 @@ class ActivitiesCategory extends React.Component {
   }
 
   handleInputChange = (activity, inputValue) => {
+    const { activity: activityData } = this.state;
     this.setState({
       [activity]: {
-        ...this.state[activity],
+        ...activityData,
         activityTime: inputValue,
       },
     });
   }
 
   handleSelectChange = (title, selectedOption) => {
+    const { title: selectedTitle } = this.state;
     this.setState({
       [title]: {
-        ...this.state[title],
+        ...selectedTitle,
         energyImpact: selectedOption.value,
       },
     });

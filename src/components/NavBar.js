@@ -42,8 +42,8 @@ class NavBar extends React.Component {
       return navBarTabs.map((tab) => (
         <NavLink
           className="nav-link"
-          // eslint-disable-next-line react/jsx-max-props-per-line
-          exact to={tab.path}
+          exact
+          to={tab.path}
           key={tab.name}
         >
           <li className="nav-item">{tab.name}</li>
@@ -53,8 +53,8 @@ class NavBar extends React.Component {
     return (
       <NavLink
         className="nav-link"
-          // eslint-disable-next-line react/jsx-max-props-per-line
-        exact to={navBarTabs[0].path}
+        exact
+        to={navBarTabs[0].path}
       >
         <li className="nav-item">{navBarTabs[0].name}</li>
       </NavLink>

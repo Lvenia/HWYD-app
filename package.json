@@ -28,7 +28,8 @@
     "test": "mocha test --require esm",
     "mocha:watch": "mocha test --watch --require esm",
     "eslint": "eslint ./src",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,13 +53,13 @@
     "@babel/eslint-plugin": "^7.12.13",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
-    "eslint": "^7.19.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "esm": "^3.2.25",
+    "husky": "^5.0.9",
     "mocha": "^8.2.1"
   }
 }

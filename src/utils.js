@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import {
   pleasant,
   unpleasant,
@@ -98,20 +97,33 @@ export function calculatePoints(dataByDay) {
   ACTIVITY_CAT_KEYS.forEach((key) => {
     if (dataByDay[key]) {
       allActivitiesTime.push(dataByDay[key].activityTime);
+      const isEnergyImpactPleasant = dataByDay[key].energyImpact === pleasant.value;
+      const pleasanteActivityTime = isEnergyImpactPleasant ? dataByDay[key].activityTime : 0;
+      pleasantActivitiesTime.push(pleasanteActivityTime);
 
-      pleasantActivitiesTime.push(dataByDay[key].energyImpact === pleasant.value ? dataByDay[key].activityTime : 0);
-
-      unpleasantActivitiesTime.push(dataByDay[key].energyImpact === unpleasant.value ? dataByDay[key].activityTime : 0);
+      const isEnergyImpactUnpleasant = dataByDay[key].energyImpact === unpleasant.value;
+      const unpleasantActivityTime = isEnergyImpactUnpleasant ? dataByDay[key].activityTime : 0;
+      unpleasantActivitiesTime.push(unpleasantActivityTime);
     }
   });
 
-  const totalActivityTime = allActivitiesTime.reduce((accumulator, cur) => accumulator + cur, 0);
+  const totalActivityTime = allActivitiesTime.reduce((accumulator, cur) => {
+    accumulator += cur;
+    return accumulator;
+  }, 0);
 
-  const pleasantActivityTotal = pleasantActivitiesTime.reduce((accumulator, cur) => accumulator + cur, 0);
+  const pleasantActivityTotal = pleasantActivitiesTime.reduce((accumulator, cur) => {
+    accumulator += cur;
+    return accumulator;
+  }, 0);
 
-  const unpleasantActivityTotal = unpleasantActivitiesTime.reduce((accumulator, cur) => accumulator + cur, 0);
+  const unpleasantActivityTotal = unpleasantActivitiesTime.reduce((accumulator, cur) => {
+    accumulator += cur;
+    return accumulator;
+  }, 0);
 
-  result.ativitiesPoints = Math.ceil(((pleasantActivityTotal - unpleasantActivityTotal) / totalActivityTime) * 3) * 10;
+  const pleasUnpleasTimeDifference = pleasantActivityTotal - unpleasantActivityTotal;
+  result.ativitiesPoints = Math.ceil((pleasUnpleasTimeDifference / totalActivityTime) * 3) * 10;
 
   const pointCatKeys = Object.keys(result);
 

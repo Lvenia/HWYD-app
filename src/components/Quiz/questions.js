@@ -222,7 +222,9 @@ export const NUTRITION_CAT_QUESTIONS = questions.filter(
 export const HYDRATION_CAT_QUESTIONS = questions.filter(
   (q) => q.summaryCardCategory === SUMMARY_HYDRATION,
 );
-export const SLEEP_CAT_QUESTIONS = questions.filter((q) => q.questionCategory === CATEGORY_SLEEP);
+export const SLEEP_CAT_QUESTIONS = questions.filter(
+  (q) => q.questionCategory === CATEGORY_SLEEP,
+);
 
 export const ACTIVITY_CAT_KEYS = ACTIVITIES.map((a) => a.name);
 export const NUTRITION_CAT_KEYS = NUTRITION_CAT_QUESTIONS.map((k) => k.name);

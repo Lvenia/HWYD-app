@@ -39,7 +39,9 @@
     }
   },
   "lint-staged": {
-    "*": ["npm run eslint"]
+    "*": [
+      "npm run eslint"
+    ]
   },
   "browserslist": {
     "production": [

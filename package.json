@@ -28,12 +28,13 @@
     "test": "mocha test --require esm",
     "mocha:watch": "mocha test --watch --require esm",
     "eslint": "eslint ./src",
-    "eject": "react-scripts eject",
-    "postinstall": "husky install",
-    "pre-commit": "npm run test && npm run eslint"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "lint-staged": {
+    "*": "npm run eslint"
   },
   "browserslist": {
     "production": [
@@ -60,7 +61,6 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "esm": "^3.2.25",
-    "husky": "^5.0.9",
     "mocha": "^8.2.1"
   }
 }

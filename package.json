@@ -66,6 +66,7 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "esm": "^3.2.25",
+    "husky": "^5.0.9",
     "lint-staged": "^10.5.4",
     "mocha": "^8.2.1"
   }

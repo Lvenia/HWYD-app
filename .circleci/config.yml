@@ -39,7 +39,7 @@ jobs:
 
   deploy:
     executor:
-      name: aws-s3/default
+      name: node/default
     steps:
       - attach_workspace:
           at: ~/project

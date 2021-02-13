@@ -30,7 +30,7 @@ class ActivitiesCategory extends React.Component {
   }
 
   handleInputChange = (activity, inputValue) => {
-    const { activity: activityData } = this.state;
+    const activityData = this.state[activity];
     this.setState({
       [activity]: {
         ...activityData,
@@ -39,11 +39,11 @@ class ActivitiesCategory extends React.Component {
     });
   }
 
-  handleSelectChange = (title, selectedOption) => {
-    const { title: selectedTitle } = this.state;
+  handleSelectChange = (activity, selectedOption) => {
+    const activityData = this.state[activity];
     this.setState({
-      [title]: {
-        ...selectedTitle,
+      [activity]: {
+        ...activityData,
         energyImpact: selectedOption.value,
       },
     });

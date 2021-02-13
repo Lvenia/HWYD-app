@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1
-  heroku: circleci/heroku@0.0.10
+  aws-s3: circleci/aws-s3@2.0.0
 
 jobs:
   test:
@@ -33,7 +33,7 @@ jobs:
           at: ~/project
       - run: npm run build
       - persist_to_workspace:
-          root: ./
+          root: ./build
           paths:
            - '*'
 
@@ -43,7 +43,13 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - heroku/deploy-via-git
+      - aws-s3/copy:
+          aws-access-key-id: AWS_ACCESS_KEY
+          aws-region: AWS_REGION
+          aws-secret-access-key: AWS_ACCESS_SECRET
+          arguments: '--recursive'
+          from: ./
+          to: 's3://hwyd-app'
 
 workflows:
   version: 2

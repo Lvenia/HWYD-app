@@ -46,6 +46,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('Welcome'); // eslint-disable-line no-console
     return (
       <Router>
         <NavBar />

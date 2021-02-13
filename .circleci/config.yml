@@ -33,7 +33,7 @@ jobs:
           at: ~/project
       - run: npm run build
       - persist_to_workspace:
-          root: ./
+          root: ~/project
           paths:
            - 'build/*'
 

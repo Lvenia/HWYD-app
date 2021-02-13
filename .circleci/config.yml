@@ -33,16 +33,15 @@ jobs:
           at: ~/project
       - run: npm run build
       - persist_to_workspace:
-          root: ~/project/build
-          paths:
-           - '*'
+          root: ~/
+          paths: project/build
 
   deploy:
     executor:
       name: node/default
     steps:
       - attach_workspace:
-          at: ~/project
+          at: ~/project/build
       - aws-s3/copy:
           aws-access-key-id: AWS_ACCESS_KEY
           aws-region: AWS_REGION

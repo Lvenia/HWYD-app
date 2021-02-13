@@ -39,7 +39,7 @@ jobs:
 
   deploy:
     executor:
-      name: heroku/default
+      name: aws-s3/default
     steps:
       - attach_workspace:
           at: ~/project

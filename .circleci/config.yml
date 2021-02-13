@@ -35,7 +35,7 @@ jobs:
       - persist_to_workspace:
           root: ~/project/build
           paths:
-           - 'project/build'
+           - '*'
 
   deploy:
     executor:

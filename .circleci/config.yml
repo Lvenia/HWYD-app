@@ -48,7 +48,7 @@ jobs:
           aws-region: AWS_REGION
           aws-secret-access-key: AWS_ACCESS_SECRET
           arguments: '--recursive'
-          from: ./
+          from: ./build
           to: 's3://hwyd-app'
 
 workflows:

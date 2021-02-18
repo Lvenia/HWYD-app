@@ -28,6 +28,7 @@ const QuizRow = ({ question, children }) => (
         flexWrap: 'nowrap',
         justifyContent: 'flex-end',
         alignItems: 'center',
+        marginLeft: '5px',
       }}
     >
       {children}

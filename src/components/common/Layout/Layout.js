@@ -9,6 +9,7 @@ export const Container = styled(ContainerBasic)`
   padding: 0px;
   font-family: Verdana, Helvetica, Arial, sans-serif;
   font-size: 16px;
+  margin: auto;
 `;
 
 export const BarWrapper = styled.div`
@@ -28,7 +29,7 @@ export const Row = styled(RowBasic)`
 
 export const ButtonsRow = styled(RowBasic)`
   justify-content: space-between;
-  margin: 16px 0px 0px;
+  margin: 16px 5px;
   padding: 0;
 
   @media (max-width: 610px) {

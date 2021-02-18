@@ -26,8 +26,8 @@ const RulesModal = ({ showModal, hideModal }) => (
               Each category - Sleep, Nutrition, Hydration and Activities - may bring you 30 points.
             </p>
             <p>
-              Every beneficial deed rates as `&quot;+10` points while every opposite one
-              `&quot;-10` points.
+              Every beneficial deed rates as &quot;+10&quot; points while every opposite one
+              &quot;-10&quot; points.
             </p>
             <hr />
             <p> Week Review show points gained in each category per day. </p>
@@ -121,7 +121,10 @@ const RulesModal = ({ showModal, hideModal }) => (
           <CarouselCaption>
             <Heading> Activities Category</Heading>
             <hr />
-            <p> Each pleasant activity gets `&quot;+` sign and each unpleasant - `&quot;-`.</p>
+            <p>
+              Each pleasant activity gets &quot;+&quot;
+              sign and each unpleasant - &quot;-&quot;.
+            </p>
             <p>
               Share of pleasant activities is calculated. If unpleasant activities pravailed
               you may end up with  negative points

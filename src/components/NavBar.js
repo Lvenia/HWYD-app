@@ -67,6 +67,7 @@ class NavBar extends React.Component {
       <>
         <span>
           {auth.user.givenName}
+         &nbsp;
           {auth.user.familyName}
         </span>
 

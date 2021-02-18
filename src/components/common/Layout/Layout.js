@@ -9,7 +9,6 @@ export const Container = styled(ContainerBasic)`
   padding: 0px;
   font-family: Verdana, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  margin: auto;
 `;
 
 export const BarWrapper = styled.div`
@@ -25,6 +24,7 @@ export const Row = styled(RowBasic)`
   justify-content: center;
   margin: 0;
   padding: 0;
+
 `;
 
 export const ButtonsRow = styled(RowBasic)`

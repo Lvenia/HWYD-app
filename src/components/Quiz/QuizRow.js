@@ -12,7 +12,15 @@ const QuizRow = ({ question, children }) => (
       paddingInline: '20px',
     }}
   >
-    <Paragraph>{question}</Paragraph>
+    <Paragraph
+      style={{
+        textAlign: 'left',
+        marginLeft: '5px',
+        marginRight: '5px',
+      }}
+    >
+      {question}
+    </Paragraph>
     <div
       style={{
         display: 'flex',

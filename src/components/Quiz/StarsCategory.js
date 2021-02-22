@@ -76,6 +76,8 @@ class StarsComponent extends React.Component {
         <Row>{this.renderStars()}</Row>
         <Row>
           <AppButton
+            shouldBeDisabled={dayRate === 0}
+            title="please rate your day"
             variant="primary"
             label="Next Section"
             handleClick={() => {

@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 const AppButton = ({
+  shouldBeDisabled = false,
   label = ' ',
   variant = 'primary',
   href = null,
@@ -9,6 +10,7 @@ const AppButton = ({
   handleClick = () => null,
 }) => (
   <Button
+    disabled={shouldBeDisabled}
     href={href}
     variant={variant}
     style={style}

@@ -2,7 +2,7 @@
 
 A tool for tracking how everyday actions affect a person's well-being.
 
-[Go to the app](https://hwyd.kresinska.com/ "Open 'How Was Your Day' App")
+<a href="https://hwyd.kresinska.com/" target="_blank">Go to the app</a>
 
 ---
 ### Technical Keys 
@@ -19,8 +19,8 @@ A tool for tracking how everyday actions affect a person's well-being.
 
 This is my first React based application, intended as an opportunity to learn the React Ecosystem and apply acquired knowledge. 
 I was responsible for the idea, design and frontend implementation.
----
 
+---
 ### Main features
 
 1. Home page with conditional rendering depending on the user login status.
@@ -32,5 +32,3 @@ I was responsible for the idea, design and frontend implementation.
 7. Points awarded in each quiz category are shown as a bar chart in the week and month time period range while the monthly average points are shown in the year range.
 
  ![](./screenshots/hwyd-app.gif)
-
-[comment]: <> (timeperiod: 10/2020 - 02/2021)
